@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>电子书店 - 购物车</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/cart.css" />
   </head>
+
   <body>
     <div class="site-page">
+      <!-- 统一导航栏：与项目其他页面一致 -->
       <header class="site-header">
         <div class="site-container">
           <nav class="site-nav" aria-label="主导航">
@@ -32,9 +35,73 @@
 
       <main class="site-main">
         <div class="site-container">
-          <section class="site-card" aria-label="页面内容">
-            <h1 class="site-title">购物车</h1>
-            <p class="site-subtitle">此处可展示购物车条目、数量、价格汇总与结算按钮。</p>
+          <section class="cart" aria-label="购物车">
+            <div class="site-card">
+              <header class="cart__header">
+                <div class="cart__heading">
+                  <h1 class="cart__title">购物车</h1>
+                  <p class="cart__subtitle">勾选商品后可进行结算（演示静态页面）。</p>
+                </div>
+
+                <!-- 顶部：全选 -->
+                <div class="cart__toolbar" aria-label="操作栏">
+                  <label class="cart__selectall" aria-label="全选">
+                    <input class="cart__checkbox" type="checkbox" name="selectAll" />
+                    <span class="cart__selectall-text">全选</span>
+                  </label>
+                </div>
+              </header>
+
+              <div class="site-divider cart__divider" role="separator" aria-hidden="true"></div>
+
+              <!--
+                购物车列表：
+                每一行包含：书籍标题、作者、单价、删除按钮
+              -->
+              <div class="cart__list" aria-label="购物车列表">
+                <article class="cart-row" aria-label="购物车条目：高效学习方法">
+                  <div class="cart-row__main">
+                    <h2 class="cart-row__title">高效学习方法</h2>
+                    <p class="cart-row__author">作者：李明</p>
+                  </div>
+                  <div class="cart-row__author-col" aria-label="作者">李明</div>
+                  <div class="cart-row__price" aria-label="单价">¥ 29.90</div>
+                  <button class="cart-row__delete" type="button">删除</button>
+                </article>
+
+                <article class="cart-row" aria-label="购物车条目：前端开发入门">
+                  <div class="cart-row__main">
+                    <h2 class="cart-row__title">前端开发入门</h2>
+                    <p class="cart-row__author">作者：王晓</p>
+                  </div>
+                  <div class="cart-row__author-col" aria-label="作者">王晓</div>
+                  <div class="cart-row__price" aria-label="单价">¥ 49.00</div>
+                  <button class="cart-row__delete" type="button">删除</button>
+                </article>
+
+                <article class="cart-row" aria-label="购物车条目：设计思维实践">
+                  <div class="cart-row__main">
+                    <h2 class="cart-row__title">设计思维实践</h2>
+                    <p class="cart-row__author">作者：陈言</p>
+                  </div>
+                  <div class="cart-row__author-col" aria-label="作者">陈言</div>
+                  <div class="cart-row__price" aria-label="单价">¥ 39.50</div>
+                  <button class="cart-row__delete" type="button">删除</button>
+                </article>
+              </div>
+
+              <!-- 底部：总计 + 结算（预留跳转入口到订单页） -->
+              <footer class="cart__footer" aria-label="结算区">
+                <div class="cart__total" aria-label="总计金额">
+                  <span class="cart__total-label">总计</span>
+                  <span class="cart__total-value">¥ 118.40</span>
+                </div>
+
+                <a class="cart__checkout" href="./orders.html" aria-label="去结算并跳转到订单页">
+                  去结算
+                </a>
+              </footer>
+            </div>
           </section>
         </div>
       </main>
