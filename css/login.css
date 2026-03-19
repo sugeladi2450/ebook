@@ -1,0 +1,181 @@
+/* ============================================
+   电子书店 - 登录页专属样式（外部 CSS）
+   约定：
+   - 仅使用类选择器（不写标签选择器、ID 选择器）
+   - 不使用内联样式
+   - 与通用样式 css/style.css 配合使用
+   ============================================ */
+
+/* 登录页整体容器：保证主体区块视觉居中且不顶满 */
+.login {
+  padding: 8px 0 28px;
+}
+
+/* 两栏布局：左文案 + 右表单（小屏自动变单栏） */
+.login__grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 18px;
+  align-items: center;
+}
+
+.login__intro {
+  padding: 10px 6px;
+}
+
+.login__title {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  color: #0f172a;
+}
+
+.login__subtitle {
+  margin-top: 10px;
+  font-size: 14px;
+  color: rgba(15, 23, 42, 0.72);
+  max-width: 40ch;
+}
+
+.login__tips {
+  margin-top: 14px;
+  display: grid;
+  gap: 8px;
+  padding-left: 0;
+}
+
+.login__tip {
+  font-size: 13px;
+  color: rgba(15, 23, 42, 0.7);
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.16);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+/* 表单面板：复用 .site-card 的基础卡片风格 */
+.login__panel {
+  padding: 18px;
+}
+
+.login__panel-header {
+  margin-bottom: 12px;
+}
+
+.login__panel-title {
+  font-size: 18px;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.login__panel-desc {
+  margin-top: 6px;
+  font-size: 13px;
+  color: rgba(17, 24, 39, 0.65);
+}
+
+.login__form {
+  display: grid;
+  gap: 12px;
+}
+
+.login__field {
+  display: grid;
+  gap: 8px;
+}
+
+.login__label {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(15, 23, 42, 0.9);
+}
+
+.login__input {
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(17, 24, 39, 0.14);
+  background: #ffffff;
+  box-shadow: 0 1px 0 rgba(2, 6, 23, 0.03);
+  transition: border-color 160ms ease, box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+/* 输入框 hover 交互 */
+.login__input:hover {
+  border-color: rgba(59, 130, 246, 0.45);
+}
+
+/* 输入框 focus 交互（与通用 :focus-visible 保持一致的可访问性） */
+.login__input:focus {
+  outline: none;
+  border-color: rgba(59, 130, 246, 0.75);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.16);
+  transform: translateY(-1px);
+}
+
+.login__hint {
+  font-size: 12px;
+  color: rgba(17, 24, 39, 0.58);
+}
+
+.login__button {
+  margin-top: 4px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  background: linear-gradient(135deg, #3b82f6, #22c55e);
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: filter 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.login__button:hover {
+  filter: brightness(1.03);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(2, 6, 23, 0.16);
+}
+
+.login__button:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(2, 6, 23, 0.12);
+}
+
+.login__links {
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.login__link {
+  font-size: 13px;
+  color: rgba(59, 130, 246, 0.95);
+  padding: 6px 8px;
+  border-radius: 10px;
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.login__link:hover {
+  background: rgba(59, 130, 246, 0.12);
+  transform: translateY(-1px);
+}
+
+/* 响应式：小屏改为单栏，并让表单更贴近居中阅读 */
+@media (max-width: 860px) {
+  .login__grid {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .login__intro {
+    padding: 0;
+  }
+
+  .login__subtitle {
+    max-width: none;
+  }
+}

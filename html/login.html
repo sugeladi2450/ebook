@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>电子书店 - 登录</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/login.css" />
+  </head>
+
+  <body>
+    <div class="site-page">
+      <!-- 统一导航栏：与项目其他页面一致 -->
+      <header class="site-header">
+        <div class="site-container">
+          <nav class="site-nav" aria-label="主导航">
+            <a class="site-brand" href="./index.html" aria-label="返回首页">
+              <span class="site-brand__logo" aria-hidden="true"></span>
+              <span class="site-brand__name">电子书店</span>
+            </a>
+
+            <ul class="site-nav__list">
+              <li><a class="site-nav__link" href="./index.html">首页</a></li>
+              <li><a class="site-nav__link" href="./books.html">书籍</a></li>
+              <li><a class="site-nav__link" href="./cart.html">购物车</a></li>
+              <li><a class="site-nav__link" href="./orders.html">订单</a></li>
+              <li><a class="site-nav__link" href="./me.html">我的</a></li>
+              <li>
+                <a class="site-nav__link" href="./login.html" aria-current="page">登录</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main class="site-main">
+        <div class="site-container">
+          <section class="login" aria-label="登录">
+            <div class="login__grid">
+              <!-- 左侧：文案提示（可选区域，便于后续扩展） -->
+              <div class="login__intro">
+                <h1 class="login__title">欢迎回来</h1>
+                <p class="login__subtitle">
+                  登录后可同步购物车与订单信息，并在“我的”页面管理账户。
+                </p>
+
+                <ul class="login__tips" aria-label="登录提示">
+                  <li class="login__tip">演示项目：本页仅提供静态表单结构</li>
+                  <li class="login__tip">登录成功后可跳转到“我的”页面</li>
+                </ul>
+              </div>
+
+              <!-- 右侧：登录表单主体 -->
+              <div class="login__panel site-card">
+                <header class="login__panel-header">
+                  <h2 class="login__panel-title">账号登录</h2>
+                  <p class="login__panel-desc">请输入账号与密码以继续</p>
+                </header>
+
+                <!--
+                  说明：纯前端静态页，不接入后端时可先用 action 做页面联动跳转。
+                  如后续接入接口，可将 action 替换为后端地址或改为 JS 提交。
+                -->
+                <form class="login__form" action="./me.html" method="get">
+                  <div class="login__field">
+                    <label class="login__label" for="login-account">账号</label>
+                    <input
+                      class="login__input"
+                      id="login-account"
+                      name="account"
+                      type="text"
+                      autocomplete="username"
+                      placeholder="手机号 / 邮箱 / 用户名"
+                      required
+                    />
+                    <p class="login__hint">支持手机号、邮箱或用户名登录</p>
+                  </div>
+
+                  <div class="login__field">
+                    <label class="login__label" for="login-password">密码</label>
+                    <input
+                      class="login__input"
+                      id="login-password"
+                      name="password"
+                      type="password"
+                      autocomplete="current-password"
+                      placeholder="请输入密码"
+                      required
+                    />
+                    <p class="login__hint">请妥善保管你的密码</p>
+                  </div>
+
+                  <button class="login__button" type="submit">登录</button>
+
+                  <div class="login__links" aria-label="辅助链接">
+                    <a class="login__link" href="./index.html">返回首页</a>
+                    <a class="login__link" href="./me.html">直接进入我的</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer class="site-footer">
+        <div class="site-container">
+          <p class="site-footer__text">© 2026 电子书店 · All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
