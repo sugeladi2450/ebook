@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>电子书店 - 书籍详情</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/book-detail.css" />
   </head>
 
   <body>
     <div class="site-page">
+      <!-- 统一导航栏：与项目其他页面一致 -->
       <header class="site-header">
         <div class="site-container">
           <nav class="site-nav" aria-label="主导航">
@@ -31,10 +33,79 @@
 
       <main class="site-main">
         <div class="site-container">
-          <section class="site-card" aria-label="书籍详情">
-            <h1 class="site-title">书籍详情（占位页）</h1>
-            <p class="site-subtitle">此页面用于演示书籍列表的跳转链接，可按需完善为真实详情页。</p>
-          </section>
+          <article class="book-detail" aria-label="书籍详情">
+            <div class="book-detail__layout">
+              <!-- 左侧：封面占位 -->
+              <section class="book-detail__cover-card site-card" aria-label="书籍封面">
+                <div class="book-detail__cover" aria-hidden="true"></div>
+                <p class="book-detail__cover-hint">封面图占位（后续可替换为真实图片）</p>
+                <a class="book-detail__back" href="./books.html">返回书籍列表</a>
+              </section>
+
+              <!-- 右侧：详细信息 -->
+              <section class="book-detail__info site-card" aria-label="书籍信息">
+                <header class="book-detail__header">
+                  <h1 class="book-detail__title">高效学习方法</h1>
+
+                  <div class="book-detail__meta" aria-label="基础信息">
+                    <div class="book-detail__meta-row">
+                      <div class="book-detail__kv">
+                        <span class="book-detail__k">作者</span>
+                        <span class="book-detail__v">李明</span>
+                      </div>
+
+                      <span class="book-detail__tag" aria-label="分类">自我提升</span>
+                    </div>
+
+                    <div class="book-detail__meta-row">
+                      <div class="book-detail__kv">
+                        <span class="book-detail__k">库存</span>
+                        <span class="book-detail__v">38</span>
+                      </div>
+
+                      <div class="book-detail__kv">
+                        <span class="book-detail__k">分类</span>
+                        <span class="book-detail__v">学习方法</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="book-detail__price" aria-label="价格">
+                    <span class="book-detail__price-label">价格</span>
+                    <span class="book-detail__price-value">¥ 29.90</span>
+                  </div>
+
+                  <p class="book-detail__stock">提示：库存为演示数据，实际以系统为准。</p>
+
+                  <!--
+                    功能按钮：
+                    - 使用 a 标签预留跳转入口（购物车/订单页）
+                    - 后续接入业务逻辑时可替换为 JS 行为或后端接口
+                  -->
+                  <div class="book-detail__actions" aria-label="操作按钮">
+                    <a class="book-detail__button book-detail__button--cart" href="./cart.html">
+                      加入购物车
+                    </a>
+                    <a class="book-detail__button book-detail__button--buy" href="./orders.html">
+                      立即购买
+                    </a>
+                  </div>
+                </header>
+
+                <section class="book-detail__section" aria-label="书籍详情介绍">
+                  <h2 class="book-detail__section-title">书籍详情介绍</h2>
+                  <p class="book-detail__section-text">
+                    本书从“目标—方法—练习—复盘”四个环节拆解学习过程，提供可落地的技巧与模板。
+                    你将学会如何建立可持续的学习节奏、如何用最小行动持续积累，以及如何在短周期内
+                    评估学习效果并快速迭代。
+                  </p>
+                  <p class="book-detail__section-text">
+                    适合人群：需要系统提升学习效率的学生与职场人士；想用结构化方法建立长期能力的读者。
+                  </p>
+                </section>
+              </section>
+            </div>
+          </article>
         </div>
       </main>
 
