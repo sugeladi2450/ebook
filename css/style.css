@@ -1,0 +1,194 @@
+/* ============================================
+   电子书店 - 通用样式（外部 CSS）
+   包含：页面重置、基础布局、统一导航栏
+   约定：
+   - 使用类选择器：.site-*
+   - 不使用内联样式
+   - 尽量语义化（header/main/footer/nav 等）
+   ============================================ */
+
+/* -------- CSS Reset / Base -------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+  line-height: 1.5;
+  color: #111827;
+  background: #f6f7fb;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* 可访问性：键盘导航可见焦点 */
+:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, 0.55);
+  outline-offset: 2px;
+}
+
+/* -------- Layout -------- */
+.site-page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-container {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.site-header {
+  background: #0f172a;
+  color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.site-main {
+  flex: 1;
+  padding: 24px 0;
+}
+
+.site-footer {
+  background: #0b1220;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 18px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.site-footer__text {
+  font-size: 14px;
+  text-align: center;
+}
+
+/* -------- Navbar (Flex) -------- */
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+}
+
+.site-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.site-brand__logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #60a5fa, #22c55e);
+}
+
+.site-brand__name {
+  font-size: 16px;
+}
+
+.site-nav__list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.site-nav__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.92);
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.site-nav__link:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.site-nav__link[aria-current="page"] {
+  background: rgba(59, 130, 246, 0.22);
+  color: #ffffff;
+}
+
+/* -------- Common Content Styles -------- */
+.site-card {
+  background: #ffffff;
+  border: 1px solid rgba(17, 24, 39, 0.08);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 8px 20px rgba(2, 6, 23, 0.06);
+}
+
+.site-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.site-subtitle {
+  font-size: 14px;
+  color: rgba(17, 24, 39, 0.65);
+}
+
+.site-divider {
+  height: 1px;
+  background: rgba(17, 24, 39, 0.08);
+  margin: 16px 0;
+}
