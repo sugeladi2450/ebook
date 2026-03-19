@@ -49,6 +49,103 @@
   margin: 14px 0;
 }
 
+/* ===== 顶部搜索框 ===== */
+.books-search {
+  margin-top: 12px;
+}
+
+.books-search__form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.books-search__input {
+  width: 90%;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(17, 24, 39, 0.22);
+  background: #ffffff;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.books-search__input:hover {
+  border-color: rgba(17, 24, 39, 0.45);
+}
+
+.books-search__input:focus {
+  outline: none;
+  border-color: rgba(17, 24, 39, 0.55);
+  box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.08);
+}
+
+.books-search__button {
+  width: 10%;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  background: #0f172a;
+  color: #ffffff;
+  font-weight: 900;
+  cursor: pointer;
+  transition: background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.books-search__button:hover {
+  background: rgba(15, 23, 42, 0.85);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(2, 6, 23, 0.12);
+}
+
+.books-search__button:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(2, 6, 23, 0.1);
+}
+
+/* ===== 静态轮播图占位 ===== */
+.books-carousel {
+  margin-top: 12px;
+}
+
+.books-carousel__stage {
+  height: 300px;
+  border-radius: 16px;
+  border: 1px dashed rgba(17, 24, 39, 0.22);
+  background: rgba(17, 24, 39, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px;
+}
+
+.books-carousel__text {
+  font-size: 14px;
+  color: rgba(15, 23, 42, 0.72);
+  font-weight: 800;
+}
+
+.books-carousel__dots {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.books-carousel__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(15, 23, 42, 0.18);
+}
+
+.books-carousel__dot--active {
+  background: #ffffff;
+}
+
 /* 书籍网格：自适应列数 */
 .books__grid {
   display: grid;
