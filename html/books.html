@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>电子书店 - 书籍</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/books.css" />
   </head>
+
   <body>
     <div class="site-page">
+      <!-- 统一导航栏：与项目其他页面一致 -->
       <header class="site-header">
         <div class="site-container">
           <nav class="site-nav" aria-label="主导航">
@@ -24,6 +27,7 @@
               <li><a class="site-nav__link" href="./cart.html">购物车</a></li>
               <li><a class="site-nav__link" href="./orders.html">订单</a></li>
               <li><a class="site-nav__link" href="./me.html">我的</a></li>
+              <li><a class="site-nav__link" href="./login.html">登录</a></li>
             </ul>
           </nav>
         </div>
@@ -31,9 +35,99 @@
 
       <main class="site-main">
         <div class="site-container">
-          <section class="site-card" aria-label="页面内容">
-            <h1 class="site-title">书籍</h1>
-            <p class="site-subtitle">此处可展示书籍列表、搜索、分类筛选等。</p>
+          <section class="books" aria-label="书籍列表">
+            <div class="site-card">
+              <header class="books__header">
+                <div class="books__heading">
+                  <h1 class="books__title">书籍列表</h1>
+                  <p class="books__subtitle">
+                    精选电子书推荐：点击书名可跳转到详情页（演示链接）。
+                  </p>
+                </div>
+
+                <div class="books__meta" aria-label="列表信息">
+                  <span class="books__chip">共 4 本</span>
+                  <span class="books__chip">支持网格自适应</span>
+                </div>
+              </header>
+
+              <div class="site-divider books__divider" role="separator" aria-hidden="true"></div>
+
+              <!--
+                书籍卡片网格：
+                - 至少 4 本书籍
+                - 每本包含：封面占位、标题(可跳转)、作者、价格、简短介绍
+              -->
+              <div class="books__grid" aria-label="书籍网格">
+                <article class="book-card" aria-label="书籍：高效学习方法">
+                  <div class="book-card__cover" aria-hidden="true"></div>
+                  <div class="book-card__body">
+                    <h2 class="book-card__name">
+                      <a class="book-card__link" href="./book-detail-01.html">高效学习方法</a>
+                    </h2>
+                    <p class="book-card__author">作者：李明</p>
+                    <p class="book-card__desc">
+                      从目标拆解到复盘迭代，构建可持续的学习系统，适合学生与职场人。
+                    </p>
+                    <div class="book-card__footer" aria-label="价格信息">
+                      <span class="book-card__price">¥ 29.90</span>
+                      <span class="book-card__badge">自我提升</span>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="book-card" aria-label="书籍：前端开发入门">
+                  <div class="book-card__cover" aria-hidden="true"></div>
+                  <div class="book-card__body">
+                    <h2 class="book-card__name">
+                      <a class="book-card__link" href="./book-detail-01.html">前端开发入门</a>
+                    </h2>
+                    <p class="book-card__author">作者：王晓</p>
+                    <p class="book-card__desc">
+                      以 HTML、CSS、JavaScript 为主线，配合小项目快速上手前端开发。
+                    </p>
+                    <div class="book-card__footer" aria-label="价格信息">
+                      <span class="book-card__price">¥ 49.00</span>
+                      <span class="book-card__badge">编程基础</span>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="book-card" aria-label="书籍：设计思维实践">
+                  <div class="book-card__cover" aria-hidden="true"></div>
+                  <div class="book-card__body">
+                    <h2 class="book-card__name">
+                      <a class="book-card__link" href="./book-detail-01.html">设计思维实践</a>
+                    </h2>
+                    <p class="book-card__author">作者：陈言</p>
+                    <p class="book-card__desc">
+                      用同理心洞察需求，快速原型与验证，帮助你更系统地解决真实问题。
+                    </p>
+                    <div class="book-card__footer" aria-label="价格信息">
+                      <span class="book-card__price">¥ 39.50</span>
+                      <span class="book-card__badge">产品设计</span>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="book-card" aria-label="书籍：时间管理精要">
+                  <div class="book-card__cover" aria-hidden="true"></div>
+                  <div class="book-card__body">
+                    <h2 class="book-card__name">
+                      <a class="book-card__link" href="./book-detail-01.html">时间管理精要</a>
+                    </h2>
+                    <p class="book-card__author">作者：周然</p>
+                    <p class="book-card__desc">
+                      以最小可行习惯建立时间秩序：优先级、日程规划与抗干扰执行策略。
+                    </p>
+                    <div class="book-card__footer" aria-label="价格信息">
+                      <span class="book-card__price">¥ 24.80</span>
+                      <span class="book-card__badge">效率工具</span>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
           </section>
         </div>
       </main>
