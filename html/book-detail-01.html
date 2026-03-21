@@ -6,6 +6,123 @@
     <title>电子书店 - 书籍详情</title>
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/book-detail.css" />
+
+    <script>
+      (function () {
+        const books = {
+          1: {
+            title: "河的第三条岸",
+            author: "[巴西] 若昂·吉马良斯·罗萨",
+            translator: "游雨频",
+            isbn: "9787208194601",
+            price: "56.00",
+            tag: "文学 / 短篇小说",
+            cover: "../图片/书籍图片/剪贴板图片.jpg",
+            pubLine: "出版时间：2025年6月 · 页数：306页",
+            intro:
+              "本书精选了罗萨巅峰时期的 19 篇短篇小说，以巴西东北腹地为舞台，构建出充满魔幻现实主义色彩的神秘世界。其中同名名篇《河的第三条岸》讲述一位父亲离家上船、从此永不上岸的故事：荒诞又悲壮，像一道无法解释的生命谜题。",
+            intro2:
+              "作者通晓 20 多门语言，文字爆发力极强，擅长把日常瞬间写成“太阳重生”的奇迹，被誉为“语言的冒险大师”。",
+          },
+          2: {
+            title: "亲密有间：有边界感的伴侣更长久的关系",
+            author: "[美] 亨利·克劳德 / 约翰·汤森德",
+            translator: "林思语",
+            isbn: "9787521775709",
+            price: "59.00",
+            tag: "心理学 / 亲密关系",
+            cover: "../图片/书籍图片/剪贴板图片 (1).jpg",
+            pubLine: "出版时间：2025年10月 · 页数：296页",
+            intro:
+              "本书从临床心理学角度指出：亲密关系中的控制、内疚与情绪消耗，往往源于边界不明。",
+            intro2:
+              "作者提炼“边界十大定律”与多类冲突解决方案，帮助你在亲密中承担责任、守护空间，关系更长久。",
+          },
+          3: {
+            title: "幸福博弈论：用理性思维赢取更好生活",
+            author: "[印] 考希克·巴苏",
+            translator: "苏京春",
+            isbn: "9787521778472",
+            price: "69.00",
+            tag: "经济学 / 思维方法",
+            cover: "../图片/书籍图片/剪贴板图片 (2).jpg",
+            pubLine: "出版时间：2025年10月 · 页数：240页",
+            intro:
+              "把博弈论与经济学原理融入日常选择：从人际焦虑到职场决策，用思想实验拆解逻辑难题。",
+            intro2:
+              "教你站在对方角度思考，让每一次选择更接近最优解，收获更稳定的幸福感。",
+          },
+          4: {
+            title: "人间蒸发",
+            author: "[美] 劳拉·戴夫",
+            translator: "冯新平",
+            isbn: "9787522524245",
+            price: "49.80",
+            tag: "小说 / 悬疑",
+            cover: "../图片/书籍图片/剪贴板图片 (3).jpg",
+            pubLine: "出版时间：2023年12月 · 页数：304页",
+            intro:
+              "丈夫欧文在公司涉嫌经济犯罪前夕离奇失踪，只留“保护她”三个字。汉娜与继女贝莉被迫联手追寻真相。",
+            intro2:
+              "在追寻过程中，谎言层层揭开，也意外重建了超越血缘的亲密亲情。",
+          },
+        };
+
+        function getId() {
+          const sp = new URLSearchParams(location.search);
+          const id = Number(sp.get("id"));
+          return books[id] ? id : 1;
+        }
+
+        function ready(fn) {
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", fn);
+          } else {
+            fn();
+          }
+        }
+
+        ready(function () {
+          const id = getId();
+          const data = books[id];
+
+          document.title = "电子书店 - " + data.title;
+
+          const cover = document.querySelector(".book-detail__cover");
+          if (cover) {
+            cover.src = data.cover;
+            cover.alt = "《" + data.title + "》封面";
+          }
+
+          const titleEl = document.querySelector(".book-detail__title");
+          if (titleEl) titleEl.textContent = data.title;
+
+          const authorEl = document.querySelector('[data-field="author"]');
+          if (authorEl) authorEl.textContent = data.author;
+
+          const translatorEl = document.querySelector('[data-field="translator"]');
+          if (translatorEl) translatorEl.textContent = data.translator;
+
+          const isbnEl = document.querySelector('[data-field="isbn"]');
+          if (isbnEl) isbnEl.textContent = data.isbn;
+
+          const priceEl = document.querySelector('[data-field="price"]');
+          if (priceEl) priceEl.textContent = "¥ " + data.price;
+
+          const tagEl = document.querySelector('[data-field="tag"]');
+          if (tagEl) tagEl.textContent = data.tag;
+
+          const pubLineEl = document.querySelector('[data-field="pubLine"]');
+          if (pubLineEl) pubLineEl.textContent = data.pubLine;
+
+          const introEl = document.querySelector('[data-field="intro"]');
+          if (introEl) introEl.textContent = data.intro;
+
+          const intro2El = document.querySelector('[data-field="intro2"]');
+          if (intro2El) intro2El.textContent = data.intro2;
+        });
+      })();
+    </script>
   </head>
 
   <body>
@@ -47,67 +164,67 @@
               </section>
 
               <!-- 右侧：详细信息 -->
-              <section class="book-detail__info site-card" aria-label="书籍信息">
-                <header class="book-detail__header">
-                  <h1 class="book-detail__title">河的第三条岸</h1>
+                <section class="book-detail__info site-card" aria-label="书籍信息">
+                  <header class="book-detail__header">
+                    <h1 class="book-detail__title">河的第三条岸</h1>
 
-                  <div class="book-detail__meta" aria-label="基础信息">
-                    <div class="book-detail__meta-row">
-                      <div class="book-detail__kv">
-                        <span class="book-detail__k">作者</span>
-                        <span class="book-detail__v">[巴西] 若昂·吉马良斯·罗萨</span>
+                    <div class="book-detail__meta" aria-label="基础信息">
+                      <div class="book-detail__meta-row">
+                        <div class="book-detail__kv">
+                          <span class="book-detail__k">作者</span>
+                          <span class="book-detail__v" data-field="author">[巴西] 若昂·吉马良斯·罗萨</span>
+                        </div>
+
+                        <span class="book-detail__tag" aria-label="分类" data-field="tag">文学 / 短篇小说</span>
                       </div>
 
-                      <span class="book-detail__tag" aria-label="分类">文学 / 短篇小说</span>
+                      <div class="book-detail__meta-row">
+                        <div class="book-detail__kv">
+                          <span class="book-detail__k">译者</span>
+                          <span class="book-detail__v" data-field="translator">游雨频</span>
+                        </div>
+
+                        <div class="book-detail__kv">
+                          <span class="book-detail__k">ISBN</span>
+                          <span class="book-detail__v" data-field="isbn">9787208194601</span>
+                        </div>
+                      </div>
                     </div>
 
-                    <div class="book-detail__meta-row">
-                      <div class="book-detail__kv">
-                        <span class="book-detail__k">译者</span>
-                        <span class="book-detail__v">游雨频</span>
-                      </div>
-
-                      <div class="book-detail__kv">
-                        <span class="book-detail__k">ISBN</span>
-                        <span class="book-detail__v">9787208194601</span>
-                      </div>
+                    <div class="book-detail__price" aria-label="价格">
+                      <span class="book-detail__price-label">价格</span>
+                      <span class="book-detail__price-value" data-field="price">¥ 56.00</span>
                     </div>
-                  </div>
 
-                  <div class="book-detail__price" aria-label="价格">
-                    <span class="book-detail__price-label">价格</span>
-                    <span class="book-detail__price-value">¥ 56.00</span>
-                  </div>
+                    <p class="book-detail__stock" data-field="pubLine">出版时间：2025年6月 · 页数：306页</p>
 
-                  <p class="book-detail__stock">出版时间：2025年6月 · 页数：306页</p>
+                    <!--
+                      功能按钮：
+                      - 使用 a 标签预留跳转入口（购物车/订单页）
+                      - 后续接入业务逻辑时可替换为 JS 行为或后端接口
+                    -->
+                    <div class="book-detail__actions" aria-label="操作按钮">
+                      <a class="book-detail__button book-detail__button--cart" href="./cart.html">
+                        加入购物车
+                      </a>
+                      <a class="book-detail__button book-detail__button--buy" href="./orders.html">
+                        立即购买
+                      </a>
+                    </div>
+                  </header>
 
-                  <!--
-                    功能按钮：
-                    - 使用 a 标签预留跳转入口（购物车/订单页）
-                    - 后续接入业务逻辑时可替换为 JS 行为或后端接口
-                  -->
-                  <div class="book-detail__actions" aria-label="操作按钮">
-                    <a class="book-detail__button book-detail__button--cart" href="./cart.html">
-                      加入购物车
-                    </a>
-                    <a class="book-detail__button book-detail__button--buy" href="./orders.html">
-                      立即购买
-                    </a>
-                  </div>
-                </header>
-
-                <section class="book-detail__section" aria-label="书籍详情介绍">
-                  <h2 class="book-detail__section-title">内容简介</h2>
-                  <p class="book-detail__section-text">
-                    本书精选了罗萨巅峰时期的 19 篇短篇小说，以巴西东北腹地为舞台，构建出充满魔幻现实主义色彩的神秘世界。
-                    其中同名名篇《河的第三条岸》讲述一位父亲离家上船、从此永不上岸的故事：荒诞又悲壮，像一道无法解释的生命谜题。
-                  </p>
-                  <p class="book-detail__section-text">
-                    作者通晓 20 多门语言，文字爆发力极强，擅长把日常瞬间写成“太阳重生”的奇迹，被誉为“语言的冒险大师”。
-                  </p>
+                  <section class="book-detail__section" aria-label="书籍详情介绍">
+                    <h2 class="book-detail__section-title">内容简介</h2>
+                    <p class="book-detail__section-text" data-field="intro">
+                      本书精选了罗萨巅峰时期的 19 篇短篇小说，以巴西东北腹地为舞台，构建出充满魔幻现实主义色彩的神秘世界。
+                      其中同名名篇《河的第三条岸》讲述一位父亲离家上船、从此永不上岸的故事：荒诞又悲壮，像一道无法解释的生命谜题。
+                    </p>
+                    <p class="book-detail__section-text" data-field="intro2">
+                      作者通晓 20 多门语言，文字爆发力极强，擅长把日常瞬间写成“太阳重生”的奇迹，被誉为“语言的冒险大师”。
+                    </p>
+                  </section>
                 </section>
-              </section>
-            </div>
+</div>
           </article>
         </div>
       </main>

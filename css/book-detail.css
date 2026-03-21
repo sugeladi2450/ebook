@@ -12,7 +12,9 @@
 
 .book-detail__layout {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
+
+  /* 左侧封面固定更小宽度，右侧信息自适应 */
+  grid-template-columns: 360px 1fr;
   gap: 18px;
   align-items: start;
 }
@@ -22,18 +24,20 @@
   padding: 14px;
 }
 
-/* 封面图：真实图片 */
+/* 封面图：用固定书封面比例约束容器，避免观感“不适配” */
 .book-detail__cover {
   width: 100%;
-  height: 360px;
-  border-radius: 16px;
 
-  /* 保持比例并尽量铺满封面区域，避免留白 */
+  /* 详情页封面也统一为书籍常见比例（宽:高 = 3:4） */
+  aspect-ratio: 3 / 4;
+  height: auto;
+
+  border-radius: 16px;
+  display: block;
+
+  /* 不变形 + 填满（cover 只会做最小必要裁剪） */
   object-fit: cover;
   object-position: center;
-
-  /* 去掉 img 默认基线空隙 */
-  display: block;
 
   background: rgba(15, 23, 42, 0.06);
 }
@@ -211,16 +215,9 @@
   .book-detail__layout {
     grid-template-columns: 1fr;
   }
-
-  .book-detail__cover {
-    height: 320px;
-  }
 }
 
 @media (max-width: 520px) {
-  .book-detail__cover {
-    height: 280px;
-  }
 
   .book-detail__actions {
     gap: 8px;
