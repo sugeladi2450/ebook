@@ -208,6 +208,9 @@
   box-shadow: 0 10px 24px rgba(2, 6, 23, 0.06);
   transition: transform 160ms ease, box-shadow 160ms ease,
     border-color 160ms ease;
+
+  /* 让整张卡片可点击 */
+  cursor: pointer;
 }
 
 .book-card:hover {
