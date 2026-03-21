@@ -103,47 +103,91 @@
   box-shadow: 0 6px 14px rgba(2, 6, 23, 0.1);
 }
 
-/* ===== 静态轮播图占位 ===== */
+/* ===== 书籍推荐轮播 Banner ===== */
 .books-carousel {
   margin-top: 12px;
 }
 
-.books-carousel__stage {
+/* 轮播容器：圆角 + 阴影 + 溢出隐藏 */
+.books-carousel__viewport {
+  position: relative;
+  width: 100%;
   height: 300px;
-  border-radius: 16px;
-  border: 1px dashed rgba(17, 24, 39, 0.22);
-  background: rgba(17, 24, 39, 0.06);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 14px 30px rgba(2, 6, 23, 0.12);
+  background: rgba(15, 23, 42, 0.06);
+}
+
+/* Track：使用 translate3d 做硬件加速，切换更丝滑 */
+.books-carousel__track {
+  height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  will-change: transform;
+  transition: transform 0.5s ease;
+}
+
+.books-carousel__img {
+  width: 100%;
+  height: 100%;
+  flex: 0 0 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 箭头：悬浮两侧，半透明背景 */
+.books-carousel__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  font-size: 26px;
+  line-height: 40px;
   text-align: center;
-  padding: 16px;
+  cursor: pointer;
+  transition: background-color 0.5s ease, transform 0.5s ease;
 }
 
-.books-carousel__text {
-  font-size: 14px;
-  color: rgba(15, 23, 42, 0.72);
-  font-weight: 800;
+.books-carousel__arrow:hover {
+  background: rgba(0, 0, 0, 0.6);
 }
 
+.books-carousel__arrow--prev {
+  left: 12px;
+}
+
+.books-carousel__arrow--next {
+  right: 12px;
+}
+
+/* 指示器 */
 .books-carousel__dots {
   margin-top: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
 }
 
 .books-carousel__dot {
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(15, 23, 42, 0.18);
+  background: rgba(17, 24, 39, 0.28);
+  border: none;
+  margin: 0 4px;
+  cursor: pointer;
+  transition: all 0.5s ease;
 }
 
 .books-carousel__dot--active {
-  background: #ffffff;
+  width: 10px;
+  height: 10px;
+  background: #ff6700;
 }
 
 /* 书籍网格：自适应列数 */

@@ -62,18 +62,129 @@
                 </form>
               </section>
 
-              <!-- 静态轮播图：仅 HTML + CSS，无 JS -->
-              <section class="books-carousel" aria-label="书籍推荐轮播图">
-                <div class="books-carousel__stage" aria-label="轮播图区域">
-                  <p class="books-carousel__text">书籍推荐</p>
+              <!-- 书籍推荐轮播 Banner：原生 HTML + CSS + JS -->
+              <section class="books-carousel" aria-label="书籍推荐轮播图" data-carousel>
+                <div class="books-carousel__viewport" aria-label="轮播图区域">
+                  <div class="books-carousel__track" data-carousel-track>
+                    <img
+                      class="books-carousel__img"
+                      src="../图片/书籍banner/剪贴板图片.jpg"
+                      alt="书籍推荐 Banner 1"
+                      loading="lazy"
+                    />
+                    <img
+                      class="books-carousel__img"
+                      src="../图片/书籍banner/剪贴板图片 (1).jpg"
+                      alt="书籍推荐 Banner 2"
+                      loading="lazy"
+                    />
+                    <img
+                      class="books-carousel__img"
+                      src="../图片/书籍banner/剪贴板图片 (2).jpg"
+                      alt="书籍推荐 Banner 3"
+                      loading="lazy"
+                    />
+                    <img
+                      class="books-carousel__img"
+                      src="../图片/书籍banner/剪贴板图片 (3).jpg"
+                      alt="书籍推荐 Banner 4"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  <button
+                    class="books-carousel__arrow books-carousel__arrow--prev"
+                    type="button"
+                    aria-label="上一张"
+                    data-carousel-prev
+                  >
+                    ‹
+                  </button>
+                  <button
+                    class="books-carousel__arrow books-carousel__arrow--next"
+                    type="button"
+                    aria-label="下一张"
+                    data-carousel-next
+                  >
+                    ›
+                  </button>
                 </div>
-                <div class="books-carousel__dots" aria-label="轮播指示器">
-                  <span class="books-carousel__dot books-carousel__dot--active" aria-label="第 1 张"></span>
-                  <span class="books-carousel__dot" aria-label="第 2 张"></span>
-                  <span class="books-carousel__dot" aria-label="第 3 张"></span>
-                  <span class="books-carousel__dot" aria-label="第 4 张"></span>
+
+                <div class="books-carousel__dots" aria-label="轮播指示器" data-carousel-dots>
+                  <button class="books-carousel__dot books-carousel__dot--active" type="button" aria-label="第 1 张" data-carousel-dot data-index="0"></button>
+                  <button class="books-carousel__dot" type="button" aria-label="第 2 张" data-carousel-dot data-index="1"></button>
+                  <button class="books-carousel__dot" type="button" aria-label="第 3 张" data-carousel-dot data-index="2"></button>
+                  <button class="books-carousel__dot" type="button" aria-label="第 4 张" data-carousel-dot data-index="3"></button>
                 </div>
               </section>
+
+              <script>
+                (function () {
+                  const root = document.querySelector("[data-carousel]");
+                  if (!root) return;
+
+                  const track = root.querySelector("[data-carousel-track]");
+                  const slides = Array.from(root.querySelectorAll(".books-carousel__img"));
+                  const prevBtn = root.querySelector("[data-carousel-prev]");
+                  const nextBtn = root.querySelector("[data-carousel-next]");
+                  const dots = Array.from(root.querySelectorAll("[data-carousel-dot]"));
+
+                  const DURATION = 3000;
+                  let index = 0;
+                  let timer = null;
+
+                  function clampIndex(i) {
+                    const n = slides.length;
+                    return (i % n + n) % n;
+                  }
+
+                  function apply(i) {
+                    index = clampIndex(i);
+                    track.style.transform = `translate3d(${-index * 100}%, 0, 0)`;
+
+                    dots.forEach((d, di) => {
+                      const active = di === index;
+                      d.classList.toggle("books-carousel__dot--active", active);
+                      d.setAttribute("aria-current", active ? "true" : "false");
+                    });
+                  }
+
+                  function stop() {
+                    if (timer) {
+                      clearInterval(timer);
+                      timer = null;
+                    }
+                  }
+
+                  function start() {
+                    stop();
+                    timer = setInterval(() => apply(index + 1), DURATION);
+                  }
+
+                  function resetAndGo(i) {
+                    apply(i);
+                    start();
+                  }
+
+                  prevBtn?.addEventListener("click", () => resetAndGo(index - 1));
+                  nextBtn?.addEventListener("click", () => resetAndGo(index + 1));
+
+                  dots.forEach((dot) => {
+                    dot.addEventListener("click", () => {
+                      const i = Number(dot.dataset.index);
+                      resetAndGo(i);
+                    });
+                  });
+
+                  // Hover 暂停 / 离开恢复
+                  root.addEventListener("mouseenter", stop);
+                  root.addEventListener("mouseleave", start);
+
+                  // 初始状态
+                  apply(0);
+                  start();
+                })();
+              </script>
 
               <div class="site-divider books__divider" role="separator" aria-hidden="true"></div>
 
