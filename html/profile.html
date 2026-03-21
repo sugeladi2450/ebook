@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>电子书店 - 我的</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/profile.css" />
+  </head>
+
+  <body>
+    <div class="site-page">
+      <!-- 统一导航栏：与项目其他页面一致 -->
+      <header class="site-header">
+        <div class="site-container">
+          <nav class="site-nav" aria-label="主导航">
+            <a class="site-brand" href="./books.html" aria-label="进入书籍列表">
+              <img class="site-brand__logo" src="../图片/logo.jpg" alt="电子书店 Logo" />
+              <span class="site-brand__name">电子书店</span>
+            </a>
+
+            <ul class="site-nav__list">
+              <li><a class="site-nav__link" href="./books.html">书籍</a></li>
+              <li><a class="site-nav__link" href="./cart.html">购物车</a></li>
+              <li><a class="site-nav__link" href="./orders.html">订单</a></li>
+              <li>
+                <a class="site-nav__link" href="./profile.html" aria-current="page">我的</a>
+              </li>
+              <li><a class="site-nav__link" href="./login.html">登录</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main class="site-main">
+        <div class="site-container">
+          <section class="profile" aria-label="个人中心">
+            <header class="profile__header">
+              <h1 class="profile__title">我的</h1>
+              <p class="profile__subtitle">管理个人信息、收货地址与账户安全设置。</p>
+            </header>
+
+            <div class="profile__grid" aria-label="个人中心内容区">
+              <!-- 用户信息模块 -->
+              <section class="profile-card profile-user" aria-label="用户信息">
+                <header class="profile-card__header">
+                  <h2 class="profile-card__title">用户信息</h2>
+                  <p class="profile-card__desc">查看你的基础资料与账号信息。</p>
+                </header>
+
+                <div class="profile-card__body">
+                  <div class="profile-user__row">
+                    <div class="profile-user__avatar" aria-hidden="true"></div>
+
+                    <div class="profile-user__meta">
+                      <div class="profile-user__name">小明同学</div>
+                      <div class="profile-user__contact" aria-label="联系方式">
+                        <span class="profile-user__contact-item">手机号：138****0000</span>
+                        <span class="profile-user__contact-dot" aria-hidden="true">·</span>
+                        <span class="profile-user__contact-item">邮箱：demo@example.com</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="profile-divider" role="separator" aria-hidden="true"></div>
+
+                  <div class="profile-user__actions" aria-label="用户信息操作">
+                    <a class="profile-link" href="./profile.html" aria-label="编辑资料">
+                      编辑资料
+                    </a>
+                  </div>
+                </div>
+              </section>
+
+              <!-- 收货地址模块 -->
+              <section class="profile-card profile-address" aria-label="收货地址">
+                <header class="profile-card__header">
+                  <div class="profile-card__header-main">
+                    <h2 class="profile-card__title">收货地址</h2>
+                    <p class="profile-card__desc">用于下单时快速选择配送信息。</p>
+                  </div>
+
+                  <button class="profile-button profile-button--primary" type="button">
+                    新增地址
+                  </button>
+                </header>
+
+                <div class="profile-card__body">
+                  <ul class="profile-address__list" aria-label="地址列表">
+                    <li class="address-item" aria-label="地址 1">
+                      <div class="address-item__top">
+                        <span class="address-item__name">张三</span>
+                        <span class="address-item__phone">138****0000</span>
+                        <span class="address-item__tag">默认</span>
+                      </div>
+                      <div class="address-item__detail">
+                        上海市 浦东新区 张江镇 ××路 88 号 3 幢 1203
+                      </div>
+                      <div class="address-item__actions" aria-label="地址操作">
+                        <a class="profile-link" href="./profile.html">编辑</a>
+                        <a class="profile-link profile-link--danger" href="./profile.html">删除</a>
+                      </div>
+                    </li>
+
+                    <li class="address-item" aria-label="地址 2">
+                      <div class="address-item__top">
+                        <span class="address-item__name">李四</span>
+                        <span class="address-item__phone">139****1234</span>
+                      </div>
+                      <div class="address-item__detail">
+                        北京市 朝阳区 望京街道 ××小区 6 号楼 502
+                      </div>
+                      <div class="address-item__actions" aria-label="地址操作">
+                        <a class="profile-link" href="./profile.html">编辑</a>
+                        <a class="profile-link profile-link--danger" href="./profile.html">删除</a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </section>
+
+              <!-- 账户设置模块 -->
+              <section class="profile-card profile-settings" aria-label="账户设置">
+                <header class="profile-card__header">
+                  <h2 class="profile-card__title">账户设置</h2>
+                  <p class="profile-card__desc">管理账号安全与绑定信息。</p>
+                </header>
+
+                <div class="profile-card__body">
+                  <ul class="settings-list" aria-label="设置项列表">
+                    <li class="settings-item">
+                      <a class="settings-item__link" href="./profile.html" aria-label="修改密码">
+                        <span class="settings-item__label">修改密码</span>
+                        <span class="settings-item__hint">建议定期更新密码以提高安全性</span>
+                        <span class="settings-item__arrow" aria-hidden="true">›</span>
+                      </a>
+                    </li>
+
+                    <li class="settings-item">
+                      <a class="settings-item__link" href="./profile.html" aria-label="绑定手机号或邮箱">
+                        <span class="settings-item__label">绑定手机号 / 邮箱</span>
+                        <span class="settings-item__hint">用于登录与接收通知</span>
+                        <span class="settings-item__arrow" aria-hidden="true">›</span>
+                      </a>
+                    </li>
+
+                    <li class="settings-item">
+                      <a
+                        class="settings-item__link settings-item__link--danger"
+                        href="./login.html"
+                        aria-label="退出登录（示例跳转）"
+                      >
+                        <span class="settings-item__label">退出登录</span>
+                        <span class="settings-item__hint">退出后将返回登录页</span>
+                        <span class="settings-item__arrow" aria-hidden="true">›</span>
+                      </a>
+                    </li>
+                  </ul>
+
+                </div>
+              </section>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer class="site-footer">
+        <div class="site-container">
+          <p class="site-footer__text">© 2026 电子书店 · All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
