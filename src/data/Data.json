@@ -1,0 +1,250 @@
+{
+  "site": {
+    "name": "电子书店",
+    "footerText": "© 2026 电子书店 · All rights reserved."
+  },
+  "navigation": [
+    {
+      "label": "书籍",
+      "path": "/"
+    },
+    {
+      "label": "购物车",
+      "path": "/cart"
+    },
+    {
+      "label": "订单",
+      "path": "/orders"
+    },
+    {
+      "label": "我的",
+      "path": "/profile"
+    },
+    {
+      "label": "登录",
+      "path": "/login"
+    }
+  ],
+  "homePage": {
+    "title": "书籍列表",
+    "subtitle": "精选电子书推荐：点击书名可查看详情。",
+    "searchPlaceholder": "搜索书籍/作者/ISBN",
+    "searchButtonText": "🔍 搜索",
+    "gridChipText": "支持网格自适应"
+  },
+  "detailPage": {
+    "coverHint": "封面预览",
+    "backText": "返回书籍列表",
+    "priceLabel": "价格",
+    "summaryTitle": "内容简介",
+    "addToCartText": "加入购物车",
+    "buyNowText": "立即购买"
+  },
+  "cartPage": {
+    "title": "购物车",
+    "subtitle": "勾选商品后可进行结算。",
+    "selectAllText": "全选",
+    "totalLabel": "总计",
+    "checkoutText": "去结算"
+  },
+  "ordersPage": {
+    "title": "订单",
+    "subtitle": "查看你的订单记录与状态信息，可从购物车结算进入或通过导航栏直接访问。"
+  },
+  "profilePage": {
+    "title": "我的",
+    "subtitle": "管理个人信息、收货地址与账户安全设置。",
+    "userCard": {
+      "title": "用户信息",
+      "desc": "查看你的基础资料与账号信息。",
+      "name": "小明同学",
+      "phone": "138****0000",
+      "email": "demo@example.com",
+      "editText": "编辑资料"
+    },
+    "addressCard": {
+      "title": "收货地址",
+      "desc": "用于下单时快速选择配送信息。",
+      "addText": "新增地址"
+    },
+    "addresses": [
+      {
+        "id": "address-1",
+        "name": "张三",
+        "phone": "138****0000",
+        "tag": "默认",
+        "detail": "上海市 浦东新区 张江镇 ××路 88 号 3 幢 1203"
+      },
+      {
+        "id": "address-2",
+        "name": "李四",
+        "phone": "139****1234",
+        "detail": "北京市 朝阳区 望京街道 ××小区 6 号楼 502"
+      }
+    ],
+    "settingsCard": {
+      "title": "账户设置",
+      "desc": "管理账号安全与绑定信息。"
+    },
+    "settings": [
+      {
+        "id": "password",
+        "label": "修改密码",
+        "hint": "建议定期更新密码以提高安全性",
+        "path": "/profile"
+      },
+      {
+        "id": "binding",
+        "label": "绑定手机号 / 邮箱",
+        "hint": "用于登录与接收通知",
+        "path": "/profile"
+      },
+      {
+        "id": "logout",
+        "label": "退出登录",
+        "hint": "退出后将返回登录页",
+        "path": "/login",
+        "danger": true
+      }
+    ]
+  },
+  "loginPage": {
+    "title": "欢迎回来",
+    "subtitle": "登录后可同步购物车与订单信息，并在“我的”页面管理账户。",
+    "tips": [
+      "登录后可同步购物车与订单信息",
+      "如需管理账户信息，请前往“我的”页面"
+    ],
+    "panelTitle": "账号登录",
+    "panelDesc": "请输入账号与密码以继续",
+    "accountLabel": "账号",
+    "accountPlaceholder": "手机号 / 邮箱 / 用户名",
+    "accountHint": "支持手机号、邮箱或用户名登录",
+    "passwordLabel": "密码",
+    "passwordPlaceholder": "请输入密码",
+    "passwordHint": "请妥善保管你的密码",
+    "buttonText": "登录",
+    "linkText": "进入我的"
+  },
+  "banners": [
+    {
+      "id": "banner-1",
+      "imageKey": "banner1",
+      "alt": "书籍推荐 Banner 1"
+    },
+    {
+      "id": "banner-2",
+      "imageKey": "banner2",
+      "alt": "书籍推荐 Banner 2"
+    },
+    {
+      "id": "banner-3",
+      "imageKey": "banner3",
+      "alt": "书籍推荐 Banner 3"
+    },
+    {
+      "id": "banner-4",
+      "imageKey": "banner4",
+      "alt": "书籍推荐 Banner 4"
+    }
+  ],
+  "books": [
+    {
+      "id": "1",
+      "title": "河的第三条岸",
+      "author": "[巴西] 若昂·吉马良斯·罗萨",
+      "translator": "游雨频",
+      "isbn": "9787208194601",
+      "price": 56,
+      "tag": "文学 / 短篇小说",
+      "coverKey": "book1",
+      "publishLine": "出版时间：2025年6月 · 页数：306页",
+      "listDesc": "精选 19 篇短篇小说，魔幻现实主义气质浓烈；同名名篇写尽荒诞与悲壮。",
+      "intro": "本书精选了罗萨巅峰时期的 19 篇短篇小说，以巴西东北腹地为舞台，构建出充满魔幻现实主义色彩的神秘世界。其中同名名篇《河的第三条岸》讲述一位父亲离家上船、从此永不上岸的故事：荒诞又悲壮，像一道无法解释的生命谜题。",
+      "intro2": "作者通晓 20 多门语言，文字爆发力极强，擅长把日常瞬间写成“太阳重生”的奇迹，被誉为“语言的冒险大师”。"
+    },
+    {
+      "id": "2",
+      "title": "亲密有间：有边界感的伴侣更长久的关系",
+      "author": "[美] 亨利·克劳德 / 约翰·汤森德",
+      "translator": "林思语",
+      "isbn": "9787521775709",
+      "price": 59,
+      "tag": "心理学 / 亲密关系",
+      "coverKey": "book2",
+      "publishLine": "出版时间：2025年10月 · 页数：296页",
+      "listDesc": "从临床心理学视角讲清“边界不明”的冲突根源，给出关系修复的可执行方案。",
+      "intro": "本书从临床心理学角度指出：亲密关系中的控制、内疚与情绪消耗，往往源于边界不明。",
+      "intro2": "作者提炼“边界十大定律”与多类冲突解决方案，帮助你在亲密中承担责任、守护空间，关系更长久。"
+    },
+    {
+      "id": "3",
+      "title": "幸福博弈论：用理性思维赢取更好生活",
+      "author": "[印] 考希克·巴苏",
+      "translator": "苏京春",
+      "isbn": "9787521778472",
+      "price": 69,
+      "tag": "经济学 / 思维方法",
+      "coverKey": "book3",
+      "publishLine": "出版时间：2025年10月 · 页数：240页",
+      "listDesc": "把博弈论与经济学原理用思想实验讲透，用理性决策把选择推向“更优解”。",
+      "intro": "把博弈论与经济学原理融入日常选择：从人际焦虑到职场决策，用思想实验拆解逻辑难题。",
+      "intro2": "教你站在对方角度思考，让每一次选择更接近最优解，收获更稳定的幸福感。"
+    },
+    {
+      "id": "4",
+      "title": "人间蒸发",
+      "author": "[美] 劳拉·戴夫",
+      "translator": "冯新平",
+      "isbn": "9787522524245",
+      "price": 49.8,
+      "tag": "小说 / 悬疑",
+      "coverKey": "book4",
+      "publishLine": "出版时间：2023年12月 · 页数：304页",
+      "listDesc": "家庭伦理×悬疑：丈夫失踪只留“保护她”的便条，真相与亲情在联手追寻中浮出水面。",
+      "intro": "丈夫欧文在公司涉嫌经济犯罪前夕离奇失踪，只留“保护她”三个字。汉娜与继女贝莉被迫联手追寻真相。",
+      "intro2": "在追寻过程中，谎言层层揭开，也意外重建了超越血缘的亲密亲情。"
+    }
+  ],
+  "cartItems": [
+    {
+      "id": "cart-1",
+      "bookId": "1",
+      "authorShort": "若昂·吉马良斯·罗萨"
+    },
+    {
+      "id": "cart-2",
+      "bookId": "4",
+      "authorShort": "劳拉·戴夫"
+    },
+    {
+      "id": "cart-3",
+      "bookId": "2",
+      "authorShort": "亨利·克劳德 / 约翰·汤森德"
+    }
+  ],
+  "orders": [
+    {
+      "id": "20260319-0001",
+      "bookId": "1",
+      "amount": 56,
+      "status": "pending",
+      "statusText": "待支付"
+    },
+    {
+      "id": "20260318-0123",
+      "bookId": "4",
+      "amount": 49.8,
+      "status": "done",
+      "statusText": "已完成"
+    },
+    {
+      "id": "20260310-0456",
+      "bookId": "2",
+      "amount": 59,
+      "status": "done",
+      "statusText": "已完成"
+    }
+  ]
+}
+
