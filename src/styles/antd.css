@@ -1,0 +1,246 @@
+.books-search__search.ant-input-search {
+  width: 100%;
+}
+
+.books-search__search .ant-input-group .ant-input-affix-wrapper,
+.books-search__search .ant-input-group .ant-input {
+  height: 44px;
+  border-radius: 12px 0 0 12px;
+  border-color: rgba(17, 24, 39, 0.22);
+}
+
+.books-search__search .ant-input-group .ant-input-affix-wrapper:hover,
+.books-search__search .ant-input-group .ant-input-affix-wrapper-focused,
+.books-search__search .ant-input-group .ant-input:hover,
+.books-search__search .ant-input-group .ant-input:focus {
+  border-color: rgba(17, 24, 39, 0.55);
+  box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.08);
+}
+
+.books-search__search .ant-input-group-addon .ant-btn {
+  height: 44px;
+  border-radius: 0 12px 12px 0;
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  background: #0f172a;
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.books-search__search .ant-input-group-addon .ant-btn:hover,
+.books-search__search .ant-input-group-addon .ant-btn:focus {
+  background: rgba(15, 23, 42, 0.85);
+  color: #ffffff;
+}
+
+.book-card__badge.ant-tag,
+.book-detail__tag.ant-tag,
+.address-item__tag.ant-tag,
+.order-row__status.ant-tag {
+  margin: 0;
+}
+
+.book-card__badge.ant-tag {
+  font-size: 12px;
+  color: rgba(15, 23, 42, 0.75);
+  background: rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 999px;
+  padding: 6px 10px;
+}
+
+.book-detail__tag.ant-tag {
+  font-size: 12px;
+  color: rgba(15, 23, 42, 0.8);
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.18);
+  border-radius: 999px;
+  padding: 6px 10px;
+}
+
+.book-detail__button.ant-btn {
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 12px;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+}
+
+.book-detail__button--cart.ant-btn {
+  border-color: rgba(59, 130, 246, 0.35);
+  background: rgba(59, 130, 246, 0.08);
+  color: rgba(15, 23, 42, 0.92);
+}
+
+.book-detail__button--cart.ant-btn:hover,
+.book-detail__button--cart.ant-btn:focus {
+  border-color: rgba(59, 130, 246, 0.45);
+  background: rgba(59, 130, 246, 0.12);
+  color: rgba(15, 23, 42, 0.92);
+}
+
+.book-detail__button--buy.ant-btn {
+  border-color: rgba(34, 197, 94, 0.35);
+  background: linear-gradient(135deg, #22c55e, #3b82f6);
+  color: #ffffff;
+}
+
+.book-detail__button--buy.ant-btn:hover,
+.book-detail__button--buy.ant-btn:focus {
+  border-color: rgba(34, 197, 94, 0.4);
+  background: linear-gradient(135deg, #22c55e, #3b82f6);
+  color: #ffffff;
+  filter: brightness(1.03);
+}
+
+.cart__selectall.ant-checkbox-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  background: rgba(15, 23, 42, 0.04);
+  transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
+}
+
+.cart__selectall.ant-checkbox-wrapper:hover {
+  background: rgba(59, 130, 246, 0.08);
+  border-color: rgba(59, 130, 246, 0.22);
+  transform: translateY(-1px);
+}
+
+.cart__selectall .ant-checkbox + span {
+  padding-inline-start: 0;
+}
+
+.cart__checkout.ant-btn {
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 12px;
+  border-color: rgba(34, 197, 94, 0.35);
+  background: linear-gradient(135deg, #22c55e, #3b82f6);
+  color: #ffffff;
+  font-weight: 950;
+  letter-spacing: 0.2px;
+}
+
+.cart__checkout.ant-btn:hover,
+.cart__checkout.ant-btn:focus {
+  border-color: rgba(34, 197, 94, 0.4);
+  background: linear-gradient(135deg, #22c55e, #3b82f6);
+  color: #ffffff;
+  filter: brightness(1.03);
+}
+
+.cart-row__delete.ant-btn {
+  height: 36px;
+  border-radius: 12px;
+  font-weight: 900;
+}
+
+.profile-user__avatar.ant-avatar {
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.95), rgba(34, 197, 94, 0.85));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+.profile-button.ant-btn {
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 12px;
+  font-weight: 900;
+}
+
+.profile-button--primary.ant-btn {
+  background: linear-gradient(135deg, #22c55e, #3b82f6);
+  border-color: rgba(34, 197, 94, 0.35);
+  color: #ffffff;
+}
+
+.profile-button--primary.ant-btn:hover,
+.profile-button--primary.ant-btn:focus {
+  background: linear-gradient(135deg, #22c55e, #3b82f6);
+  border-color: rgba(34, 197, 94, 0.35);
+  color: #ffffff;
+  filter: brightness(1.03);
+}
+
+.address-item__tag.ant-tag {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.22);
+  color: rgba(15, 23, 42, 0.85);
+}
+
+.login__input.ant-input,
+.login__input.ant-input-affix-wrapper {
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(17, 24, 39, 0.14);
+  background: #ffffff;
+  box-shadow: 0 1px 0 rgba(2, 6, 23, 0.03);
+}
+
+.login__input.ant-input-affix-wrapper .ant-input {
+  box-shadow: none;
+}
+
+.login__input.ant-input:hover,
+.login__input.ant-input-affix-wrapper:hover {
+  border-color: rgba(59, 130, 246, 0.45);
+}
+
+.login__input.ant-input:focus,
+.login__input.ant-input-affix-wrapper-focused {
+  border-color: rgba(59, 130, 246, 0.75);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.16);
+  transform: translateY(-1px);
+}
+
+.login__button.ant-btn {
+  margin-top: 4px;
+  width: 100%;
+  height: 44px;
+  border-radius: 12px;
+  border-color: rgba(59, 130, 246, 0.35);
+  background: linear-gradient(135deg, #3b82f6, #22c55e);
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.login__button.ant-btn:hover,
+.login__button.ant-btn:focus {
+  border-color: rgba(59, 130, 246, 0.35);
+  background: linear-gradient(135deg, #3b82f6, #22c55e);
+  color: #ffffff;
+  filter: brightness(1.03);
+}
+
+.order-row__status.ant-tag {
+  justify-self: end;
+  font-size: 12px;
+  font-weight: 950;
+  border-radius: 999px;
+  padding: 6px 10px;
+}
+
+.order-row__status--pending.ant-tag {
+  border-color: rgba(239, 68, 68, 0.28);
+  background: rgba(239, 68, 68, 0.08);
+  color: rgba(185, 28, 28, 0.95);
+}
+
+.order-row__status--done.ant-tag {
+  border-color: rgba(34, 197, 94, 0.28);
+  background: rgba(34, 197, 94, 0.1);
+  color: rgba(21, 128, 61, 0.98);
+}
+
+@media (max-width: 860px) {
+  .order-row__status.ant-tag {
+    justify-self: start;
+  }
+}

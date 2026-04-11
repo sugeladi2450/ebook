@@ -1,3 +1,4 @@
+import { Tag } from "antd";
 import { Link } from "react-router-dom";
 
 export default function BookCard({ book }) {
@@ -20,10 +21,9 @@ export default function BookCard({ book }) {
         <p className="book-card__desc">{book.listDesc}</p>
         <div className="book-card__footer" aria-label="价格信息">
           <span className="book-card__price">{book.priceText}</span>
-          <span className="book-card__badge">{book.tag}</span>
+          <Tag className="book-card__badge">{book.tag}</Tag>
         </div>
       </div>
     </Link>
   );
 }
-

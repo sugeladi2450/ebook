@@ -27,4 +27,3 @@ export default function OrdersPage({ orders, pageData, siteName }) {
     </section>
   );
 }
-

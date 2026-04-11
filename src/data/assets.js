@@ -19,4 +19,3 @@ export const assetMap = {
   book3,
   book4,
 };
-

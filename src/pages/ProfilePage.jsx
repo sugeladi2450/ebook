@@ -1,3 +1,5 @@
+import { UserOutlined } from "@ant-design/icons";
+import { Avatar, Button } from "antd";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import AddressItem from "../components/AddressItem";
@@ -25,7 +27,7 @@ export default function ProfilePage({ pageData, siteName }) {
 
           <div className="profile-card__body">
             <div className="profile-user__row">
-              <div className="profile-user__avatar" aria-hidden="true"></div>
+              <Avatar className="profile-user__avatar" icon={<UserOutlined />} size={56} />
 
               <div className="profile-user__meta">
                 <div className="profile-user__name">{pageData.userCard.name}</div>
@@ -49,6 +51,9 @@ export default function ProfilePage({ pageData, siteName }) {
               <Link className="profile-link" to="/profile" aria-label="编辑资料">
                 {pageData.userCard.editText}
               </Link>
+              <Button className="profile-button profile-button--primary" htmlType="button" type="primary">
+                {pageData.userCard.saveText}
+              </Button>
             </div>
           </div>
         </ProfileCard>
@@ -60,9 +65,9 @@ export default function ProfilePage({ pageData, siteName }) {
               <p className="profile-card__desc">{pageData.addressCard.desc}</p>
             </div>
 
-            <button className="profile-button profile-button--primary" type="button">
+            <Button className="profile-button profile-button--primary" htmlType="button" type="primary">
               {pageData.addressCard.addText}
-            </button>
+            </Button>
           </header>
 
           <div className="profile-card__body">
@@ -92,4 +97,3 @@ export default function ProfilePage({ pageData, siteName }) {
     </section>
   );
 }
-

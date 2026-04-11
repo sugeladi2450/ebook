@@ -1,7 +1,10 @@
 import { useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Button, Tag } from "antd";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 export default function BookDetailPage({ book, pageData, siteName }) {
+  const navigate = useNavigate();
+
   useEffect(() => {
     document.title = book ? `${siteName} - ${book.title}` : `${siteName} - 书籍详情`;
   }, [book, siteName]);
@@ -37,9 +40,9 @@ export default function BookDetailPage({ book, pageData, siteName }) {
                   <span className="book-detail__v">{book.author}</span>
                 </div>
 
-                <span className="book-detail__tag" aria-label="分类">
+                <Tag className="book-detail__tag" aria-label="分类">
                   {book.tag}
-                </span>
+                </Tag>
               </div>
 
               <div className="book-detail__meta-row">
@@ -63,12 +66,21 @@ export default function BookDetailPage({ book, pageData, siteName }) {
             <p className="book-detail__stock">{book.publishLine}</p>
 
             <div className="book-detail__actions" aria-label="操作按钮">
-              <Link className="book-detail__button book-detail__button--cart" to="/cart">
+              <Button
+                className="book-detail__button book-detail__button--cart"
+                htmlType="button"
+                onClick={() => navigate("/cart")}
+              >
                 {pageData.addToCartText}
-              </Link>
-              <Link className="book-detail__button book-detail__button--buy" to="/orders">
+              </Button>
+              <Button
+                className="book-detail__button book-detail__button--buy"
+                htmlType="button"
+                type="primary"
+                onClick={() => navigate("/orders")}
+              >
                 {pageData.buyNowText}
-              </Link>
+              </Button>
             </div>
           </header>
 
@@ -82,4 +94,3 @@ export default function BookDetailPage({ book, pageData, siteName }) {
     </article>
   );
 }
-

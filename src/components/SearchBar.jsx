@@ -1,3 +1,7 @@
+import { Input } from "antd";
+
+const { Search } = Input;
+
 export default function SearchBar({
   keyword,
   onKeywordChange,
@@ -8,20 +12,17 @@ export default function SearchBar({
   return (
     <section className="books-search" aria-label="搜索书籍">
       <form className="books-search__form" onSubmit={onSubmit}>
-        <input
-          className="books-search__input"
-          type="search"
-          name="q"
+        <Search
+          allowClear
+          className="books-search__search"
+          enterButton={buttonText}
           placeholder={placeholder}
-          aria-label={placeholder}
+          size="large"
           value={keyword}
           onChange={(event) => onKeywordChange(event.target.value)}
+          onSearch={() => undefined}
         />
-        <button className="books-search__button" type="submit">
-          {buttonText}
-        </button>
       </form>
     </section>
   );
 }
-

@@ -1,3 +1,4 @@
+import { Tag } from "antd";
 import { Link } from "react-router-dom";
 
 export default function AddressItem({ address }) {
@@ -6,7 +7,7 @@ export default function AddressItem({ address }) {
       <div className="address-item__top">
         <span className="address-item__name">{address.name}</span>
         <span className="address-item__phone">{address.phone}</span>
-        {address.tag ? <span className="address-item__tag">{address.tag}</span> : null}
+        {address.tag ? <Tag className="address-item__tag">{address.tag}</Tag> : null}
       </div>
       <div className="address-item__detail">{address.detail}</div>
       <div className="address-item__actions" aria-label="地址操作">
@@ -20,4 +21,3 @@ export default function AddressItem({ address }) {
     </li>
   );
 }
-

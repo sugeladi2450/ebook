@@ -1,3 +1,5 @@
+import { Tag } from "antd";
+
 export default function OrderRow({ order }) {
   const statusClassName =
     order.status === "pending"
@@ -9,8 +11,7 @@ export default function OrderRow({ order }) {
       <div className="order-row__no">订单号：{order.id}</div>
       <div className="order-row__book">书籍：{order.book.title}</div>
       <div className="order-row__amount">{order.amountText}</div>
-      <div className={statusClassName}>{order.statusText}</div>
+      <Tag className={statusClassName}>{order.statusText}</Tag>
     </article>
   );
 }
-

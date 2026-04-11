@@ -60,7 +60,8 @@
       "name": "小明同学",
       "phone": "138****0000",
       "email": "demo@example.com",
-      "editText": "编辑资料"
+      "editText": "编辑资料",
+      "saveText": "保存资料"
     },
     "addressCard": {
       "title": "收货地址",
@@ -247,4 +248,3 @@
     }
   ]
 }
-

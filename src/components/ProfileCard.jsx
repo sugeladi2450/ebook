@@ -7,4 +7,3 @@ export default function ProfileCard({ children, className = "", ...props }) {
     </section>
   );
 }
-

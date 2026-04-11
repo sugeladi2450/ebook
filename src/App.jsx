@@ -29,9 +29,7 @@ function BookDetailRoute() {
 export default function App() {
   return (
     <Routes>
-      <Route
-        element={<AppLayout navigation={appData.navigation} site={appData.site} />}
-      >
+      <Route element={<AppLayout navigation={appData.navigation} site={appData.site} />}>
         <Route
           index
           element={
@@ -87,4 +85,3 @@ export default function App() {
     </Routes>
   );
 }
-

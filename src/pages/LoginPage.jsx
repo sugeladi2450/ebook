@@ -1,3 +1,4 @@
+import { Button, Input } from "antd";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -46,12 +47,10 @@ export default function LoginPage({ pageData, siteName }) {
               <label className="login__label" htmlFor="login-account">
                 {pageData.accountLabel}
               </label>
-              <input
+              <Input
                 className="login__input"
                 id="login-account"
                 name="account"
-                type="text"
-                autoComplete="username"
                 placeholder={pageData.accountPlaceholder}
                 required
                 value={account}
@@ -64,12 +63,10 @@ export default function LoginPage({ pageData, siteName }) {
               <label className="login__label" htmlFor="login-password">
                 {pageData.passwordLabel}
               </label>
-              <input
+              <Input.Password
                 className="login__input"
                 id="login-password"
                 name="password"
-                type="password"
-                autoComplete="current-password"
                 placeholder={pageData.passwordPlaceholder}
                 required
                 value={password}
@@ -78,9 +75,9 @@ export default function LoginPage({ pageData, siteName }) {
               <p className="login__hint">{pageData.passwordHint}</p>
             </div>
 
-            <button className="login__button" type="submit">
+            <Button className="login__button" htmlType="submit" type="primary">
               {pageData.buttonText}
-            </button>
+            </Button>
 
             <div className="login__links" aria-label="辅助链接">
               <Link className="login__link" to="/profile">

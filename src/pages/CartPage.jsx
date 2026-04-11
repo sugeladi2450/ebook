@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Button, Checkbox } from "antd";
+import { useNavigate } from "react-router-dom";
 import CartRow from "../components/CartRow";
 
 function formatPrice(price) {
@@ -7,6 +8,7 @@ function formatPrice(price) {
 }
 
 export default function CartPage({ initialItems, pageData, siteName }) {
+  const navigate = useNavigate();
   const [items, setItems] = useState(initialItems);
   const [selectedAll, setSelectedAll] = useState(false);
 
@@ -31,16 +33,13 @@ export default function CartPage({ initialItems, pageData, siteName }) {
           </div>
 
           <div className="cart__toolbar" aria-label="操作栏">
-            <label className="cart__selectall" aria-label="全选">
-              <input
-                className="cart__checkbox"
-                type="checkbox"
-                name="selectAll"
-                checked={selectedAll}
-                onChange={(event) => setSelectedAll(event.target.checked)}
-              />
-              <span className="cart__selectall-text">{pageData.selectAllText}</span>
-            </label>
+            <Checkbox
+              checked={selectedAll}
+              className="cart__selectall"
+              onChange={(event) => setSelectedAll(event.target.checked)}
+            >
+              {pageData.selectAllText}
+            </Checkbox>
           </div>
         </header>
 
@@ -58,9 +57,14 @@ export default function CartPage({ initialItems, pageData, siteName }) {
             <span className="cart__total-value">{totalText}</span>
           </div>
 
-          <Link className="cart__checkout" to="/orders" aria-label="去结算并跳转到订单页">
+          <Button
+            className="cart__checkout"
+            htmlType="button"
+            type="primary"
+            onClick={() => navigate("/orders")}
+          >
             {pageData.checkoutText}
-          </Link>
+          </Button>
         </footer>
       </div>
     </section>

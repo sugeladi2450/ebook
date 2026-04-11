@@ -1,3 +1,5 @@
+import { Button } from "antd";
+
 export default function CartRow({ item, onDelete }) {
   return (
     <article className="cart-row" aria-label={`购物车条目：${item.book.title}`}>
@@ -11,10 +13,9 @@ export default function CartRow({ item, onDelete }) {
       <div className="cart-row__price" aria-label="单价">
         {item.priceText}
       </div>
-      <button className="cart-row__delete" type="button" onClick={() => onDelete(item.id)}>
+      <Button className="cart-row__delete" danger htmlType="button" onClick={() => onDelete(item.id)}>
         删除
-      </button>
+      </Button>
     </article>
   );
 }
-
