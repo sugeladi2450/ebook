@@ -49,7 +49,7 @@
   },
   "ordersPage": {
     "title": "订单",
-    "subtitle": "查看你的订单记录与状态信息，可从购物车结算进入或通过导航栏直接访问。"
+    "subtitle": "查看你的订单记录与状态信息。"
   },
   "profilePage": {
     "title": "我的",
@@ -59,7 +59,7 @@
       "desc": "查看你的基础资料与账号信息。",
       "name": "小明同学",
       "phone": "138****0000",
-      "email": "demo@example.com",
+      "email": "email@example.com",
       "editText": "编辑资料",
       "saveText": "保存资料"
     },
@@ -72,15 +72,15 @@
       {
         "id": "address-1",
         "name": "张三",
-        "phone": "138****0000",
+        "phone": "phone1",
         "tag": "默认",
-        "detail": "上海市 浦东新区 张江镇 ××路 88 号 3 幢 1203"
+        "detail": "address1"
       },
       {
         "id": "address-2",
         "name": "李四",
-        "phone": "139****1234",
-        "detail": "北京市 朝阳区 望京街道 ××小区 6 号楼 502"
+        "phone": "phone2",
+        "detail": "address2"
       }
     ],
     "settingsCard": {

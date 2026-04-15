@@ -17,6 +17,7 @@ function matchesKeyword(book, keyword) {
 }
 
 export default function BookListPage({ banners, books, pageData, siteName }) {
+  const [inputValue, setInputValue] = useState("");
   const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
@@ -41,9 +42,9 @@ export default function BookListPage({ banners, books, pageData, siteName }) {
         </header>
 
         <SearchBar
-          keyword={keyword}
-          onKeywordChange={setKeyword}
-          onSubmit={(event) => event.preventDefault()}
+          keyword={inputValue}
+          onKeywordChange={setInputValue}
+          onSearch={setKeyword}
           placeholder={pageData.searchPlaceholder}
           buttonText={pageData.searchButtonText}
         />

@@ -5,13 +5,13 @@ const { Search } = Input;
 export default function SearchBar({
   keyword,
   onKeywordChange,
-  onSubmit,
+  onSearch,
   placeholder,
   buttonText,
 }) {
   return (
     <section className="books-search" aria-label="搜索书籍">
-      <form className="books-search__form" onSubmit={onSubmit}>
+      <div className="books-search__form">
         <Search
           allowClear
           className="books-search__search"
@@ -20,9 +20,9 @@ export default function SearchBar({
           size="large"
           value={keyword}
           onChange={(event) => onKeywordChange(event.target.value)}
-          onSearch={() => undefined}
+          onSearch={onSearch}
         />
-      </form>
+      </div>
     </section>
   );
 }
