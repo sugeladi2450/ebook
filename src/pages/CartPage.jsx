@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import { Button, Checkbox } from "antd";
 import { useNavigate } from "react-router-dom";
 import CartRow from "../components/CartRow";
-
-function formatPrice(price) {
-  return `¥ ${price.toFixed(2)}`;
-}
+import { calculateCartTotal, removeCartItem } from "../services/cartService";
+import { formatPrice } from "../utils/formatters";
 
 export default function CartPage({ initialItems, pageData, siteName }) {
   const navigate = useNavigate();
@@ -16,11 +14,11 @@ export default function CartPage({ initialItems, pageData, siteName }) {
     document.title = `${siteName} - ${pageData.title}`;
   }, [pageData.title, siteName]);
 
-  const total = items.reduce((sum, item) => sum + Number(item.book.price), 0);
+  const total = calculateCartTotal(items);
   const totalText = formatPrice(total);
 
   function handleDelete(itemId) {
-    setItems((currentItems) => currentItems.filter((item) => item.id !== itemId));
+    setItems((currentItems) => removeCartItem(currentItems, itemId));
   }
 
   return (

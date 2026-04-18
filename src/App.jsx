@@ -1,12 +1,13 @@
 import { Navigate, Route, Routes, useLocation, useParams } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
-import { findBookById, getAppData } from "./data/library";
 import BookDetailPage from "./pages/BookDetailPage";
 import BookListPage from "./pages/BookListPage";
 import CartPage from "./pages/CartPage";
 import LoginPage from "./pages/LoginPage";
 import OrdersPage from "./pages/OrdersPage";
 import ProfilePage from "./pages/ProfilePage";
+import { getAppData } from "./services/appDataService";
+import { findBookById } from "./services/bookService";
 
 const appData = getAppData();
 

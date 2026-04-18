@@ -2,19 +2,7 @@ import { useEffect, useState } from "react";
 import BannerCarousel from "../components/BannerCarousel";
 import BookCard from "../components/BookCard";
 import SearchBar from "../components/SearchBar";
-
-function matchesKeyword(book, keyword) {
-  if (!keyword.trim()) {
-    return true;
-  }
-
-  const normalizedKeyword = keyword.trim().toLowerCase();
-
-  return [book.title, book.author, book.isbn]
-    .join(" ")
-    .toLowerCase()
-    .includes(normalizedKeyword);
-}
+import { filterBooksByKeyword } from "../services/bookService";
 
 export default function BookListPage({ banners, books, pageData, siteName }) {
   const [inputValue, setInputValue] = useState("");
@@ -24,7 +12,7 @@ export default function BookListPage({ banners, books, pageData, siteName }) {
     document.title = `${siteName} - ${pageData.title}`;
   }, [pageData.title, siteName]);
 
-  const filteredBooks = books.filter((book) => matchesKeyword(book, keyword));
+  const filteredBooks = filterBooksByKeyword(books, keyword);
 
   return (
     <section className="books" aria-label="书籍列表">
