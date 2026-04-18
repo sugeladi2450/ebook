@@ -1,18 +1,15 @@
-import { useEffect, useState } from "react";
-import BannerCarousel from "../components/BannerCarousel";
-import BookCard from "../components/BookCard";
-import SearchBar from "../components/SearchBar";
-import { filterBooksByKeyword } from "../services/bookService";
+import { useLoaderData } from "react-router-dom";
+import BannerCarousel from "../../components/books/BannerCarousel";
+import BookCard from "../../components/books/BookCard";
+import BookSearchForm from "../../components/books/BookSearchForm";
+import useBookSearch from "../../hooks/useBookSearch";
+import usePageTitle from "../../hooks/usePageTitle";
 
-export default function BookListPage({ banners, books, pageData, siteName }) {
-  const [inputValue, setInputValue] = useState("");
-  const [keyword, setKeyword] = useState("");
+export default function BookListPage({ banners, pageData, siteName }) {
+  const { filteredBooks, keyword } = useLoaderData();
+  const search = useBookSearch(keyword);
 
-  useEffect(() => {
-    document.title = `${siteName} - ${pageData.title}`;
-  }, [pageData.title, siteName]);
-
-  const filteredBooks = filterBooksByKeyword(books, keyword);
+  usePageTitle(`${siteName} - ${pageData.title}`);
 
   return (
     <section className="books" aria-label="书籍列表">
@@ -29,12 +26,14 @@ export default function BookListPage({ banners, books, pageData, siteName }) {
           </div>
         </header>
 
-        <SearchBar
-          keyword={inputValue}
-          onKeywordChange={setInputValue}
-          onSearch={setKeyword}
+        <BookSearchForm
+          value={search.inputValue}
           placeholder={pageData.searchPlaceholder}
           buttonText={pageData.searchButtonText}
+          onChange={search.handleInputChange}
+          onCompositionStart={search.handleCompositionStart}
+          onCompositionEnd={search.handleCompositionEnd}
+          onSubmit={search.handleSubmit}
         />
 
         <BannerCarousel banners={banners} />

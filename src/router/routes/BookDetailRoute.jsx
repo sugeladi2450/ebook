@@ -1,6 +1,6 @@
 import { useLocation, useParams } from "react-router-dom";
-import BookDetailPage from "../pages/BookDetailPage";
-import { findBookById } from "../services/bookService";
+import BookDetailPage from "../../pages/books/BookDetailPage";
+import { findBookById } from "../../services/books/bookQueryService";
 
 export default function BookDetailRoute({ books, pageData, siteName }) {
   const { bookId } = useParams();

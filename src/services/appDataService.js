@@ -1,8 +1,8 @@
 import rawData from "../data/Data.json";
 import { assetMap } from "../data/assets";
-import { buildBooks, buildBanners } from "./bookService";
-import { buildCartItems } from "./cartService";
-import { buildOrders } from "./orderService";
+import { buildBooks, buildBanners } from "./books/bookDataService";
+import { buildCartItems } from "./cart/cartDataService";
+import { buildOrders } from "./orders/orderDataService";
 
 export function getAppData() {
   const books = buildBooks(rawData.books, assetMap);

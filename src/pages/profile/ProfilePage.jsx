@@ -1,15 +1,13 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Button } from "antd";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import AddressItem from "../components/AddressItem";
-import ProfileCard from "../components/ProfileCard";
-import SettingsItem from "../components/SettingsItem";
+import AddressItem from "../../components/profile/AddressItem";
+import ProfileCard from "../../components/profile/ProfileCard";
+import SettingsItem from "../../components/profile/SettingsItem";
+import usePageTitle from "../../hooks/usePageTitle";
 
 export default function ProfilePage({ pageData, siteName }) {
-  useEffect(() => {
-    document.title = `${siteName} - ${pageData.title}`;
-  }, [pageData.title, siteName]);
+  usePageTitle(`${siteName} - ${pageData.title}`);
 
   return (
     <section className="profile" aria-label="个人中心">

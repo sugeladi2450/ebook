@@ -1,10 +1,8 @@
-import { useEffect } from "react";
-import OrderRow from "../components/OrderRow";
+import OrderRow from "../../components/orders/OrderRow";
+import usePageTitle from "../../hooks/usePageTitle";
 
 export default function OrdersPage({ orders, pageData, siteName }) {
-  useEffect(() => {
-    document.title = `${siteName} - ${pageData.title}`;
-  }, [pageData.title, siteName]);
+  usePageTitle(`${siteName} - ${pageData.title}`);
 
   return (
     <section className="orders" aria-label="订单列表">

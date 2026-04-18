@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { clampIndex } from "../utils/math";
+import { clampIndex } from "../../utils/math";
 
 export default function BannerCarousel({ banners }) {
   const [index, setIndex] = useState(0);

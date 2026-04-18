@@ -1,18 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Checkbox } from "antd";
 import { useNavigate } from "react-router-dom";
-import CartRow from "../components/CartRow";
-import { calculateCartTotal, removeCartItem } from "../services/cartService";
-import { formatPrice } from "../utils/formatters";
+import CartRow from "../../components/cart/CartRow";
+import usePageTitle from "../../hooks/usePageTitle";
+import { calculateCartTotal, removeCartItem } from "../../services/cart/cartService";
+import { formatPrice } from "../../utils/formatters";
 
 export default function CartPage({ initialItems, pageData, siteName }) {
   const navigate = useNavigate();
   const [items, setItems] = useState(initialItems);
   const [selectedAll, setSelectedAll] = useState(false);
 
-  useEffect(() => {
-    document.title = `${siteName} - ${pageData.title}`;
-  }, [pageData.title, siteName]);
+  usePageTitle(`${siteName} - ${pageData.title}`);
 
   const total = calculateCartTotal(items);
   const totalText = formatPrice(total);
