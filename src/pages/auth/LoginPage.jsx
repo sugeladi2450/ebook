@@ -12,7 +12,9 @@ export default function LoginPage({ pageData, siteName }) {
   }, [siteName]);
 
   function handleSubmit(event) {
+    // 模拟登录成功，直接跳转到个人中心页面，并把账号信息通过路由状态传递过去。
     event.preventDefault();
+    // 把用户输入的账号通过路由状态带给个人中心页面，让 /profile 页面可以直接显示登录的账号信息。
     navigate("/profile", {
       state: {
         account,
@@ -29,6 +31,7 @@ export default function LoginPage({ pageData, siteName }) {
 
           <ul className="login__tips" aria-label="登录提示">
             {pageData.tips.map((tip) => (
+              // key 是 React 用来识别列表项唯一性的标识，帮助 React 高效更新 DOM，避免渲染错乱和性能问题。
               <li key={tip} className="login__tip">
                 {tip}
               </li>

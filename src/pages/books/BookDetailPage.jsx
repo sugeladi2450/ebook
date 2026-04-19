@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Button, Tag } from "antd";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
+// 书籍详情页面组件：接收 book、pageData 和 siteName 作为 props，展示书籍的详细信息，包括封面、标题、作者、价格等，同时提供加入购物车和立即购买的按钮。页面还会根据书籍信息动态设置文档标题，并且如果没有找到对应的书籍，则自动跳转回首页。
 export default function BookDetailPage({ book, pageData, siteName }) {
   const navigate = useNavigate();
 

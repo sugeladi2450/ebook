@@ -1,3 +1,4 @@
+// 书籍搜索功能的自定义 Hook，专门封装搜索框的所有逻辑，包括输入监听、中文输入法处理、表单提交、路由查询、实时搜索。
 import { useEffect, useRef, useState } from "react";
 import { useSubmit } from "react-router-dom";
 
@@ -5,6 +6,7 @@ export default function useBookSearch(initialKeyword, action = "/") {
   const submit = useSubmit();
   const [inputValue, setInputValue] = useState(initialKeyword);
   const hasSearchRef = useRef(initialKeyword.trim() !== "");
+  // 标记是否正在输入中文（拼音未完成），防止中文还没输完就提前触发搜索。
   const isComposingRef = useRef(false);
 
   useEffect(() => {

@@ -8,11 +8,13 @@ import ProfilePage from "../pages/profile/ProfilePage";
 import BookDetailRoute from "./routes/BookDetailRoute";
 import { createBookListLoader } from "./loaders/bookListLoader";
 
+// 创建应用路由：定义整个应用的路由结构，包括每个页面对应的路径、组件和数据加载器等信息
 export function createAppRouter(appData) {
   return createBrowserRouter(
     createRoutesFromElements(
       <Route element={<AppLayout navigation={appData.navigation} site={appData.site} />}>
         <Route
+          // 默认子路由，用户访问 / 根路径时，渲染这个页面（首页）
           index
           loader={createBookListLoader(appData)}
           element={
