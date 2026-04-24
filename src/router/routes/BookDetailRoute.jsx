@@ -6,7 +6,7 @@ export default function BookDetailRoute({ books, pageData, siteName }) {
   const { bookId } = useParams();
   const location = useLocation();
   const bookFromState = location.state?.book;
-  const book = bookFromState?.id === bookId ? bookFromState : findBookById(books, bookId);
+  const book = bookFromState || findBookById(books, bookId);
 
   return <BookDetailPage book={book} pageData={pageData} siteName={siteName} />;
 }

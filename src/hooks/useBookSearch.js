@@ -6,7 +6,6 @@ export default function useBookSearch(initialKeyword, action = "/") {
   const submit = useSubmit();
   const [inputValue, setInputValue] = useState(initialKeyword);
   const hasSearchRef = useRef(initialKeyword.trim() !== "");
-  // 标记是否正在输入中文（拼音未完成），防止中文还没输完就提前触发搜索。
   const isComposingRef = useRef(false);
 
   useEffect(() => {
@@ -31,6 +30,7 @@ export default function useBookSearch(initialKeyword, action = "/") {
     hasSearchRef.current = normalizedValue !== "";
   }
 
+  // 用户每敲一个字，就更新框里的文字。如果不是在打中文，就立刻搜索。
   function handleInputChange(event) {
     const nextValue = event.target.value;
 
@@ -47,7 +47,7 @@ export default function useBookSearch(initialKeyword, action = "/") {
     isComposingRef.current = true;
   }
 
-  function handleCompositionEnd(event) {
+function handleCompositionEnd(event) {
     const nextValue = event.currentTarget.value;
 
     isComposingRef.current = false;
@@ -56,6 +56,7 @@ export default function useBookSearch(initialKeyword, action = "/") {
   }
 
   function handleSubmit(event) {
+    //阻止浏览器默认的刷新行为
     event.preventDefault();
     submitSearch(event.currentTarget, inputValue);
   }

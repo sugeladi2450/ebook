@@ -10,7 +10,7 @@ export default function BannerCarousel({ banners }) {
     }, 3000);
 
     return () => window.clearInterval(timer);
-  }, [banners.length]);
+  }, [banners.length, index]);
 
   return (
     <section className="books-carousel" aria-label="书籍推荐轮播图">

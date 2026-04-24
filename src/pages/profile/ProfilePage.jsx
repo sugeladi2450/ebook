@@ -71,7 +71,6 @@ export default function ProfilePage({ pageData, siteName }) {
           <div className="profile-card__body">
             <ul className="profile-address__list" aria-label="地址列表">
               {pageData.addresses.map((address) => (
-                // key:给列表项一个唯一标识，帮助 React 高效更新 DOM，避免渲染错误，提高性能。
                 <AddressItem key={address.id} address={address} />
               ))}
             </ul>
