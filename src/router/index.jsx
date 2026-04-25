@@ -5,7 +5,7 @@ import BookListPage from "../pages/books/BookListPage";
 import CartPage from "../pages/cart/CartPage";
 import OrdersPage from "../pages/orders/OrdersPage";
 import ProfilePage from "../pages/profile/ProfilePage";
-import BookDetailRoute from "./routes/BookDetailRoute";
+import BookDetailPage from "../pages/books/BookDetailPage";
 import { createBookListLoader } from "./loaders/bookListLoader";
 
 // 创建应用路由：定义整个应用的路由结构，包括每个页面对应的路径、组件和数据加载器等信息
@@ -28,7 +28,7 @@ export function createAppRouter(appData) {
         <Route
           path="/books/:bookId"
           element={
-            <BookDetailRoute
+            <BookDetailPage
               books={appData.books}
               pageData={appData.detailPage}
               siteName={appData.site.name}

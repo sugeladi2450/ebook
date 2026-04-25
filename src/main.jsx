@@ -6,7 +6,7 @@ import App from "./App";
 import "antd/dist/reset.css";
 import "./styles/index.css";
 
-// 去 HTML 页面里找到 id="root" 的那个节点，然后 React 再把整个应用挂载到这个节点上。
+// 负责挂载 React 和全局 Provider
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ConfigProvider locale={zhCN}>

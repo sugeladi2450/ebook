@@ -1,9 +1,15 @@
 import { useEffect } from "react";
 import { Button, Tag } from "antd";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate, useLocation, useParams } from "react-router-dom";
 import usePageTitle from "../../hooks/usePageTitle";
+import { findBookById } from "../../services/books/bookQueryService";
 
-export default function BookDetailPage({ book, pageData, siteName }) {
+export default function BookDetailPage({ books, pageData, siteName }) {
+  const { bookId } = useParams();
+  const location = useLocation();
+  const bookFromState = location.state?.book;
+  const book = bookFromState || findBookById(books, bookId);
+
   const navigate = useNavigate();
 
   const pageTitle = book ? `${siteName} - ${book.title}` : `${siteName} - 书籍详情`;
