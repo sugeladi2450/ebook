@@ -20,6 +20,27 @@ public class Book {
     @Column(length = 255)
     private String author;
 
+    @Column(length = 255)
+    private String translator;
+
+    @Column(length = 64)
+    private String isbn;
+
+    @Column(length = 64)
+    private String tag;
+
+    @Column(name = "publish_line", length = 255)
+    private String publishLine;
+
+    @Column(name = "list_desc", columnDefinition = "TEXT")
+    private String listDesc;
+
+    @Column(columnDefinition = "TEXT")
+    private String intro;
+
+    @Column(columnDefinition = "TEXT")
+    private String intro2;
+
     @Column(columnDefinition = "TEXT")
     private String description;
 
@@ -52,6 +73,62 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getTranslator() {
+        return translator;
+    }
+
+    public void setTranslator(String translator) {
+        this.translator = translator;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public String getPublishLine() {
+        return publishLine;
+    }
+
+    public void setPublishLine(String publishLine) {
+        this.publishLine = publishLine;
+    }
+
+    public String getListDesc() {
+        return listDesc;
+    }
+
+    public void setListDesc(String listDesc) {
+        this.listDesc = listDesc;
+    }
+
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
+    }
+
+    public String getIntro2() {
+        return intro2;
+    }
+
+    public void setIntro2(String intro2) {
+        this.intro2 = intro2;
     }
 
     public String getDescription() {

@@ -1,20 +1,5 @@
 import { formatPrice } from "../../utils/formatters";
 
-export function buildBooks(rawBooks, assets) {
-  return rawBooks.map((book) => ({
-    ...book,
-    cover: assets[book.coverKey],
-    priceText: formatPrice(book.price),
-  }));
-}
-
-export function buildBanners(rawBanners, assets) {
-  return rawBanners.map((banner) => ({
-    ...banner,
-    image: assets[banner.imageKey],
-  }));
-}
-
 function normalizeApiPrice(price) {
   const numericPrice = Number(price ?? 0);
 
@@ -28,6 +13,8 @@ function normalizeApiPrice(price) {
 export function buildBookFromApi(rawBook) {
   const price = normalizeApiPrice(rawBook.price);
   const description = rawBook.description ?? "";
+  const listDesc = rawBook.listDesc ?? description;
+  const intro = rawBook.intro ?? description;
 
   return {
     id: String(rawBook.id),
@@ -38,10 +25,11 @@ export function buildBookFromApi(rawBook) {
     price,
     tag: rawBook.tag ?? "图书",
     cover: rawBook.cover ?? "",
-    publishLine: `销量：${rawBook.sales ?? 0}`,
-    listDesc: description,
-    intro: description,
-    intro2: "",
+    publishLine: rawBook.publishLine ?? `销量：${rawBook.sales ?? 0}`,
+    listDesc,
+    intro,
+    intro2: rawBook.intro2 ?? "",
+    description,
     sales: rawBook.sales ?? 0,
     priceText: formatPrice(price),
   };

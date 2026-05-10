@@ -17,7 +17,7 @@ export function createAppRouter(appData) {
         <Route
           // 默认子路由，用户访问 / 根路径时，渲染这个页面（首页）
           index
-          loader={createBookListLoader(appData)}
+          loader={createBookListLoader()}
           element={
             <BookListPage
               banners={appData.banners}
@@ -28,7 +28,7 @@ export function createAppRouter(appData) {
         />
         <Route
           path="/books/:bookId"
-          loader={createBookDetailLoader(appData)}
+          loader={createBookDetailLoader()}
           element={
             <BookDetailPage
               pageData={appData.detailPage}
@@ -38,7 +38,7 @@ export function createAppRouter(appData) {
         />
         <Route
           path="/cart"
-          loader={createCartLoader(appData)}
+          loader={createCartLoader()}
           element={
             <CartPage
               pageData={appData.cartPage}
@@ -48,7 +48,7 @@ export function createAppRouter(appData) {
         />
         <Route
           path="/orders"
-          loader={createOrdersLoader(appData)}
+          loader={createOrdersLoader()}
           element={
             <OrdersPage
               pageData={appData.ordersPage}

@@ -13,7 +13,7 @@ function requireCurrentUser() {
   return user;
 }
 
-export function createCartLoader(appData) {
+export function createCartLoader() {
   return async function cartLoader() {
     const user = requireCurrentUser();
 
@@ -23,16 +23,16 @@ export function createCartLoader(appData) {
         cartItems: await fetchCartItems(user.id),
       };
     } catch (error) {
-      console.warn("Failed to load cart from backend, falling back to local data.", error);
+      console.warn("Failed to load cart from backend.", error);
       return {
         user,
-        cartItems: appData.cartItems,
+        cartItems: [],
       };
     }
   };
 }
 
-export function createOrdersLoader(appData) {
+export function createOrdersLoader() {
   return async function ordersLoader() {
     const user = requireCurrentUser();
 
@@ -42,10 +42,10 @@ export function createOrdersLoader(appData) {
         orders: await fetchOrders(user.id),
       };
     } catch (error) {
-      console.warn("Failed to load orders from backend, falling back to local data.", error);
+      console.warn("Failed to load orders from backend.", error);
       return {
         user,
-        orders: appData.orders,
+        orders: [],
       };
     }
   };

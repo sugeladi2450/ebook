@@ -188,3 +188,11 @@ textarea {
   background: rgba(17, 24, 39, 0.08);
   margin: 16px 0;
 }
+
+.site-boot {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #f6f7fb;
+}

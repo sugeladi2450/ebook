@@ -1,16 +1,16 @@
 import { fetchBookById, fetchBooks } from "../../services/books/bookApiService";
-import { filterBooksByKeyword, findBookById } from "../../services/books/bookQueryService";
+import { filterBooksByKeyword } from "../../services/books/bookQueryService";
 
-export function createBookListLoader(appData) {
+export function createBookListLoader() {
   return async function bookListLoader({ request }) {
     const url = new URL(request.url);
     const keyword = url.searchParams.get("q") ?? "";
-    let books = appData.books;
+    let books = [];
 
     try {
       books = await fetchBooks();
     } catch (error) {
-      console.warn("Failed to load books from backend, falling back to local data.", error);
+      console.warn("Failed to load books from backend.", error);
     }
 
     return {
@@ -20,18 +20,16 @@ export function createBookListLoader(appData) {
   };
 }
 
-export function createBookDetailLoader(appData) {
+export function createBookDetailLoader() {
   return async function bookDetailLoader({ params }) {
-    const fallbackBook = findBookById(appData.books, params.bookId);
-
     try {
       return {
         book: await fetchBookById(params.bookId),
       };
     } catch (error) {
-      console.warn("Failed to load book detail from backend, falling back to local data.", error);
+      console.warn("Failed to load book detail from backend.", error);
       return {
-        book: fallbackBook,
+        book: null,
       };
     }
   };
