@@ -68,7 +68,7 @@
 
 .cart-row {
   display: grid;
-  grid-template-columns: 1fr 160px 110px 120px;
+  grid-template-columns: 34px 1fr 160px 110px 120px;
   gap: 10px;
   align-items: center;
   padding: 12px 12px;
@@ -77,6 +77,10 @@
   background: #ffffff;
   transition: transform 160ms ease, box-shadow 160ms ease,
     border-color 160ms ease;
+}
+
+.cart-row__check {
+  justify-self: center;
 }
 
 .cart-row:hover {
@@ -193,7 +197,7 @@
 /* 响应式：小屏改为两行信息 */
 @media (max-width: 860px) {
   .cart-row {
-    grid-template-columns: 1fr 110px;
+    grid-template-columns: 34px 1fr 110px;
     grid-template-rows: auto auto;
   }
 
@@ -204,7 +208,7 @@
 
 @media (max-width: 520px) {
   .cart-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: 34px 1fr;
   }
 
   .cart-row__price {

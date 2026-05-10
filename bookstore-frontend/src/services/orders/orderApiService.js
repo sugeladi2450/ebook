@@ -6,10 +6,10 @@ export async function fetchOrders(userId) {
   return buildOrdersFromApi(orders);
 }
 
-export async function checkoutCart(userId) {
+export async function checkoutCart(userId, cartItemIds = []) {
   const order = await requestJson("/api/v1/orders", {
     method: "POST",
-    body: JSON.stringify({ userId }),
+    body: JSON.stringify({ userId, cartItemIds }),
   });
   return buildOrderFromApi(order);
 }

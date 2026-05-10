@@ -16,7 +16,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -46,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public OrderResponse checkout(CheckoutRequest request) {
         User user = ensureUser(request.userId());
-        List<CartItem> cartItems = cartItemRepository.findAllByUserIdOrderByIdAsc(user.getId());
+        List<CartItem> cartItems = getCheckoutCartItems(user.getId(), request.cartItemIds());
         if (cartItems.isEmpty()) {
             throw new EmptyCartException();
         }
@@ -71,8 +73,28 @@ public class OrderServiceImpl implements OrderService {
         order.setAmount(amount);
 
         Order savedOrder = orderRepository.save(order);
-        cartItemRepository.deleteAllByUserId(user.getId());
+        cartItemRepository.deleteAll(cartItems);
         return OrderResponse.from(savedOrder);
+    }
+
+    private List<CartItem> getCheckoutCartItems(Long userId, List<Long> cartItemIds) {
+        if (cartItemIds == null) {
+            return cartItemRepository.findAllByUserIdOrderByIdAsc(userId);
+        }
+        if (cartItemIds.isEmpty()) {
+            return List.of();
+        }
+
+        Set<Long> uniqueIds = new HashSet<>(cartItemIds);
+        List<CartItem> cartItems = cartItemRepository.findAllByUserIdAndIdInOrderByIdAsc(userId, cartItemIds);
+        if (cartItems.size() != uniqueIds.size()) {
+            Long missingId = uniqueIds.stream()
+                    .filter(id -> cartItems.stream().noneMatch(item -> item.getId().equals(id)))
+                    .findFirst()
+                    .orElse(null);
+            throw new ResourceNotFoundException("CartItem", missingId);
+        }
+        return cartItems;
     }
 
     private User ensureUser(Long userId) {
