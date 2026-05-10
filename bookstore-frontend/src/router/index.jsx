@@ -8,7 +8,7 @@ import OrdersPage from "../pages/orders/OrdersPage";
 import ProfilePage from "../pages/profile/ProfilePage";
 import BookDetailPage from "../pages/books/BookDetailPage";
 import { createBookDetailLoader, createBookListLoader } from "./loaders/bookListLoader";
-import { createCartLoader, createOrdersLoader } from "./loaders/accountLoaders";
+import { createCartLoader, createOrdersLoader, createProfileLoader } from "./loaders/accountLoaders";
 
 // 创建应用路由：定义整个应用的路由结构，包括每个页面对应的路径、组件和数据加载器等信息
 export function createAppRouter(appData) {
@@ -59,6 +59,7 @@ export function createAppRouter(appData) {
         />
         <Route
           path="/profile"
+          loader={createProfileLoader()}
           element={<ProfilePage pageData={appData.profilePage} siteName={appData.site.name} />}
         />
         <Route

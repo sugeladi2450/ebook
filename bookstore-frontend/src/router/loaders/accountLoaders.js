@@ -50,3 +50,11 @@ export function createOrdersLoader() {
     }
   };
 }
+
+export function createProfileLoader() {
+  return function profileLoader() {
+    return {
+      user: requireCurrentUser(),
+    };
+  };
+}
