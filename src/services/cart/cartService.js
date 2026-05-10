@@ -1,6 +1,6 @@
 // 购物车服务：提供与购物车相关的数据处理函数，如计算总价和移除项等
 export function calculateCartTotal(items) {
-  return items.reduce((sum, item) => sum + Number(item.book.price), 0);
+  return items.reduce((sum, item) => sum + Number(item.book.price) * Number(item.number ?? 1), 0);
 }
 
 export function removeCartItem(items, itemId) {

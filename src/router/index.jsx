@@ -6,7 +6,8 @@ import CartPage from "../pages/cart/CartPage";
 import OrdersPage from "../pages/orders/OrdersPage";
 import ProfilePage from "../pages/profile/ProfilePage";
 import BookDetailPage from "../pages/books/BookDetailPage";
-import { createBookListLoader } from "./loaders/bookListLoader";
+import { createBookDetailLoader, createBookListLoader } from "./loaders/bookListLoader";
+import { createCartLoader, createOrdersLoader } from "./loaders/accountLoaders";
 
 // 创建应用路由：定义整个应用的路由结构，包括每个页面对应的路径、组件和数据加载器等信息
 export function createAppRouter(appData) {
@@ -27,9 +28,9 @@ export function createAppRouter(appData) {
         />
         <Route
           path="/books/:bookId"
+          loader={createBookDetailLoader(appData)}
           element={
             <BookDetailPage
-              books={appData.books}
               pageData={appData.detailPage}
               siteName={appData.site.name}
             />
@@ -37,9 +38,9 @@ export function createAppRouter(appData) {
         />
         <Route
           path="/cart"
+          loader={createCartLoader(appData)}
           element={
             <CartPage
-              initialItems={appData.cartItems}
               pageData={appData.cartPage}
               siteName={appData.site.name}
             />
@@ -47,9 +48,9 @@ export function createAppRouter(appData) {
         />
         <Route
           path="/orders"
+          loader={createOrdersLoader(appData)}
           element={
             <OrdersPage
-              orders={appData.orders}
               pageData={appData.ordersPage}
               siteName={appData.site.name}
             />

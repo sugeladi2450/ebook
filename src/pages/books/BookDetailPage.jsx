@@ -1,14 +1,16 @@
-import { useEffect } from "react";
-import { Button, Tag } from "antd";
-import { Link, Navigate, useNavigate, useLocation, useParams } from "react-router-dom";
+import { Button, Tag, message } from "antd";
+import { useState } from "react";
+import { Link, Navigate, useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import usePageTitle from "../../hooks/usePageTitle";
-import { findBookById } from "../../services/books/bookQueryService";
+import { getCurrentUser } from "../../services/auth/authService";
+import { addCartItem } from "../../services/cart/cartApiService";
 
-export default function BookDetailPage({ books, pageData, siteName }) {
-  const { bookId } = useParams();
+export default function BookDetailPage({ pageData, siteName }) {
+  const { book: loadedBook } = useLoaderData();
   const location = useLocation();
   const bookFromState = location.state?.book;
-  const book = bookFromState || findBookById(books, bookId);
+  const book = bookFromState || loadedBook;
+  const [adding, setAdding] = useState(false);
 
   const navigate = useNavigate();
 
@@ -17,6 +19,27 @@ export default function BookDetailPage({ books, pageData, siteName }) {
 
   if (!book) {
     return <Navigate replace to="/" />;
+  }
+
+  async function handleAddToCart() {
+    const user = getCurrentUser();
+
+    if (!user) {
+      message.warning("请先登录");
+      navigate("/login");
+      return;
+    }
+
+    setAdding(true);
+    try {
+      await addCartItem(user.id, book.id, 1);
+      message.success("已加入购物车");
+      navigate("/cart");
+    } catch (error) {
+      message.error(error.message || "加入购物车失败");
+    } finally {
+      setAdding(false);
+    }
   }
 
   return (
@@ -75,7 +98,8 @@ export default function BookDetailPage({ books, pageData, siteName }) {
               <Button
                 className="book-detail__button book-detail__button--cart"
                 htmlType="button"
-                onClick={() => navigate("/cart")}
+                loading={adding}
+                onClick={handleAddToCart}
               >
                 {pageData.addToCartText}
               </Button>
@@ -83,7 +107,7 @@ export default function BookDetailPage({ books, pageData, siteName }) {
                 className="book-detail__button book-detail__button--buy"
                 htmlType="button"
                 type="primary"
-                onClick={() => navigate("/orders")}
+                onClick={handleAddToCart}
               >
                 {pageData.buyNowText}
               </Button>

@@ -8,10 +8,10 @@ export default function CartRow({ item, onDelete }) {
         <p className="cart-row__author">作者：{item.book.author}</p>
       </div>
       <div className="cart-row__author-col" aria-label="作者">
-        {item.authorShort}
+        数量：{item.number ?? 1}
       </div>
       <div className="cart-row__price" aria-label="单价">
-        {item.priceText}
+        {item.subtotalText ?? item.priceText}
       </div>
       <Button className="cart-row__delete" danger htmlType="button" onClick={() => onDelete(item.id)}>
         删除

@@ -1,22 +1,31 @@
-import { Button, Input } from "antd";
-import { useEffect, useState } from "react";
+import { Button, Input, message } from "antd";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import usePageTitle from "../../hooks/usePageTitle";
+import { loginUser, saveCurrentUser } from "../../services/auth/authService";
 
 export default function LoginPage({ pageData, siteName }) {
   const navigate = useNavigate();
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   usePageTitle(`${siteName} - 登录`);
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    navigate("/profile", {
-      state: {
-        account,
-      },
-    });
+    setSubmitting(true);
+
+    try {
+      const user = await loginUser(account, password);
+      saveCurrentUser(user);
+      message.success("登录成功");
+      navigate("/profile");
+    } catch (error) {
+      message.error(error.message || "登录失败");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -74,7 +83,7 @@ export default function LoginPage({ pageData, siteName }) {
               <p className="login__hint">{pageData.passwordHint}</p>
             </div>
 
-            <Button className="login__button" htmlType="submit" type="primary">
+            <Button className="login__button" htmlType="submit" loading={submitting} type="primary">
               {pageData.buttonText}
             </Button>
 

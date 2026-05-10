@@ -1,7 +1,10 @@
+import { useLoaderData } from "react-router-dom";
 import OrderRow from "../../components/orders/OrderRow";
 import usePageTitle from "../../hooks/usePageTitle";
 
-export default function OrdersPage({ orders, pageData, siteName }) {
+export default function OrdersPage({ pageData, siteName }) {
+  const { orders } = useLoaderData();
+
   usePageTitle(`${siteName} - ${pageData.title}`);
 
   return (
@@ -17,9 +20,11 @@ export default function OrdersPage({ orders, pageData, siteName }) {
         <div className="site-divider orders__divider" role="separator" aria-hidden="true"></div>
 
         <div className="orders__list" aria-label="订单列表">
-          {orders.map((order) => (
-            <OrderRow key={order.id} order={order} />
-          ))}
+          {orders.length > 0 ? (
+            orders.map((order) => <OrderRow key={order.id} order={order} />)
+          ) : (
+            <p className="orders__empty">暂无订单</p>
+          )}
         </div>
       </div>
     </section>

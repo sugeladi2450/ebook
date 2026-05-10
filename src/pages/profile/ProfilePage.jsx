@@ -5,8 +5,11 @@ import AddressItem from "../../components/profile/AddressItem";
 import ProfileCard from "../../components/profile/ProfileCard";
 import SettingsItem from "../../components/profile/SettingsItem";
 import usePageTitle from "../../hooks/usePageTitle";
+import { getCurrentUser } from "../../services/auth/authService";
 
 export default function ProfilePage({ pageData, siteName }) {
+  const currentUser = getCurrentUser();
+
   usePageTitle(`${siteName} - ${pageData.title}`);
 
   return (
@@ -28,10 +31,12 @@ export default function ProfilePage({ pageData, siteName }) {
               <Avatar className="profile-user__avatar" icon={<UserOutlined />} size={56} />
 
               <div className="profile-user__meta">
-                <div className="profile-user__name">{pageData.userCard.name}</div>
+                <div className="profile-user__name">
+                  {currentUser?.nickname ?? pageData.userCard.name}
+                </div>
                 <div className="profile-user__contact" aria-label="联系方式">
                   <span className="profile-user__contact-item">
-                    手机号：{pageData.userCard.phone}
+                    用户名：{currentUser?.username ?? pageData.userCard.phone}
                   </span>
                   <span className="profile-user__contact-dot" aria-hidden="true">
                     ·

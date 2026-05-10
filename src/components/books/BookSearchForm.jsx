@@ -21,7 +21,7 @@ export default function BookSearchForm({
           onCompositionStart={onCompositionStart}
           onCompositionEnd={onCompositionEnd}
         />
-        <button className="books-search__button" type="submit"type="submit">
+        <button className="books-search__button" type="submit">
           {buttonText}
         </button>
       </form>

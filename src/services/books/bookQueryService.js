@@ -1,5 +1,5 @@
 export function findBookById(books, bookId) {
-  return books.find((book) => book.id === bookId);
+  return books.find((book) => String(book.id) === String(bookId));
 }
 
 export function matchesBookKeyword(book, keyword) {
