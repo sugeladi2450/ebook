@@ -1,6 +1,7 @@
 import { Navigate, Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import AppLayout from "../components/layout/AppLayout";
 import LoginPage from "../pages/auth/LoginPage";
+import RegisterPage from "../pages/auth/RegisterPage";
 import BookListPage from "../pages/books/BookListPage";
 import CartPage from "../pages/cart/CartPage";
 import OrdersPage from "../pages/orders/OrdersPage";
@@ -63,6 +64,10 @@ export function createAppRouter(appData) {
         <Route
           path="/login"
           element={<LoginPage pageData={appData.loginPage} siteName={appData.site.name} />}
+        />
+        <Route
+          path="/register"
+          element={<RegisterPage pageData={appData.registerPage} siteName={appData.site.name} />}
         />
         <Route path="*" element={<Navigate replace to="/" />} />
       </Route>,

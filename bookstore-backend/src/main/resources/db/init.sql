@@ -12,7 +12,7 @@ create table users
 (
     id       bigint auto_increment primary key,
     username varchar(64)  not null unique,
-    password varchar(128) not null,
+    password varchar(255) not null,
     nickname varchar(255) null,
     balance  bigint       not null default 0
 );
@@ -68,7 +68,10 @@ create table order_item
 );
 
 insert into users(username, password, nickname, balance)
-values ('admin', 'admin123', 'admin', 100000000);
+values ('admin',
+        'pbkdf2$120000$8L6OkJXV5JT/ZnhyDj7ZXg==$AAbyIhn0lskeqG0f+0fHEHyHOOS3EwiPT2tMV7dHF0c=',
+        'admin',
+        100000000);
 
 insert into book(title, author, translator, isbn, tag, cover, publish_line, list_desc, intro, intro2, description, price, sales)
 values ('1984',

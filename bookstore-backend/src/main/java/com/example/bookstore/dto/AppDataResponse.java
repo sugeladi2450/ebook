@@ -11,6 +11,7 @@ public record AppDataResponse(
         OrdersPage ordersPage,
         ProfilePage profilePage,
         LoginPage loginPage,
+        RegisterPage registerPage,
         List<Banner> banners
 ) {
     public record Site(String name, String footerText, String logo) {
@@ -110,6 +111,26 @@ public record AppDataResponse(
             String passwordHint,
             String buttonText,
             String linkText
+    ) {
+    }
+
+    public record RegisterPage(
+            String title,
+            String subtitle,
+            List<String> tips,
+            String panelTitle,
+            String panelDesc,
+            String usernameLabel,
+            String usernamePlaceholder,
+            String usernameHint,
+            String passwordLabel,
+            String passwordPlaceholder,
+            String passwordHint,
+            String confirmPasswordLabel,
+            String confirmPasswordPlaceholder,
+            String confirmPasswordHint,
+            String buttonText,
+            String loginLinkText
     ) {
     }
 

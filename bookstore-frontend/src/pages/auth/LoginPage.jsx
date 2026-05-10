@@ -88,7 +88,7 @@ export default function LoginPage({ pageData, siteName }) {
             </Button>
 
             <div className="login__links" aria-label="辅助链接">
-              <Link className="login__link" to="/profile">
+              <Link className="login__link" to="/register">
                 {pageData.linkText}
               </Link>
             </div>

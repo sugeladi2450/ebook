@@ -219,6 +219,14 @@
   filter: brightness(1.03);
 }
 
+.login__button.ant-btn:disabled,
+.login__button.ant-btn:disabled:hover {
+  border-color: rgba(17, 24, 39, 0.1);
+  background: rgba(15, 23, 42, 0.16);
+  color: rgba(15, 23, 42, 0.42);
+  filter: none;
+}
+
 .order-row__status.ant-tag {
   justify-self: end;
   font-size: 12px;

@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
         for (FieldError error : exception.getBindingResult().getFieldErrors()) {
             fields.put(error.getField(), error.getDefaultMessage());
         }
-        return ResponseEntity.badRequest().body(errorBody("Validation failed", fields));
+        return ResponseEntity.badRequest().body(errorBody("参数错误", fields));
     }
 
     @ExceptionHandler(ConstraintViolationException.class)

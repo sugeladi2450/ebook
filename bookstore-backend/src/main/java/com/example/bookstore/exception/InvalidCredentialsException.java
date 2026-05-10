@@ -2,6 +2,6 @@ package com.example.bookstore.exception;
 
 public class InvalidCredentialsException extends RuntimeException {
     public InvalidCredentialsException() {
-        super("Invalid username or password");
+        super("用户名或密码错误");
     }
 }
