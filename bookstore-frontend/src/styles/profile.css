@@ -95,7 +95,7 @@
 }
 
 .profile-user__name {
-  font-size: 16px;
+  font-size: 22px;
   font-weight: 950;
   color: #0f172a;
 }
@@ -177,6 +177,39 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.profile-empty {
+  border: 1px dashed rgba(17, 24, 39, 0.14);
+  border-radius: 14px;
+  padding: 16px;
+  text-align: center;
+  color: rgba(17, 24, 39, 0.58);
+  background: rgba(15, 23, 42, 0.02);
+}
+
+.address-form {
+  padding-top: 8px;
+}
+
+.address-form .ant-form-item {
+  margin-bottom: 14px;
+}
+
+.profile-edit-form {
+  padding-top: 8px;
+}
+
+.profile-edit-form .ant-form-item {
+  margin-bottom: 14px;
+}
+
+.password-form {
+  padding-top: 8px;
+}
+
+.password-form .ant-form-item {
+  margin-bottom: 14px;
 }
 
 /* ===== 设置模块 ===== */
@@ -270,6 +303,13 @@
   font-size: 13px;
   color: rgba(15, 23, 42, 0.92);
   transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.profile-link.ant-btn {
+  height: 30px;
+  padding: 0 10px;
+  color: rgba(15, 23, 42, 0.92);
+  font-weight: 400;
 }
 
 .profile-link:hover {

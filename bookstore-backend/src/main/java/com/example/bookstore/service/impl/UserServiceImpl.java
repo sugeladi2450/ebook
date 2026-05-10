@@ -1,12 +1,18 @@
 package com.example.bookstore.service.impl;
 
+import com.example.bookstore.dto.ChangePasswordRequest;
 import com.example.bookstore.dto.LoginRequest;
 import com.example.bookstore.dto.RegisterUserRequest;
+import com.example.bookstore.dto.UpdateUserProfileRequest;
 import com.example.bookstore.dto.UserResponse;
 import com.example.bookstore.entity.User;
+import com.example.bookstore.exception.DuplicateContactException;
 import com.example.bookstore.exception.DuplicateUsernameException;
 import com.example.bookstore.exception.InvalidCredentialsException;
+import com.example.bookstore.exception.PasswordChangeException;
+import com.example.bookstore.exception.ResourceNotFoundException;
 import com.example.bookstore.repository.UserRepository;
+import com.example.bookstore.service.PasswordCipherService;
 import com.example.bookstore.service.PasswordService;
 import com.example.bookstore.service.UserService;
 import org.springframework.stereotype.Service;
@@ -17,10 +23,16 @@ import org.springframework.util.StringUtils;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordService passwordService;
+    private final PasswordCipherService passwordCipherService;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordService passwordService) {
+    public UserServiceImpl(
+            UserRepository userRepository,
+            PasswordService passwordService,
+            PasswordCipherService passwordCipherService
+    ) {
         this.userRepository = userRepository;
         this.passwordService = passwordService;
+        this.passwordCipherService = passwordCipherService;
     }
 
     @Override
@@ -42,9 +54,68 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse login(LoginRequest request) {
-        User user = userRepository.findByUsername(request.username().trim())
+        String account = request.username().trim();
+        User user = userRepository.findByUsernameOrEmailOrPhone(account, account, account)
                 .filter(candidate -> passwordService.matches(request.password(), candidate.getPassword()))
                 .orElseThrow(InvalidCredentialsException::new);
         return UserResponse.from(user);
+    }
+
+    @Override
+    @Transactional
+    public UserResponse updateProfile(Long userId, UpdateUserProfileRequest request) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User", userId));
+
+        String username = request.username().trim();
+        if (userRepository.existsByUsernameAndIdNot(username, userId)) {
+            throw new DuplicateUsernameException(username);
+        }
+
+        String phone = normalizeBlank(request.phone());
+        String email = normalizeBlank(request.email());
+        if (StringUtils.hasText(phone) && userRepository.existsByPhoneAndIdNot(phone, userId)) {
+            throw new DuplicateContactException("手机号已被其他用户绑定");
+        }
+        if (StringUtils.hasText(email) && userRepository.existsByEmailAndIdNot(email, userId)) {
+            throw new DuplicateContactException("邮箱已被其他用户绑定");
+        }
+
+        user.setUsername(username);
+        user.setNickname(request.nickname().trim());
+        user.setPhone(phone);
+        user.setEmail(email);
+        return UserResponse.from(userRepository.save(user));
+    }
+
+    @Override
+    @Transactional
+    public void changePassword(Long userId, ChangePasswordRequest request) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User", userId));
+
+        String currentPassword = passwordCipherService.decrypt(request.encryptedCurrentPassword());
+        String newPassword = passwordCipherService.decrypt(request.encryptedNewPassword());
+        String confirmPassword = passwordCipherService.decrypt(request.encryptedConfirmPassword());
+
+        if (!passwordService.matches(currentPassword, user.getPassword())) {
+            throw new PasswordChangeException("原密码错误");
+        }
+        if (!newPassword.equals(confirmPassword)) {
+            throw new PasswordChangeException("两次输入的新密码不一致");
+        }
+        if (newPassword.length() < 6 || newPassword.length() > 128) {
+            throw new PasswordChangeException("新密码长度必须在 6 到 128 个字符之间");
+        }
+        if (newPassword.equals(currentPassword)) {
+            throw new PasswordChangeException("新密码不能与原密码相同");
+        }
+
+        user.setPassword(passwordService.encode(newPassword));
+        userRepository.save(user);
+    }
+
+    private String normalizeBlank(String value) {
+        return StringUtils.hasText(value) ? value.trim() : null;
     }
 }

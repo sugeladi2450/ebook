@@ -2,6 +2,7 @@ import { redirect } from "react-router-dom";
 import { getCurrentUser } from "../../services/auth/authService";
 import { fetchCartItems } from "../../services/cart/cartApiService";
 import { fetchOrders } from "../../services/orders/orderApiService";
+import { fetchAddresses } from "../../services/profile/addressApiService";
 
 function requireCurrentUser() {
   const user = getCurrentUser();
@@ -52,9 +53,20 @@ export function createOrdersLoader() {
 }
 
 export function createProfileLoader() {
-  return function profileLoader() {
-    return {
-      user: requireCurrentUser(),
-    };
+  return async function profileLoader() {
+    const user = requireCurrentUser();
+
+    try {
+      return {
+        user,
+        addresses: await fetchAddresses(user.id),
+      };
+    } catch (error) {
+      console.warn("Failed to load addresses from backend.", error);
+      return {
+        user,
+        addresses: [],
+      };
+    }
   };
 }

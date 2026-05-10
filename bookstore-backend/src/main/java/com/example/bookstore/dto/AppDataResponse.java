@@ -68,8 +68,7 @@ public record AppDataResponse(
             String name,
             String phone,
             String email,
-            String editText,
-            String saveText
+            String editText
     ) {
     }
 

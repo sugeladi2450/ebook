@@ -21,7 +21,7 @@ export default function RegisterPage({ pageData, siteName }) {
   usePageTitle(`${siteName} - 注册`);
 
   const errors = useMemo(() => {
-    const usernameError = username.trim() ? "" : "请输入用户名";
+    const usernameError = username.trim() ? "" : "请输入账号";
     let passwordError = "";
     if (!password) {
       passwordError = "请输入登录密码";

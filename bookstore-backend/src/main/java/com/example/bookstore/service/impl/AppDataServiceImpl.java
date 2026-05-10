@@ -57,47 +57,24 @@ public class AppDataServiceImpl implements AppDataService {
                                 "查看你的基础资料与账号信息。",
                                 "小明同学",
                                 "138****0000",
-                                "email@example.com",
-                                "编辑资料",
-                                "保存资料"
+                                "未填写邮箱",
+                                "编辑资料"
                         ),
                         new AppDataResponse.AddressCard(
                                 "收货地址",
                                 "用于下单时快速选择配送信息。",
                                 "新增地址"
                         ),
-                        List.of(
-                                new AppDataResponse.Address(
-                                        "address-1",
-                                        "张三",
-                                        "phone1",
-                                        "默认",
-                                        "address1"
-                                ),
-                                new AppDataResponse.Address(
-                                        "address-2",
-                                        "李四",
-                                        "phone2",
-                                        null,
-                                        "address2"
-                                )
-                        ),
+                        List.of(),
                         new AppDataResponse.SettingsCard(
                                 "账户设置",
-                                "管理账号安全与绑定信息。"
+                                "管理账号安全设置。"
                         ),
                         List.of(
                                 new AppDataResponse.Setting(
                                         "password",
                                         "修改密码",
                                         "建议定期更新密码以提高安全性",
-                                        "/profile",
-                                        false
-                                ),
-                                new AppDataResponse.Setting(
-                                        "binding",
-                                        "绑定手机号 / 邮箱",
-                                        "用于登录与接收通知",
                                         "/profile",
                                         false
                                 ),
@@ -120,8 +97,8 @@ public class AppDataServiceImpl implements AppDataService {
                         "账号登录",
                         "请输入账号与密码以继续",
                         "账号",
-                        "手机号 / 邮箱 / 用户名",
-                        "支持手机号、邮箱或用户名登录",
+                        "手机号 / 邮箱 / 账号",
+                        "支持手机号、邮箱或账号登录",
                         "密码",
                         "请输入密码",
                         "请妥善保管你的密码",
@@ -132,14 +109,14 @@ public class AppDataServiceImpl implements AppDataService {
                         "创建账号",
                         "注册后即可同步购物车与订单信息，继续你的阅读选购。",
                         List.of(
-                                "用户名用于登录，请使用容易记住的名称",
+                                "账号用于登录，请使用容易记住的名称",
                                 "密码会进行加密存储，不会以明文保存"
                         ),
                         "用户注册",
-                        "请填写用户名并设置登录密码",
-                        "用户名",
-                        "请输入用户名",
-                        "用户名不能为空，最长 64 个字符",
+                        "请填写账号并设置登录密码",
+                        "账号",
+                        "请输入账号",
+                        "账号不能为空，最长 64 个字符",
                         "登录密码",
                         "请输入登录密码",
                         "密码至少 6 位",

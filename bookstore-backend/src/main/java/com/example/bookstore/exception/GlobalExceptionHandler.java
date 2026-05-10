@@ -32,6 +32,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(errorBody(exception.getMessage(), null));
     }
 
+    @ExceptionHandler(DuplicateContactException.class)
+    public ResponseEntity<Map<String, Object>> handleDuplicateContact(DuplicateContactException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorBody(exception.getMessage(), null));
+    }
+
     @ExceptionHandler(InvalidCredentialsException.class)
     public ResponseEntity<Map<String, Object>> handleInvalidCredentials(InvalidCredentialsException exception) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorBody(exception.getMessage(), null));
@@ -39,6 +44,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(EmptyCartException.class)
     public ResponseEntity<Map<String, Object>> handleEmptyCart(EmptyCartException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorBody(exception.getMessage(), null));
+    }
+
+    @ExceptionHandler(PasswordChangeException.class)
+    public ResponseEntity<Map<String, Object>> handlePasswordChange(PasswordChangeException exception) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorBody(exception.getMessage(), null));
     }
 

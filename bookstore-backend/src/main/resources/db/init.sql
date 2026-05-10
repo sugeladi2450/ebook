@@ -14,6 +14,8 @@ create table users
     username varchar(64)  not null unique,
     password varchar(255) not null,
     nickname varchar(255) null,
+    email    varchar(255) null,
+    phone    varchar(32)  null,
     balance  bigint       not null default 0
 );
 
@@ -46,6 +48,20 @@ create table cart_item
     constraint uq_cart_user_book unique (user_id, book_id)
 );
 
+create table shipping_address
+(
+    id              bigint auto_increment primary key,
+    user_id         bigint       not null,
+    receiver        varchar(64)  not null,
+    phone           varchar(32)  not null,
+    province        varchar(64)  not null,
+    city            varchar(64)  not null,
+    district        varchar(64)  not null,
+    detail          varchar(255) not null,
+    default_address boolean      not null default false,
+    constraint fk_address_user foreign key (user_id) references users (id)
+);
+
 create table order_tbl
 (
     id         bigint auto_increment primary key,
@@ -67,10 +83,12 @@ create table order_item
     constraint fk_order_item_book foreign key (book_id) references book (id)
 );
 
-insert into users(username, password, nickname, balance)
+insert into users(username, password, nickname, email, phone, balance)
 values ('admin',
         'pbkdf2$120000$8L6OkJXV5JT/ZnhyDj7ZXg==$AAbyIhn0lskeqG0f+0fHEHyHOOS3EwiPT2tMV7dHF0c=',
         'admin',
+        'admin@example.com',
+        '13800000000',
         100000000);
 
 insert into book(title, author, translator, isbn, tag, cover, publish_line, list_desc, intro, intro2, description, price, sales)
@@ -195,3 +213,7 @@ values ('1984',
 insert into cart_item(user_id, book_id, number)
 values (1, 1, 1),
        (1, 3, 1);
+
+insert into shipping_address(user_id, receiver, phone, province, city, district, detail, default_address)
+values (1, '张三', '13800000000', '上海市', '上海市', '浦东新区', '张江高科技园区 88 号', true),
+       (1, '李四', '13900000000', '北京市', '北京市', '海淀区', '中关村大街 1 号', false);

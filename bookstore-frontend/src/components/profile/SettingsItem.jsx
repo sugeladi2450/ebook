@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom";
 import { clearCurrentUser } from "../../services/auth/authService";
 
-export default function SettingsItem({ item }) {
+export default function SettingsItem({ item, onAction }) {
   const className = item.danger
     ? "settings-item__link settings-item__link--danger"
     : "settings-item__link";
   const isLogout = item.id === "logout";
 
-  function handleClick() {
+  function handleClick(event) {
+    if (onAction?.(item, event) === false) {
+      return;
+    }
+
     if (isLogout) {
       clearCurrentUser();
     }

@@ -1,22 +1,42 @@
-import { Tag } from "antd";
-import { Link } from "react-router-dom";
+import { Button, Popconfirm, Tag } from "antd";
 
-export default function AddressItem({ address }) {
+export default function AddressItem({ address, deleting, onDelete, onEdit }) {
+  const fullDetail = [address.province, address.city, address.district, address.detail]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <li className="address-item" aria-label={`地址 ${address.name}`}>
+    <li className="address-item" aria-label={`地址 ${address.receiver ?? address.name}`}>
       <div className="address-item__top">
-        <span className="address-item__name">{address.name}</span>
+        <span className="address-item__name">{address.receiver ?? address.name}</span>
         <span className="address-item__phone">{address.phone}</span>
-        {address.tag ? <Tag className="address-item__tag">{address.tag}</Tag> : null}
+        {address.defaultAddress || address.tag ? (
+          <Tag className="address-item__tag">{address.tag ?? "默认"}</Tag>
+        ) : null}
       </div>
-      <div className="address-item__detail">{address.detail}</div>
+      <div className="address-item__detail">{fullDetail}</div>
       <div className="address-item__actions" aria-label="地址操作">
-        <Link className="profile-link" to="/profile">
+        <Button className="profile-link" htmlType="button" type="text" onClick={() => onEdit(address)}>
           编辑
-        </Link>
-        <Link className="profile-link profile-link--danger" to="/profile">
-          删除
-        </Link>
+        </Button>
+        <Popconfirm
+          title="删除收货地址"
+          description="确认删除这条收货地址吗？"
+          okText="删除"
+          cancelText="取消"
+          okButtonProps={{ danger: true, loading: deleting }}
+          onConfirm={() => onDelete(address.id)}
+        >
+          <Button
+            className="profile-link profile-link--danger"
+            danger
+            htmlType="button"
+            loading={deleting}
+            type="text"
+          >
+            删除
+          </Button>
+        </Popconfirm>
       </div>
     </li>
   );

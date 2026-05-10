@@ -23,6 +23,12 @@ public class User {
     @Column(length = 255)
     private String nickname;
 
+    @Column(length = 255)
+    private String email;
+
+    @Column(length = 32)
+    private String phone;
+
     @Column(nullable = false)
     private Long balance = 0L;
 
@@ -56,6 +62,22 @@ public class User {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Long getBalance() {
