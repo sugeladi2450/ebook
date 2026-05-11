@@ -1,0 +1,17 @@
+{
+  "name": "ebook-workspace",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Unified scripts for the ebook bookstore frontend and backend.",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "frontend:dev": "npm --prefix bookstore-frontend run dev",
+    "frontend:build": "npm --prefix bookstore-frontend run build",
+    "frontend:preview": "npm --prefix bookstore-frontend run preview",
+    "frontend:install": "npm --prefix bookstore-frontend install",
+    "backend:dev": "cd bookstore-backend && .\\mvnw.cmd spring-boot:run",
+    "backend:build": "cd bookstore-backend && .\\mvnw.cmd -q -DskipTests compile",
+    "backend:test": "cd bookstore-backend && .\\mvnw.cmd test",
+    "build": "npm run backend:build && npm run frontend:build"
+  }
+}

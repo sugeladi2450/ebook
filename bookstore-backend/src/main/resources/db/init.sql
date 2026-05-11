@@ -209,11 +209,3 @@ values ('1984',
         '家庭伦理×悬疑：丈夫失踪只留“保护她”的便条，真相与亲情在联手追寻中浮出水面。',
         4980,
         0);
-
-insert into cart_item(user_id, book_id, number)
-values (1, 1, 1),
-       (1, 3, 1);
-
-insert into shipping_address(user_id, receiver, phone, province, city, district, detail, default_address)
-values (1, '张三', '13800000000', '上海市', '上海市', '浦东新区', '张江高科技园区 88 号', true),
-       (1, '李四', '13900000000', '北京市', '北京市', '海淀区', '中关村大街 1 号', false);

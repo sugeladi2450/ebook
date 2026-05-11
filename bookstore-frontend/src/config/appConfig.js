@@ -1,12 +1,14 @@
-import { API_BASE_URL } from "../services/apiClient";
-
-const staticAsset = (path) => `${API_BASE_URL}${path}`;
+import logoImage from "../assets/images/logo.jpg";
+import bannerImage1 from "../assets/images/banners/banner-1.jpg";
+import bannerImage2 from "../assets/images/banners/banner-2.jpg";
+import bannerImage3 from "../assets/images/banners/banner-3.jpg";
+import bannerImage4 from "../assets/images/banners/banner-4.jpg";
 
 export const appConfig = {
   site: {
     name: "电子书店",
     footerText: "© 2026 电子书店 · All rights reserved.",
-    logo: staticAsset("/images/logo.jpg"),
+    logo: logoImage,
   },
   navigation: [
     { label: "书籍", path: "/" },
@@ -120,22 +122,22 @@ export const appConfig = {
   banners: [
     {
       id: "banner-1",
-      image: staticAsset("/images/banners/banner-1.jpg"),
+      image: bannerImage1,
       alt: "书籍推荐 Banner 1",
     },
     {
       id: "banner-2",
-      image: staticAsset("/images/banners/banner-2.jpg"),
+      image: bannerImage2,
       alt: "书籍推荐 Banner 2",
     },
     {
       id: "banner-3",
-      image: staticAsset("/images/banners/banner-3.jpg"),
+      image: bannerImage3,
       alt: "书籍推荐 Banner 3",
     },
     {
       id: "banner-4",
-      image: staticAsset("/images/banners/banner-4.jpg"),
+      image: bannerImage4,
       alt: "书籍推荐 Banner 4",
     },
   ],
