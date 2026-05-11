@@ -1,7 +1,7 @@
 import { redirect } from "react-router-dom";
 import { getCurrentUser } from "../../services/auth/authService";
 import { fetchCartItems } from "../../services/cart/cartApiService";
-import { fetchOrders } from "../../services/orders/orderApiService";
+import { fetchAdminOrders, fetchOrders } from "../../services/orders/orderApiService";
 import { fetchAddresses } from "../../services/profile/addressApiService";
 import { isAdminUser } from "../../utils/userRole";
 
@@ -45,18 +45,21 @@ export function createCartLoader() {
 }
 
 export function createOrdersLoader() {
-  return async function ordersLoader() {
+  return async function ordersLoader({ request }) {
     const user = requireCurrentUser();
+    const filters = getOrderFilters(request);
 
     try {
       return {
         user,
-        orders: await fetchOrders(user.id),
+        filters,
+        orders: await fetchOrders(user.id, filters),
       };
     } catch (error) {
       console.warn("Failed to load orders from backend.", error);
       return {
         user,
+        filters,
         orders: [],
       };
     }
@@ -87,5 +90,36 @@ export function createAdminLoader() {
     return {
       user: requireAdminUser(),
     };
+  };
+}
+
+export function createAdminOrdersLoader() {
+  return async function adminOrdersLoader({ request }) {
+    const user = requireAdminUser();
+    const filters = getOrderFilters(request);
+
+    try {
+      return {
+        user,
+        filters,
+        orders: await fetchAdminOrders(user.id, filters),
+      };
+    } catch (error) {
+      console.warn("Failed to load admin orders from backend.", error);
+      return {
+        user,
+        filters,
+        orders: [],
+      };
+    }
+  };
+}
+
+function getOrderFilters(request) {
+  const url = new URL(request.url);
+  return {
+    bookName: url.searchParams.get("bookName") ?? "",
+    startDate: url.searchParams.get("startDate") ?? "",
+    endDate: url.searchParams.get("endDate") ?? "",
   };
 }

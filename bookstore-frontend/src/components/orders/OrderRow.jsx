@@ -1,6 +1,14 @@
 import { Tag } from "antd";
 
-export default function OrderRow({ order }) {
+function formatCreatedAt(value) {
+  if (!value) {
+    return "未知时间";
+  }
+
+  return String(value).replace("T", " ").slice(0, 16);
+}
+
+export default function OrderRow({ admin = false, order }) {
   const bookTitle =
     order.book?.title ?? order.items?.map((item) => item.book.title).join(" / ") ?? "未知书籍";
   const statusClassName =
@@ -10,10 +18,17 @@ export default function OrderRow({ order }) {
 
   return (
     <article className="order-row" aria-label={`订单：${order.statusText}`}>
-      <div className="order-row__no">订单号：{order.id}</div>
-      <div className="order-row__book">书籍：{bookTitle}</div>
+      <div className="order-row__no">
+        <span>订单号：{order.id}</span>
+        <span className="order-row__time">{formatCreatedAt(order.createdAt)}</span>
+      </div>
+      <div className="order-row__book">
+        <span>书籍：{bookTitle}</span>
+        {admin ? <span className="order-row__user">用户ID：{order.userId}</span> : null}
+      </div>
       <div className="order-row__amount">{order.amountText}</div>
       <Tag className={statusClassName}>{order.statusText}</Tag>
     </article>
   );
 }
+

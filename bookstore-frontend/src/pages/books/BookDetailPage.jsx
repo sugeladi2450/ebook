@@ -11,7 +11,6 @@ export default function BookDetailPage({ pageData, siteName }) {
   const bookFromState = location.state?.book;
   const book = bookFromState || loadedBook;
   const [adding, setAdding] = useState(false);
-
   const navigate = useNavigate();
 
   const pageTitle = book ? `${siteName} - ${book.title}` : `${siteName} - 书籍详情`;
@@ -21,12 +20,18 @@ export default function BookDetailPage({ pageData, siteName }) {
     return <Navigate replace to="/" />;
   }
 
+  const stock = Number(book.stock ?? 0);
+
   async function handleAddToCart() {
     const user = getCurrentUser();
 
     if (!user) {
       message.warning("请先登录");
       navigate("/login");
+      return;
+    }
+    if (stock <= 0) {
+      message.warning("该书库存不足，暂不能加入购物车");
       return;
     }
 
@@ -47,10 +52,10 @@ export default function BookDetailPage({ pageData, siteName }) {
       <div className="book-detail__layout">
         <section className="book-detail__cover-card site-card" aria-label="书籍封面">
           <img
-            className="book-detail__cover"
-            src={book.cover}
             alt={`《${book.title}》封面`}
+            className="book-detail__cover"
             loading="lazy"
+            src={book.cover}
           />
           <p className="book-detail__cover-hint">{pageData.coverHint}</p>
           <Link className="book-detail__back" to="/">
@@ -82,7 +87,19 @@ export default function BookDetailPage({ pageData, siteName }) {
 
                 <div className="book-detail__kv">
                   <span className="book-detail__k">ISBN</span>
-                  <span className="book-detail__v">{book.isbn}</span>
+                  <span className="book-detail__v">{book.isbn || "未填写"}</span>
+                </div>
+              </div>
+
+              <div className="book-detail__meta-row">
+                <div className="book-detail__kv">
+                  <span className="book-detail__k">库存</span>
+                  <span className="book-detail__v">{stock}</span>
+                </div>
+
+                <div className="book-detail__kv">
+                  <span className="book-detail__k">出版社</span>
+                  <span className="book-detail__v">{book.publishLine || "暂无出版信息"}</span>
                 </div>
               </div>
             </div>
@@ -92,11 +109,10 @@ export default function BookDetailPage({ pageData, siteName }) {
               <span className="book-detail__price-value">{book.priceText}</span>
             </div>
 
-            <p className="book-detail__stock">{book.publishLine}</p>
-
             <div className="book-detail__actions" aria-label="操作按钮">
               <Button
                 className="book-detail__button book-detail__button--cart"
+                disabled={stock <= 0}
                 htmlType="button"
                 loading={adding}
                 onClick={handleAddToCart}
@@ -105,6 +121,7 @@ export default function BookDetailPage({ pageData, siteName }) {
               </Button>
               <Button
                 className="book-detail__button book-detail__button--buy"
+                disabled={stock <= 0}
                 htmlType="button"
                 type="primary"
                 onClick={handleAddToCart}
@@ -124,3 +141,4 @@ export default function BookDetailPage({ pageData, siteName }) {
     </article>
   );
 }
+

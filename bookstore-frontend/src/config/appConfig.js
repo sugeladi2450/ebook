@@ -17,6 +17,7 @@ export const appConfig = {
     { label: "我的", path: "/profile" },
     { label: "用户管理", path: "/admin/users", adminOnly: true },
     { label: "书籍管理", path: "/admin/books", adminOnly: true },
+    { label: "订单管理", path: "/admin/orders", adminOnly: true },
     { label: "登录", path: "/login", guestOnly: true },
   ],
   homePage: {
@@ -44,6 +45,8 @@ export const appConfig = {
   ordersPage: {
     title: "订单",
     subtitle: "查看你的订单记录与状态信息。",
+    adminTitle: "订单管理",
+    adminSubtitle: "查看系统内所有订单，并按时间范围或书籍名称过滤。",
   },
   profilePage: {
     title: "我的",

@@ -12,6 +12,7 @@ import BookDetailPage from "../pages/books/BookDetailPage";
 import { createBookDetailLoader, createBookListLoader } from "./loaders/bookListLoader";
 import {
   createAdminLoader,
+  createAdminOrdersLoader,
   createCartLoader,
   createOrdersLoader,
   createProfileLoader,
@@ -78,6 +79,17 @@ export function createAppRouter(appData) {
           path="/admin/books"
           loader={createAdminLoader()}
           element={<AdminBooksPage siteName={appData.site.name} />}
+        />
+        <Route
+          path="/admin/orders"
+          loader={createAdminOrdersLoader()}
+          element={
+            <OrdersPage
+              admin
+              pageData={appData.ordersPage}
+              siteName={appData.site.name}
+            />
+          }
         />
         <Route
           path="/login"
