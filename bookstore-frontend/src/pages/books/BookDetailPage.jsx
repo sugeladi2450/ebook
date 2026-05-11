@@ -1,19 +1,24 @@
 import { Button, Tag, message } from "antd";
 import { useState } from "react";
 import { Link, Navigate, useLoaderData, useLocation, useNavigate } from "react-router-dom";
+import CheckoutModal from "../../components/checkout/CheckoutModal";
 import usePageTitle from "../../hooks/usePageTitle";
 import { getCurrentUser } from "../../services/auth/authService";
 import { addCartItem } from "../../services/cart/cartApiService";
 import { directCheckout } from "../../services/orders/orderApiService";
+import { fetchAddresses } from "../../services/profile/addressApiService";
 
 export default function BookDetailPage({ pageData, siteName }) {
   const { book: loadedBook } = useLoaderData();
   const location = useLocation();
+  const navigate = useNavigate();
   const bookFromState = location.state?.book;
   const book = bookFromState || loadedBook;
   const [adding, setAdding] = useState(false);
   const [buying, setBuying] = useState(false);
-  const navigate = useNavigate();
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [addresses, setAddresses] = useState([]);
+  const [loadingAddresses, setLoadingAddresses] = useState(false);
 
   const pageTitle = book ? `${siteName} - ${book.title}` : `${siteName} - 书籍详情`;
   usePageTitle(pageTitle);
@@ -23,6 +28,7 @@ export default function BookDetailPage({ pageData, siteName }) {
   }
 
   const stock = Number(book.stock ?? 0);
+  const checkoutItems = [{ id: book.id, book, number: 1 }];
 
   async function handleAddToCart() {
     const user = getCurrentUser();
@@ -62,16 +68,45 @@ export default function BookDetailPage({ pageData, siteName }) {
       return;
     }
 
+    setCheckoutOpen(true);
+    setLoadingAddresses(true);
+    try {
+      const nextAddresses = await fetchAddresses(user.id);
+      setAddresses(nextAddresses);
+    } catch (error) {
+      setAddresses([]);
+      message.error(error.message || "收货地址加载失败");
+    } finally {
+      setLoadingAddresses(false);
+    }
+  }
+
+  async function handleDirectCheckout(selectedAddressId) {
+    const user = getCurrentUser();
+
+    if (!user) {
+      message.warning("请先登录");
+      setCheckoutOpen(false);
+      navigate("/login");
+      return;
+    }
+
     setBuying(true);
     try {
-      await directCheckout(user.id, book.id, 1);
+      await directCheckout(user.id, book.id, 1, selectedAddressId);
       message.success("下单成功");
+      setCheckoutOpen(false);
       navigate("/orders");
     } catch (error) {
       message.error(error.message || "立即购买失败");
     } finally {
       setBuying(false);
     }
+  }
+
+  function handleManageAddresses() {
+    setCheckoutOpen(false);
+    navigate("/profile");
   }
 
   return (
@@ -150,8 +185,8 @@ export default function BookDetailPage({ pageData, siteName }) {
                 className="book-detail__button book-detail__button--buy"
                 disabled={stock <= 0}
                 htmlType="button"
-                type="primary"
                 loading={buying}
+                type="primary"
                 onClick={handleBuyNow}
               >
                 {pageData.buyNowText}
@@ -166,6 +201,17 @@ export default function BookDetailPage({ pageData, siteName }) {
           </section>
         </section>
       </div>
+
+      <CheckoutModal
+        addresses={addresses}
+        items={checkoutItems}
+        loadingAddresses={loadingAddresses}
+        open={checkoutOpen}
+        submitting={buying}
+        onCancel={() => setCheckoutOpen(false)}
+        onManageAddresses={handleManageAddresses}
+        onSubmit={handleDirectCheckout}
+      />
     </article>
   );
 }

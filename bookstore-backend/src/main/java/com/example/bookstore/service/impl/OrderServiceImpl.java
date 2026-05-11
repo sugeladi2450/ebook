@@ -7,6 +7,7 @@ import com.example.bookstore.entity.Book;
 import com.example.bookstore.entity.CartItem;
 import com.example.bookstore.entity.Order;
 import com.example.bookstore.entity.OrderItem;
+import com.example.bookstore.entity.ShippingAddress;
 import com.example.bookstore.entity.User;
 import com.example.bookstore.exception.EmptyCartException;
 import com.example.bookstore.exception.ForbiddenOperationException;
@@ -14,6 +15,7 @@ import com.example.bookstore.exception.ResourceNotFoundException;
 import com.example.bookstore.repository.CartItemRepository;
 import com.example.bookstore.repository.BookRepository;
 import com.example.bookstore.repository.OrderRepository;
+import com.example.bookstore.repository.ShippingAddressRepository;
 import com.example.bookstore.repository.UserRepository;
 import com.example.bookstore.service.OrderService;
 import org.springframework.stereotype.Service;
@@ -35,15 +37,18 @@ public class OrderServiceImpl implements OrderService {
     private final CartItemRepository cartItemRepository;
     private final BookRepository bookRepository;
     private final UserRepository userRepository;
+    private final ShippingAddressRepository shippingAddressRepository;
 
     public OrderServiceImpl(OrderRepository orderRepository,
                             CartItemRepository cartItemRepository,
                             BookRepository bookRepository,
-                            UserRepository userRepository) {
+                            UserRepository userRepository,
+                            ShippingAddressRepository shippingAddressRepository) {
         this.orderRepository = orderRepository;
         this.cartItemRepository = cartItemRepository;
         this.bookRepository = bookRepository;
         this.userRepository = userRepository;
+        this.shippingAddressRepository = shippingAddressRepository;
     }
 
     @Override
@@ -79,6 +84,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public OrderResponse checkout(CheckoutRequest request) {
         User user = ensureUser(request.userId());
+        ShippingAddress shippingAddress = ensureShippingAddress(user.getId(), request.shippingAddressId());
         List<CartItem> cartItems = getCheckoutCartItems(user.getId(), request.cartItemIds());
         if (cartItems.isEmpty()) {
             throw new EmptyCartException();
@@ -86,6 +92,7 @@ public class OrderServiceImpl implements OrderService {
 
         Order order = new Order();
         order.setUser(user);
+        order.setShippingAddress(shippingAddress);
         order.setCreatedAt(LocalDateTime.now());
         order.setStatus("done");
 
@@ -117,6 +124,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public OrderResponse directCheckout(DirectCheckoutRequest request) {
         User user = ensureUser(request.userId());
+        ShippingAddress shippingAddress = ensureShippingAddress(user.getId(), request.shippingAddressId());
         Book book = bookRepository.findById(request.bookId())
                 .orElseThrow(() -> new ResourceNotFoundException("Book", request.bookId()));
         int number = request.number() == null ? 1 : request.number();
@@ -130,6 +138,7 @@ public class OrderServiceImpl implements OrderService {
 
         Order order = new Order();
         order.setUser(user);
+        order.setShippingAddress(shippingAddress);
         order.setCreatedAt(LocalDateTime.now());
         order.setStatus("done");
         order.setAmount((long) price * number);
@@ -166,6 +175,15 @@ public class OrderServiceImpl implements OrderService {
     private User ensureUser(Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User", userId));
+    }
+
+    private ShippingAddress ensureShippingAddress(Long userId, Long shippingAddressId) {
+        ShippingAddress address = shippingAddressRepository.findById(shippingAddressId)
+                .orElseThrow(() -> new ResourceNotFoundException("ShippingAddress", shippingAddressId));
+        if (!address.getUser().getId().equals(userId)) {
+            throw new ForbiddenOperationException("收货地址不属于当前用户");
+        }
+        return address;
     }
 
     private void ensureAdmin(Long adminId) {

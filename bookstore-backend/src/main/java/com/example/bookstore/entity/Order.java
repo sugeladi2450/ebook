@@ -26,6 +26,10 @@ public class Order {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shipping_address_id")
+    private ShippingAddress shippingAddress;
+
     private LocalDateTime createdAt;
 
     private Long amount;
@@ -49,6 +53,14 @@ public class Order {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public ShippingAddress getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(ShippingAddress shippingAddress) {
+        this.shippingAddress = shippingAddress;
     }
 
     public LocalDateTime getCreatedAt() {

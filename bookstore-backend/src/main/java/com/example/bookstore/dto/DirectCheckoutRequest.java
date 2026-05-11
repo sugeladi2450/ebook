@@ -7,6 +7,9 @@ public record DirectCheckoutRequest(
         @NotNull(message = "userId is required")
         Long userId,
 
+        @NotNull(message = "shippingAddressId is required")
+        Long shippingAddressId,
+
         @NotNull(message = "bookId is required")
         Long bookId,
 
@@ -14,4 +17,3 @@ public record DirectCheckoutRequest(
         Integer number
 ) {
 }
-

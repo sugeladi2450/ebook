@@ -8,6 +8,7 @@ import java.util.List;
 public record OrderResponse(
         Long id,
         Long userId,
+        Long shippingAddressId,
         LocalDateTime createdAt,
         Long amount,
         String status,
@@ -18,6 +19,7 @@ public record OrderResponse(
         return new OrderResponse(
                 order.getId(),
                 order.getUser().getId(),
+                order.getShippingAddress() == null ? null : order.getShippingAddress().getId(),
                 order.getCreatedAt(),
                 order.getAmount(),
                 order.getStatus(),

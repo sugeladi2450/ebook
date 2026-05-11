@@ -67,12 +67,14 @@ create table shipping_address
 
 create table order_tbl
 (
-    id         bigint auto_increment primary key,
-    user_id    bigint      not null,
-    created_at datetime(6) not null,
-    amount     bigint      not null,
-    status     varchar(32) not null,
-    constraint fk_order_user foreign key (user_id) references users (id)
+    id                  bigint auto_increment primary key,
+    user_id             bigint      not null,
+    shipping_address_id bigint      null,
+    created_at          datetime(6) not null,
+    amount              bigint      not null,
+    status              varchar(32) not null,
+    constraint fk_order_user foreign key (user_id) references users (id),
+    constraint fk_order_address foreign key (shipping_address_id) references shipping_address (id)
 );
 
 create table order_item

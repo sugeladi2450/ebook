@@ -2,10 +2,12 @@ import { useState } from "react";
 import { Button, Checkbox, message } from "antd";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import CartRow from "../../components/cart/CartRow";
+import CheckoutModal from "../../components/checkout/CheckoutModal";
 import usePageTitle from "../../hooks/usePageTitle";
 import { calculateSelectedCartTotal, removeCartItem } from "../../services/cart/cartService";
 import { deleteCartItem } from "../../services/cart/cartApiService";
 import { checkoutCart } from "../../services/orders/orderApiService";
+import { fetchAddresses } from "../../services/profile/addressApiService";
 import { formatPrice } from "../../utils/formatters";
 
 export default function CartPage({ pageData, siteName }) {
@@ -13,6 +15,9 @@ export default function CartPage({ pageData, siteName }) {
   const navigate = useNavigate();
   const [items, setItems] = useState(cartItems);
   const [selectedIds, setSelectedIds] = useState(() => new Set());
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [addresses, setAddresses] = useState([]);
+  const [loadingAddresses, setLoadingAddresses] = useState(false);
   const [checkingOut, setCheckingOut] = useState(false);
 
   usePageTitle(`${siteName} - ${pageData.title}`);
@@ -20,6 +25,7 @@ export default function CartPage({ pageData, siteName }) {
   const selectedCount = selectedIds.size;
   const selectedAll = items.length > 0 && selectedCount === items.length;
   const selectedSome = selectedCount > 0 && !selectedAll;
+  const selectedItems = items.filter((item) => selectedIds.has(String(item.id)));
   const total = calculateSelectedCartTotal(items, selectedIds);
   const totalText = formatPrice(total);
 
@@ -57,21 +63,46 @@ export default function CartPage({ pageData, siteName }) {
     }
   }
 
-  async function handleCheckout() {
+  async function handleOpenCheckout() {
+    if (selectedCount === 0) {
+      message.warning("请先选择要结算的商品");
+      return;
+    }
+
+    setCheckoutOpen(true);
+    setLoadingAddresses(true);
+    try {
+      const nextAddresses = await fetchAddresses(user.id);
+      setAddresses(nextAddresses);
+    } catch (error) {
+      setAddresses([]);
+      message.error(error.message || "收货地址加载失败");
+    } finally {
+      setLoadingAddresses(false);
+    }
+  }
+
+  async function handleCheckout(selectedAddressId) {
     setCheckingOut(true);
 
     try {
       const cartItemIds = Array.from(selectedIds).map((itemId) => Number(itemId));
-      await checkoutCart(user.id, cartItemIds);
+      await checkoutCart(user.id, cartItemIds, selectedAddressId);
       message.success("下单成功");
       setItems((currentItems) => currentItems.filter((item) => !selectedIds.has(String(item.id))));
       setSelectedIds(new Set());
+      setCheckoutOpen(false);
       navigate("/orders");
     } catch (error) {
       message.error(error.message || "下单失败");
     } finally {
       setCheckingOut(false);
     }
+  }
+
+  function handleManageAddresses() {
+    setCheckoutOpen(false);
+    navigate("/profile");
   }
 
   return (
@@ -126,12 +157,23 @@ export default function CartPage({ pageData, siteName }) {
             disabled={selectedCount === 0}
             loading={checkingOut}
             type="primary"
-            onClick={handleCheckout}
+            onClick={handleOpenCheckout}
           >
             {pageData.checkoutText}
           </Button>
         </footer>
       </div>
+
+      <CheckoutModal
+        addresses={addresses}
+        items={selectedItems}
+        loadingAddresses={loadingAddresses}
+        open={checkoutOpen}
+        submitting={checkingOut}
+        onCancel={() => setCheckoutOpen(false)}
+        onManageAddresses={handleManageAddresses}
+        onSubmit={handleCheckout}
+      />
     </section>
   );
 }

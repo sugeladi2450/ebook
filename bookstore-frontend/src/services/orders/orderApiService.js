@@ -33,18 +33,18 @@ export async function fetchAdminOrders(adminId, filters = {}) {
   return buildOrdersFromApi(orders);
 }
 
-export async function checkoutCart(userId, cartItemIds = []) {
+export async function checkoutCart(userId, cartItemIds = [], shippingAddressId) {
   const order = await requestJson("/api/v1/orders", {
     method: "POST",
-    body: JSON.stringify({ userId, cartItemIds }),
+    body: JSON.stringify({ userId, cartItemIds, shippingAddressId }),
   });
   return buildOrderFromApi(order);
 }
 
-export async function directCheckout(userId, bookId, number = 1) {
+export async function directCheckout(userId, bookId, number = 1, shippingAddressId) {
   const order = await requestJson("/api/v1/orders/direct", {
     method: "POST",
-    body: JSON.stringify({ userId, bookId, number }),
+    body: JSON.stringify({ userId, bookId, number, shippingAddressId }),
   });
   return buildOrderFromApi(order);
 }
