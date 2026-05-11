@@ -31,6 +31,7 @@ export function buildBookFromApi(rawBook) {
     intro2: rawBook.intro2 ?? "",
     description,
     sales: rawBook.sales ?? 0,
+    stock: rawBook.stock ?? 0,
     priceText: formatPrice(price),
   };
 }

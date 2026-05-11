@@ -6,13 +6,17 @@ import { registerUser } from "../../services/auth/authService";
 
 const initialTouched = {
   username: false,
+  email: false,
   password: false,
   confirmPassword: false,
 };
 
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function RegisterPage({ pageData, siteName }) {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [touched, setTouched] = useState(initialTouched);
@@ -22,6 +26,13 @@ export default function RegisterPage({ pageData, siteName }) {
 
   const errors = useMemo(() => {
     const usernameError = username.trim() ? "" : "请输入账号";
+    let emailError = "";
+    if (!email.trim()) {
+      emailError = "请输入邮箱";
+    } else if (!emailPattern.test(email.trim())) {
+      emailError = "请输入正确的邮箱格式";
+    }
+
     let passwordError = "";
     if (!password) {
       passwordError = "请输入登录密码";
@@ -38,12 +49,13 @@ export default function RegisterPage({ pageData, siteName }) {
 
     return {
       username: usernameError,
+      email: emailError,
       password: passwordError,
       confirmPassword: confirmPasswordError,
     };
-  }, [username, password, confirmPassword]);
+  }, [username, email, password, confirmPassword]);
 
-  const canSubmit = !errors.username && !errors.password && !errors.confirmPassword;
+  const canSubmit = !errors.username && !errors.email && !errors.password && !errors.confirmPassword;
 
   function markTouched(field) {
     setTouched((current) => ({
@@ -60,6 +72,7 @@ export default function RegisterPage({ pageData, siteName }) {
     event.preventDefault();
     setTouched({
       username: true,
+      email: true,
       password: true,
       confirmPassword: true,
     });
@@ -70,7 +83,7 @@ export default function RegisterPage({ pageData, siteName }) {
 
     setSubmitting(true);
     try {
-      await registerUser(username.trim(), password);
+      await registerUser(username.trim(), password, confirmPassword, email.trim());
       message.success("注册成功，请登录");
       navigate("/login");
     } catch (error) {
@@ -122,6 +135,28 @@ export default function RegisterPage({ pageData, siteName }) {
               />
               <p className={visibleError("username") ? "login__error" : "login__hint"}>
                 {visibleError("username") || pageData.usernameHint}
+              </p>
+            </div>
+
+            <div className="login__field">
+              <label className="login__label" htmlFor="register-email">
+                {pageData.emailLabel}
+              </label>
+              <Input
+                className="login__input"
+                id="register-email"
+                name="email"
+                placeholder={pageData.emailPlaceholder}
+                status={visibleError("email") ? "error" : undefined}
+                value={email}
+                onBlur={() => markTouched("email")}
+                onChange={(event) => {
+                  markTouched("email");
+                  setEmail(event.target.value);
+                }}
+              />
+              <p className={visibleError("email") ? "login__error" : "login__hint"}>
+                {visibleError("email") || pageData.emailHint}
               </p>
             </div>
 

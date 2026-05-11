@@ -16,7 +16,8 @@ public record BookResponse(
         String description,
         Integer price,
         String cover,
-        Integer sales
+        Integer sales,
+        Integer stock
 ) {
     public static BookResponse from(Book book) {
         return new BookResponse(
@@ -33,7 +34,8 @@ public record BookResponse(
                 book.getDescription(),
                 book.getPrice(),
                 book.getCover(),
-                book.getSales()
+                book.getSales(),
+                book.getStock()
         );
     }
 }

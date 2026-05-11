@@ -1,26 +1,59 @@
 import { Button, Input, message } from "antd";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import usePageTitle from "../../hooks/usePageTitle";
 import { loginUser, saveCurrentUser } from "../../services/auth/authService";
+import { isAdminUser } from "../../utils/userRole";
+
+const initialTouched = {
+  account: false,
+  password: false,
+};
 
 export default function LoginPage({ pageData, siteName }) {
   const navigate = useNavigate();
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
+  const [touched, setTouched] = useState(initialTouched);
   const [submitting, setSubmitting] = useState(false);
 
   usePageTitle(`${siteName} - 登录`);
 
+  const errors = useMemo(() => ({
+    account: account.trim() ? "" : "请输入账号",
+    password: password ? "" : "请输入密码",
+  }), [account, password]);
+
+  function markTouched(field) {
+    setTouched((current) => ({
+      ...current,
+      [field]: true,
+    }));
+  }
+
+  function visibleError(field) {
+    return touched[field] ? errors[field] : "";
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
+    setTouched({
+      account: true,
+      password: true,
+    });
+
+    if (errors.account || errors.password) {
+      message.warning(errors.account || errors.password);
+      return;
+    }
+
     setSubmitting(true);
 
     try {
-      const user = await loginUser(account, password);
+      const user = await loginUser(account.trim(), password);
       saveCurrentUser(user);
       message.success("登录成功");
-      navigate("/profile");
+      navigate(isAdminUser(user) ? "/admin/users" : "/profile");
     } catch (error) {
       message.error(error.message || "登录失败");
     } finally {
@@ -60,11 +93,17 @@ export default function LoginPage({ pageData, siteName }) {
                 id="login-account"
                 name="account"
                 placeholder={pageData.accountPlaceholder}
-                required
+                status={visibleError("account") ? "error" : undefined}
                 value={account}
-                onChange={(event) => setAccount(event.target.value)}
+                onBlur={() => markTouched("account")}
+                onChange={(event) => {
+                  markTouched("account");
+                  setAccount(event.target.value);
+                }}
               />
-              <p className="login__hint">{pageData.accountHint}</p>
+              <p className={visibleError("account") ? "login__error" : "login__hint"}>
+                {visibleError("account") || pageData.accountHint}
+              </p>
             </div>
 
             <div className="login__field">
@@ -76,11 +115,17 @@ export default function LoginPage({ pageData, siteName }) {
                 id="login-password"
                 name="password"
                 placeholder={pageData.passwordPlaceholder}
-                required
+                status={visibleError("password") ? "error" : undefined}
                 value={password}
-                onChange={(event) => setPassword(event.target.value)}
+                onBlur={() => markTouched("password")}
+                onChange={(event) => {
+                  markTouched("password");
+                  setPassword(event.target.value);
+                }}
               />
-              <p className="login__hint">{pageData.passwordHint}</p>
+              <p className={visibleError("password") ? "login__error" : "login__hint"}>
+                {visibleError("password") || pageData.passwordHint}
+              </p>
             </div>
 
             <Button className="login__button" htmlType="submit" loading={submitting} type="primary">

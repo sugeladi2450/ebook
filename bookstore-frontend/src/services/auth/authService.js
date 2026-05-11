@@ -23,10 +23,10 @@ export async function loginUser(username, password) {
   });
 }
 
-export async function registerUser(username, password) {
+export async function registerUser(username, password, confirmPassword, email) {
   return requestJson("/api/v1/users/register", {
     method: "POST",
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ username, password, confirmPassword, email }),
   });
 }
 

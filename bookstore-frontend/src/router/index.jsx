@@ -1,5 +1,7 @@
 import { Navigate, Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import AppLayout from "../components/layout/AppLayout";
+import AdminBooksPage from "../pages/admin/AdminBooksPage";
+import AdminUsersPage from "../pages/admin/AdminUsersPage";
 import LoginPage from "../pages/auth/LoginPage";
 import RegisterPage from "../pages/auth/RegisterPage";
 import BookListPage from "../pages/books/BookListPage";
@@ -8,7 +10,12 @@ import OrdersPage from "../pages/orders/OrdersPage";
 import ProfilePage from "../pages/profile/ProfilePage";
 import BookDetailPage from "../pages/books/BookDetailPage";
 import { createBookDetailLoader, createBookListLoader } from "./loaders/bookListLoader";
-import { createCartLoader, createOrdersLoader, createProfileLoader } from "./loaders/accountLoaders";
+import {
+  createAdminLoader,
+  createCartLoader,
+  createOrdersLoader,
+  createProfileLoader,
+} from "./loaders/accountLoaders";
 
 // 创建应用路由：定义整个应用的路由结构，包括每个页面对应的路径、组件和数据加载器等信息
 export function createAppRouter(appData) {
@@ -61,6 +68,16 @@ export function createAppRouter(appData) {
           path="/profile"
           loader={createProfileLoader()}
           element={<ProfilePage pageData={appData.profilePage} siteName={appData.site.name} />}
+        />
+        <Route
+          path="/admin/users"
+          loader={createAdminLoader()}
+          element={<AdminUsersPage siteName={appData.site.name} />}
+        />
+        <Route
+          path="/admin/books"
+          loader={createAdminLoader()}
+          element={<AdminBooksPage siteName={appData.site.name} />}
         />
         <Route
           path="/login"

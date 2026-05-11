@@ -16,7 +16,9 @@ create table users
     nickname varchar(255) null,
     email    varchar(255) null,
     phone    varchar(32)  null,
-    balance  bigint       not null default 0
+    balance  bigint       not null default 0,
+    role     varchar(32)  not null default 'CUSTOMER',
+    status   varchar(32)  not null default 'ACTIVE'
 );
 
 create table book
@@ -34,7 +36,8 @@ create table book
     intro2       text         null,
     description  text         null,
     price        int          null,
-    sales        int          null default 0
+    sales        int          null default 0,
+    stock        int          not null default 100
 );
 
 create table cart_item
@@ -83,13 +86,15 @@ create table order_item
     constraint fk_order_item_book foreign key (book_id) references book (id)
 );
 
-insert into users(username, password, nickname, email, phone, balance)
+insert into users(username, password, nickname, email, phone, balance, role, status)
 values ('admin',
         'pbkdf2$120000$8L6OkJXV5JT/ZnhyDj7ZXg==$AAbyIhn0lskeqG0f+0fHEHyHOOS3EwiPT2tMV7dHF0c=',
         'admin',
         'admin@example.com',
         '13800000000',
-        100000000);
+        100000000,
+        'ADMIN',
+        'ACTIVE');
 
 insert into book(title, author, translator, isbn, tag, cover, publish_line, list_desc, intro, intro2, description, price, sales)
 values ('1984',

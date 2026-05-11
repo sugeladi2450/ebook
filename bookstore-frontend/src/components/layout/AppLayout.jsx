@@ -1,10 +1,46 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
+import { getCurrentUser } from "../../services/auth/authService";
+import { isAdminUser } from "../../utils/userRole";
 
 function isHomePath(path) {
   return path === "/";
 }
 
 export default function AppLayout({ navigation, site }) {
+  const location = useLocation();
+  const [currentUser, setCurrentUser] = useState(() => getCurrentUser());
+
+  useEffect(() => {
+    setCurrentUser(getCurrentUser());
+  }, [location.pathname]);
+
+  useEffect(() => {
+    function refreshCurrentUser() {
+      setCurrentUser(getCurrentUser());
+    }
+
+    window.addEventListener("storage", refreshCurrentUser);
+    window.addEventListener("focus", refreshCurrentUser);
+    return () => {
+      window.removeEventListener("storage", refreshCurrentUser);
+      window.removeEventListener("focus", refreshCurrentUser);
+    };
+  }, []);
+
+  const visibleNavigation = useMemo(
+    () => navigation.filter((item) => {
+      if (item.adminOnly && !isAdminUser(currentUser)) {
+        return false;
+      }
+      if (item.guestOnly && currentUser) {
+        return false;
+      }
+      return true;
+    }),
+    [currentUser, navigation],
+  );
+
   return (
     <div className="site-page">
       <header className="site-header">
@@ -16,7 +52,7 @@ export default function AppLayout({ navigation, site }) {
             </Link>
 
             <ul className="site-nav__list">
-              {navigation.map((item) => (
+              {visibleNavigation.map((item) => (
                 <li key={item.path}>
                   <NavLink
                     className="site-nav__link"

@@ -6,6 +6,7 @@ import com.example.bookstore.dto.RegisterUserRequest;
 import com.example.bookstore.dto.UpdateUserProfileRequest;
 import com.example.bookstore.dto.UserResponse;
 import com.example.bookstore.entity.User;
+import com.example.bookstore.exception.AccountDisabledException;
 import com.example.bookstore.exception.DuplicateContactException;
 import com.example.bookstore.exception.DuplicateUsernameException;
 import com.example.bookstore.exception.InvalidCredentialsException;
@@ -42,12 +43,18 @@ public class UserServiceImpl implements UserService {
         if (userRepository.existsByUsername(username)) {
             throw new DuplicateUsernameException(username);
         }
+        if (!request.password().equals(request.confirmPassword())) {
+            throw new PasswordChangeException("两次输入的密码不一致");
+        }
 
         User user = new User();
         user.setUsername(username);
         user.setPassword(passwordService.encode(request.password()));
+        user.setEmail(request.email().trim());
         user.setNickname(StringUtils.hasText(request.nickname()) ? request.nickname().trim() : username);
         user.setBalance(request.balance() == null ? 0L : request.balance());
+        user.setRole("CUSTOMER");
+        user.setStatus("ACTIVE");
 
         return UserResponse.from(userRepository.save(user));
     }
@@ -56,8 +63,13 @@ public class UserServiceImpl implements UserService {
     public UserResponse login(LoginRequest request) {
         String account = request.username().trim();
         User user = userRepository.findByUsernameOrEmailOrPhone(account, account, account)
-                .filter(candidate -> passwordService.matches(request.password(), candidate.getPassword()))
                 .orElseThrow(InvalidCredentialsException::new);
+        if ("DISABLED".equals(user.getStatus())) {
+            throw new AccountDisabledException();
+        }
+        if (!passwordService.matches(request.password(), user.getPassword())) {
+            throw new InvalidCredentialsException();
+        }
         return UserResponse.from(user);
     }
 

@@ -2,7 +2,7 @@ package com.example.bookstore.dto;
 
 import com.example.bookstore.entity.User;
 
-public record UserResponse(
+public record AdminUserResponse(
         Long id,
         String username,
         String nickname,
@@ -12,8 +12,8 @@ public record UserResponse(
         String role,
         String status
 ) {
-    public static UserResponse from(User user) {
-        return new UserResponse(
+    public static AdminUserResponse from(User user) {
+        return new AdminUserResponse(
                 user.getId(),
                 user.getUsername(),
                 user.getNickname(),

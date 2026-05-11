@@ -3,12 +3,23 @@ import { getCurrentUser } from "../../services/auth/authService";
 import { fetchCartItems } from "../../services/cart/cartApiService";
 import { fetchOrders } from "../../services/orders/orderApiService";
 import { fetchAddresses } from "../../services/profile/addressApiService";
+import { isAdminUser } from "../../utils/userRole";
 
-function requireCurrentUser() {
+export function requireCurrentUser() {
   const user = getCurrentUser();
 
   if (!user) {
     throw redirect("/login");
+  }
+
+  return user;
+}
+
+export function requireAdminUser() {
+  const user = requireCurrentUser();
+
+  if (!isAdminUser(user)) {
+    throw redirect("/");
   }
 
   return user;
@@ -68,5 +79,13 @@ export function createProfileLoader() {
         addresses: [],
       };
     }
+  };
+}
+
+export function createAdminLoader() {
+  return function adminLoader() {
+    return {
+      user: requireAdminUser(),
+    };
   };
 }

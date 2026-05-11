@@ -32,6 +32,12 @@ public class User {
     @Column(nullable = false)
     private Long balance = 0L;
 
+    @Column(nullable = false, length = 32)
+    private String role = "CUSTOMER";
+
+    @Column(nullable = false, length = 32)
+    private String status = "ACTIVE";
+
     public Long getId() {
         return id;
     }
@@ -86,5 +92,21 @@ public class User {
 
     public void setBalance(Long balance) {
         this.balance = balance;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

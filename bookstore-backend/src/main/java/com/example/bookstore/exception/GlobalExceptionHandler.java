@@ -42,6 +42,16 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorBody(exception.getMessage(), null));
     }
 
+    @ExceptionHandler(AccountDisabledException.class)
+    public ResponseEntity<Map<String, Object>> handleAccountDisabled(AccountDisabledException exception) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorBody(exception.getMessage(), null));
+    }
+
+    @ExceptionHandler(ForbiddenOperationException.class)
+    public ResponseEntity<Map<String, Object>> handleForbiddenOperation(ForbiddenOperationException exception) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorBody(exception.getMessage(), null));
+    }
+
     @ExceptionHandler(EmptyCartException.class)
     public ResponseEntity<Map<String, Object>> handleEmptyCart(EmptyCartException exception) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorBody(exception.getMessage(), null));

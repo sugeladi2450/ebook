@@ -51,6 +51,9 @@ public class Book {
 
     private Integer sales = 0;
 
+    @Column(nullable = false)
+    private Integer stock = 100;
+
     public Long getId() {
         return id;
     }
@@ -161,5 +164,13 @@ public class Book {
 
     public void setSales(Integer sales) {
         this.sales = sales;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 }
