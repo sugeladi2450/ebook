@@ -4,6 +4,7 @@ import { Link, Navigate, useLoaderData, useLocation, useNavigate } from "react-r
 import usePageTitle from "../../hooks/usePageTitle";
 import { getCurrentUser } from "../../services/auth/authService";
 import { addCartItem } from "../../services/cart/cartApiService";
+import { directCheckout } from "../../services/orders/orderApiService";
 
 export default function BookDetailPage({ pageData, siteName }) {
   const { book: loadedBook } = useLoaderData();
@@ -11,6 +12,7 @@ export default function BookDetailPage({ pageData, siteName }) {
   const bookFromState = location.state?.book;
   const book = bookFromState || loadedBook;
   const [adding, setAdding] = useState(false);
+  const [buying, setBuying] = useState(false);
   const navigate = useNavigate();
 
   const pageTitle = book ? `${siteName} - ${book.title}` : `${siteName} - 书籍详情`;
@@ -44,6 +46,31 @@ export default function BookDetailPage({ pageData, siteName }) {
       message.error(error.message || "加入购物车失败");
     } finally {
       setAdding(false);
+    }
+  }
+
+  async function handleBuyNow() {
+    const user = getCurrentUser();
+
+    if (!user) {
+      message.warning("请先登录");
+      navigate("/login");
+      return;
+    }
+    if (stock <= 0) {
+      message.warning("该书库存不足，暂不能购买");
+      return;
+    }
+
+    setBuying(true);
+    try {
+      await directCheckout(user.id, book.id, 1);
+      message.success("下单成功");
+      navigate("/orders");
+    } catch (error) {
+      message.error(error.message || "立即购买失败");
+    } finally {
+      setBuying(false);
     }
   }
 
@@ -124,7 +151,8 @@ export default function BookDetailPage({ pageData, siteName }) {
                 disabled={stock <= 0}
                 htmlType="button"
                 type="primary"
-                onClick={handleAddToCart}
+                loading={buying}
+                onClick={handleBuyNow}
               >
                 {pageData.buyNowText}
               </Button>
@@ -141,4 +169,3 @@ export default function BookDetailPage({ pageData, siteName }) {
     </article>
   );
 }
-

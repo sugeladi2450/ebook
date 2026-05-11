@@ -1,7 +1,9 @@
 package com.example.bookstore.service.impl;
 
 import com.example.bookstore.dto.CheckoutRequest;
+import com.example.bookstore.dto.DirectCheckoutRequest;
 import com.example.bookstore.dto.OrderResponse;
+import com.example.bookstore.entity.Book;
 import com.example.bookstore.entity.CartItem;
 import com.example.bookstore.entity.Order;
 import com.example.bookstore.entity.OrderItem;
@@ -10,6 +12,7 @@ import com.example.bookstore.exception.EmptyCartException;
 import com.example.bookstore.exception.ForbiddenOperationException;
 import com.example.bookstore.exception.ResourceNotFoundException;
 import com.example.bookstore.repository.CartItemRepository;
+import com.example.bookstore.repository.BookRepository;
 import com.example.bookstore.repository.OrderRepository;
 import com.example.bookstore.repository.UserRepository;
 import com.example.bookstore.service.OrderService;
@@ -30,13 +33,16 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final CartItemRepository cartItemRepository;
+    private final BookRepository bookRepository;
     private final UserRepository userRepository;
 
     public OrderServiceImpl(OrderRepository orderRepository,
                             CartItemRepository cartItemRepository,
+                            BookRepository bookRepository,
                             UserRepository userRepository) {
         this.orderRepository = orderRepository;
         this.cartItemRepository = cartItemRepository;
+        this.bookRepository = bookRepository;
         this.userRepository = userRepository;
     }
 
@@ -105,6 +111,36 @@ public class OrderServiceImpl implements OrderService {
         Order savedOrder = orderRepository.save(order);
         cartItemRepository.deleteAll(cartItems);
         return OrderResponse.from(savedOrder);
+    }
+
+    @Override
+    @Transactional
+    public OrderResponse directCheckout(DirectCheckoutRequest request) {
+        User user = ensureUser(request.userId());
+        Book book = bookRepository.findById(request.bookId())
+                .orElseThrow(() -> new ResourceNotFoundException("Book", request.bookId()));
+        int number = request.number() == null ? 1 : request.number();
+        int price = book.getPrice() == null ? 0 : book.getPrice();
+        int currentStock = book.getStock() == null ? 0 : book.getStock();
+        if (currentStock < number) {
+            throw new ForbiddenOperationException("《" + book.getTitle() + "》库存不足");
+        }
+
+        book.setStock(currentStock - number);
+
+        Order order = new Order();
+        order.setUser(user);
+        order.setCreatedAt(LocalDateTime.now());
+        order.setStatus("done");
+        order.setAmount((long) price * number);
+
+        OrderItem orderItem = new OrderItem();
+        orderItem.setBook(book);
+        orderItem.setNumber(number);
+        orderItem.setPrice(price);
+        order.addItem(orderItem);
+
+        return OrderResponse.from(orderRepository.save(order));
     }
 
     private List<CartItem> getCheckoutCartItems(Long userId, List<Long> cartItemIds) {

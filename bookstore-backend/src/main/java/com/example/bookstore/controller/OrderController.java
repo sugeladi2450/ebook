@@ -1,6 +1,7 @@
 package com.example.bookstore.controller;
 
 import com.example.bookstore.dto.CheckoutRequest;
+import com.example.bookstore.dto.DirectCheckoutRequest;
 import com.example.bookstore.dto.OrderResponse;
 import com.example.bookstore.service.OrderService;
 import jakarta.validation.Valid;
@@ -42,5 +43,10 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<OrderResponse> checkout(@Valid @RequestBody CheckoutRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(orderService.checkout(request));
+    }
+
+    @PostMapping("/direct")
+    public ResponseEntity<OrderResponse> directCheckout(@Valid @RequestBody DirectCheckoutRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(orderService.directCheckout(request));
     }
 }

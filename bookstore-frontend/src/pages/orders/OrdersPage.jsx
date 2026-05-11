@@ -1,14 +1,21 @@
-import { Button, Input, Space } from "antd";
+import { Button, DatePicker, Input, Select, Space } from "antd";
+import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import OrderRow from "../../components/orders/OrderRow";
 import usePageTitle from "../../hooks/usePageTitle";
+import {
+  DATE_RANGE_PRESETS,
+  getPresetDateRange,
+  resolvePresetFromFilters,
+} from "../../utils/dateRangePresets";
 
 export default function OrdersPage({ admin = false, pageData, siteName }) {
   const { filters = {}, orders } = useLoaderData();
   const navigate = useNavigate();
   const location = useLocation();
   const [bookName, setBookName] = useState(filters.bookName ?? "");
+  const [rangeType, setRangeType] = useState(() => resolvePresetFromFilters(filters));
   const [startDate, setStartDate] = useState(filters.startDate ?? "");
   const [endDate, setEndDate] = useState(filters.endDate ?? "");
   const pageTitle = admin ? pageData.adminTitle : pageData.title;
@@ -18,20 +25,21 @@ export default function OrdersPage({ admin = false, pageData, siteName }) {
 
   useEffect(() => {
     setBookName(filters.bookName ?? "");
+    setRangeType(resolvePresetFromFilters(filters));
     setStartDate(filters.startDate ?? "");
     setEndDate(filters.endDate ?? "");
   }, [filters.bookName, filters.startDate, filters.endDate]);
 
-  function handleSearch() {
+  function navigateWithFilters(nextBookName, nextStartDate, nextEndDate) {
     const searchParams = new URLSearchParams();
-    if (bookName.trim()) {
-      searchParams.set("bookName", bookName.trim());
+    if (nextBookName.trim()) {
+      searchParams.set("bookName", nextBookName.trim());
     }
-    if (startDate) {
-      searchParams.set("startDate", startDate);
+    if (nextStartDate) {
+      searchParams.set("startDate", nextStartDate);
     }
-    if (endDate) {
-      searchParams.set("endDate", endDate);
+    if (nextEndDate) {
+      searchParams.set("endDate", nextEndDate);
     }
 
     navigate({
@@ -40,11 +48,33 @@ export default function OrdersPage({ admin = false, pageData, siteName }) {
     });
   }
 
+  function handleRangeTypeChange(value) {
+    setRangeType(value);
+
+    if (value === "custom") {
+      return;
+    }
+
+    const nextRange = getPresetDateRange(value);
+    setStartDate(nextRange.startDate);
+    setEndDate(nextRange.endDate);
+    navigateWithFilters(bookName, nextRange.startDate, nextRange.endDate);
+  }
+
+  function handleSearch() {
+    navigateWithFilters(bookName, startDate, endDate);
+  }
+
   function handleReset() {
     setBookName("");
+    setRangeType("");
     setStartDate("");
     setEndDate("");
     navigate(location.pathname);
+  }
+
+  function toDatePickerValue(value) {
+    return value ? dayjs(value, "YYYY-MM-DD") : null;
   }
 
   return (
@@ -66,20 +96,33 @@ export default function OrdersPage({ admin = false, pageData, siteName }) {
             onChange={(event) => setBookName(event.target.value)}
             onPressEnter={handleSearch}
           />
-          <Input
-            aria-label="开始日期"
-            className="orders-filter__date"
-            type="date"
-            value={startDate}
-            onChange={(event) => setStartDate(event.target.value)}
+          <Select
+            className="orders-filter__preset"
+            options={DATE_RANGE_PRESETS}
+            value={rangeType}
+            onChange={handleRangeTypeChange}
           />
-          <Input
-            aria-label="结束日期"
-            className="orders-filter__date"
-            type="date"
-            value={endDate}
-            onChange={(event) => setEndDate(event.target.value)}
-          />
+          {rangeType === "custom" ? (
+            <div className="orders-filter__custom" aria-label="自定义时间范围">
+              <DatePicker
+                aria-label="开始日期"
+                className="orders-filter__date"
+                format="YYYY年MM月DD日"
+                placeholder="年/月/日"
+                value={toDatePickerValue(startDate)}
+                onChange={(date) => setStartDate(date ? date.format("YYYY-MM-DD") : "")}
+              />
+              <span className="orders-filter__separator">至</span>
+              <DatePicker
+                aria-label="结束日期"
+                className="orders-filter__date"
+                format="YYYY年MM月DD日"
+                placeholder="年/月/日"
+                value={toDatePickerValue(endDate)}
+                onChange={(date) => setEndDate(date ? date.format("YYYY-MM-DD") : "")}
+              />
+            </div>
+          ) : null}
           <Space>
             <Button type="primary" onClick={handleSearch}>
               搜索
@@ -101,4 +144,3 @@ export default function OrdersPage({ admin = false, pageData, siteName }) {
     </section>
   );
 }
-

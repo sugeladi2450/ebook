@@ -14,10 +14,12 @@ export const appConfig = {
     { label: "书籍", path: "/" },
     { label: "购物车", path: "/cart" },
     { label: "订单", path: "/orders" },
+    { label: "我的统计", path: "/statistics", customerOnly: true },
     { label: "我的", path: "/profile" },
     { label: "用户管理", path: "/admin/users", adminOnly: true },
     { label: "书籍管理", path: "/admin/books", adminOnly: true },
     { label: "订单管理", path: "/admin/orders", adminOnly: true },
+    { label: "统计管理", path: "/admin/statistics", adminOnly: true },
     { label: "登录", path: "/login", guestOnly: true },
   ],
   homePage: {

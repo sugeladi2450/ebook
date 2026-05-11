@@ -1,6 +1,7 @@
 package com.example.bookstore.service;
 
 import com.example.bookstore.dto.CheckoutRequest;
+import com.example.bookstore.dto.DirectCheckoutRequest;
 import com.example.bookstore.dto.OrderResponse;
 
 import java.time.LocalDate;
@@ -12,4 +13,6 @@ public interface OrderService {
     List<OrderResponse> getAdminOrders(Long adminId, LocalDate startDate, LocalDate endDate, String bookName);
 
     OrderResponse checkout(CheckoutRequest request);
+
+    OrderResponse directCheckout(DirectCheckoutRequest request);
 }

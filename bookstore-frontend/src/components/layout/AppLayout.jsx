@@ -33,6 +33,12 @@ export default function AppLayout({ navigation, site }) {
       if (item.adminOnly && !isAdminUser(currentUser)) {
         return false;
       }
+      if (item.customerOnly && (!currentUser || isAdminUser(currentUser))) {
+        return false;
+      }
+      if (item.authOnly && !currentUser) {
+        return false;
+      }
       if (item.guestOnly && currentUser) {
         return false;
       }

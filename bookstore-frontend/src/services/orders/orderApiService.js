@@ -40,3 +40,11 @@ export async function checkoutCart(userId, cartItemIds = []) {
   });
   return buildOrderFromApi(order);
 }
+
+export async function directCheckout(userId, bookId, number = 1) {
+  const order = await requestJson("/api/v1/orders/direct", {
+    method: "POST",
+    body: JSON.stringify({ userId, bookId, number }),
+  });
+  return buildOrderFromApi(order);
+}

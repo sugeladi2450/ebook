@@ -38,8 +38,25 @@
   width: 260px;
 }
 
+.orders-filter__preset {
+  width: 180px;
+}
+
+.orders-filter__custom {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
 .orders-filter__date {
   width: 160px;
+}
+
+.orders-filter__separator {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .orders__divider {
@@ -144,7 +161,12 @@
 
 @media (max-width: 520px) {
   .orders-filter__book,
+  .orders-filter__preset,
   .orders-filter__date {
+    width: 100%;
+  }
+
+  .orders-filter__custom {
     width: 100%;
   }
 
