@@ -1,14 +1,14 @@
-import logoImage from "../assets/images/logo.jpg";
-import bannerImage1 from "../assets/images/banners/banner-1.jpg";
-import bannerImage2 from "../assets/images/banners/banner-2.jpg";
-import bannerImage3 from "../assets/images/banners/banner-3.jpg";
-import bannerImage4 from "../assets/images/banners/banner-4.jpg";
+import logoUrl from "../assets/images/logo.jpg?url";
+import banner1Url from "../assets/images/banners/banner-1.jpg?url";
+import banner2Url from "../assets/images/banners/banner-2.jpg?url";
+import banner3Url from "../assets/images/banners/banner-3.jpg?url";
+import banner4Url from "../assets/images/banners/banner-4.jpg?url";
 
 export const appConfig = {
   site: {
     name: "电子书店",
     footerText: "© 2026 电子书店 · All rights reserved.",
-    logo: logoImage,
+    logo: logoUrl,
   },
   navigation: [
     { label: "书籍", path: "/" },
@@ -130,25 +130,9 @@ export const appConfig = {
     loginLinkText: "已有账号？去登录",
   },
   banners: [
-    {
-      id: "banner-1",
-      image: bannerImage1,
-      alt: "书籍推荐 Banner 1",
-    },
-    {
-      id: "banner-2",
-      image: bannerImage2,
-      alt: "书籍推荐 Banner 2",
-    },
-    {
-      id: "banner-3",
-      image: bannerImage3,
-      alt: "书籍推荐 Banner 3",
-    },
-    {
-      id: "banner-4",
-      image: bannerImage4,
-      alt: "书籍推荐 Banner 4",
-    },
+    { id: "banner-1", image: banner1Url, alt: "书籍推荐 Banner 1" },
+    { id: "banner-2", image: banner2Url, alt: "书籍推荐 Banner 2" },
+    { id: "banner-3", image: banner3Url, alt: "书籍推荐 Banner 3" },
+    { id: "banner-4", image: banner4Url, alt: "书籍推荐 Banner 4" },
   ],
 };
