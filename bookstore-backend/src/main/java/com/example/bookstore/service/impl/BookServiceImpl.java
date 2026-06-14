@@ -1,6 +1,6 @@
 package com.example.bookstore.service.impl;
 
-import com.example.bookstore.dto.BookResponse;
+import com.example.bookstore.dto.response.BookResponse;
 import com.example.bookstore.exception.ResourceNotFoundException;
 import com.example.bookstore.repository.BookRepository;
 import com.example.bookstore.service.BookService;

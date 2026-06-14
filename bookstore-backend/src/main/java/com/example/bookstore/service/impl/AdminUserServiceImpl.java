@@ -1,7 +1,7 @@
 package com.example.bookstore.service.impl;
 
-import com.example.bookstore.dto.AdminUserPageResponse;
-import com.example.bookstore.dto.AdminUserResponse;
+import com.example.bookstore.dto.response.AdminUserPageResponse;
+import com.example.bookstore.dto.response.AdminUserResponse;
 import com.example.bookstore.entity.User;
 import com.example.bookstore.exception.ForbiddenOperationException;
 import com.example.bookstore.exception.ResourceNotFoundException;

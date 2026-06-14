@@ -1,10 +1,10 @@
 package com.example.bookstore.service.impl;
 
-import com.example.bookstore.dto.ChangePasswordRequest;
-import com.example.bookstore.dto.LoginRequest;
-import com.example.bookstore.dto.RegisterUserRequest;
-import com.example.bookstore.dto.UpdateUserProfileRequest;
-import com.example.bookstore.dto.UserResponse;
+import com.example.bookstore.dto.request.ChangePasswordRequest;
+import com.example.bookstore.dto.request.LoginRequest;
+import com.example.bookstore.dto.request.RegisterUserRequest;
+import com.example.bookstore.dto.request.UpdateUserProfileRequest;
+import com.example.bookstore.dto.response.UserResponse;
 import com.example.bookstore.entity.User;
 import com.example.bookstore.exception.AccountDisabledException;
 import com.example.bookstore.exception.DuplicateContactException;

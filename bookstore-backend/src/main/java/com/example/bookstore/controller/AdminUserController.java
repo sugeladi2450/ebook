@@ -1,7 +1,7 @@
 package com.example.bookstore.controller;
 
-import com.example.bookstore.dto.AdminUserPageResponse;
-import com.example.bookstore.dto.AdminUserResponse;
+import com.example.bookstore.dto.response.AdminUserPageResponse;
+import com.example.bookstore.dto.response.AdminUserResponse;
 import com.example.bookstore.service.AdminUserService;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;

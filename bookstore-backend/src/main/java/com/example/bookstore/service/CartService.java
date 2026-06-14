@@ -1,7 +1,7 @@
 package com.example.bookstore.service;
 
-import com.example.bookstore.dto.AddCartItemRequest;
-import com.example.bookstore.dto.CartItemResponse;
+import com.example.bookstore.dto.request.AddCartItemRequest;
+import com.example.bookstore.dto.response.CartItemResponse;
 
 import java.util.List;
 

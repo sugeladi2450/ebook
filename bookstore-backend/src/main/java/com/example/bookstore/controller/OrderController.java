@@ -1,8 +1,8 @@
 package com.example.bookstore.controller;
 
-import com.example.bookstore.dto.CheckoutRequest;
-import com.example.bookstore.dto.DirectCheckoutRequest;
-import com.example.bookstore.dto.OrderResponse;
+import com.example.bookstore.dto.request.CheckoutRequest;
+import com.example.bookstore.dto.request.DirectCheckoutRequest;
+import com.example.bookstore.dto.response.OrderResponse;
 import com.example.bookstore.service.OrderService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

@@ -1,4 +1,4 @@
-package com.example.bookstore.dto;
+package com.example.bookstore.dto.response;
 
 import com.example.bookstore.entity.Book;
 

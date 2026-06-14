@@ -1,7 +1,7 @@
 package com.example.bookstore.service.impl;
 
-import com.example.bookstore.dto.ShippingAddressRequest;
-import com.example.bookstore.dto.ShippingAddressResponse;
+import com.example.bookstore.dto.request.ShippingAddressRequest;
+import com.example.bookstore.dto.response.ShippingAddressResponse;
 import com.example.bookstore.entity.ShippingAddress;
 import com.example.bookstore.entity.User;
 import com.example.bookstore.exception.ResourceNotFoundException;

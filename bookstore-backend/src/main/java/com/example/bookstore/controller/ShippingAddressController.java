@@ -1,7 +1,7 @@
 package com.example.bookstore.controller;
 
-import com.example.bookstore.dto.ShippingAddressRequest;
-import com.example.bookstore.dto.ShippingAddressResponse;
+import com.example.bookstore.dto.request.ShippingAddressRequest;
+import com.example.bookstore.dto.response.ShippingAddressResponse;
 import com.example.bookstore.service.ShippingAddressService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

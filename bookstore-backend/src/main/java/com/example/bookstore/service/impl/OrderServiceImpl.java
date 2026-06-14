@@ -1,8 +1,8 @@
 package com.example.bookstore.service.impl;
 
-import com.example.bookstore.dto.CheckoutRequest;
-import com.example.bookstore.dto.DirectCheckoutRequest;
-import com.example.bookstore.dto.OrderResponse;
+import com.example.bookstore.dto.request.CheckoutRequest;
+import com.example.bookstore.dto.request.DirectCheckoutRequest;
+import com.example.bookstore.dto.response.OrderResponse;
 import com.example.bookstore.entity.Book;
 import com.example.bookstore.entity.CartItem;
 import com.example.bookstore.entity.Order;

@@ -1,7 +1,7 @@
 package com.example.bookstore.controller;
 
-import com.example.bookstore.dto.AddCartItemRequest;
-import com.example.bookstore.dto.CartItemResponse;
+import com.example.bookstore.dto.request.AddCartItemRequest;
+import com.example.bookstore.dto.response.CartItemResponse;
 import com.example.bookstore.service.CartService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

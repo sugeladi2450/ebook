@@ -1,8 +1,8 @@
 package com.example.bookstore.service;
 
-import com.example.bookstore.dto.CheckoutRequest;
-import com.example.bookstore.dto.DirectCheckoutRequest;
-import com.example.bookstore.dto.OrderResponse;
+import com.example.bookstore.dto.request.CheckoutRequest;
+import com.example.bookstore.dto.request.DirectCheckoutRequest;
+import com.example.bookstore.dto.response.OrderResponse;
 
 import java.time.LocalDate;
 import java.util.List;

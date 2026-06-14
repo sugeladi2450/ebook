@@ -30,7 +30,6 @@ export default function useBookSearch(initialKeyword, action = "/") {
     hasSearchRef.current = normalizedValue !== "";
   }
 
-  // 用户每敲一个字，就更新框里的文字。如果不是在打中文，就立刻搜索。
   function handleInputChange(event) {
     const nextValue = event.target.value;
 

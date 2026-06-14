@@ -1,6 +1,6 @@
 package com.example.bookstore.controller;
 
-import com.example.bookstore.dto.PasswordPublicKeyResponse;
+import com.example.bookstore.dto.response.PasswordPublicKeyResponse;
 import com.example.bookstore.service.PasswordCipherService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

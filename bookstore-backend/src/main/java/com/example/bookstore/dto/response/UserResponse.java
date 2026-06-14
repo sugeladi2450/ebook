@@ -1,8 +1,8 @@
-package com.example.bookstore.dto;
+package com.example.bookstore.dto.response;
 
 import com.example.bookstore.entity.User;
 
-public record AdminUserResponse(
+public record UserResponse(
         Long id,
         String username,
         String nickname,
@@ -12,8 +12,8 @@ public record AdminUserResponse(
         String role,
         String status
 ) {
-    public static AdminUserResponse from(User user) {
-        return new AdminUserResponse(
+    public static UserResponse from(User user) {
+        return new UserResponse(
                 user.getId(),
                 user.getUsername(),
                 user.getNickname(),

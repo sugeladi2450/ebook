@@ -1,7 +1,7 @@
 package com.example.bookstore.service;
 
-import com.example.bookstore.dto.ShippingAddressRequest;
-import com.example.bookstore.dto.ShippingAddressResponse;
+import com.example.bookstore.dto.request.ShippingAddressRequest;
+import com.example.bookstore.dto.response.ShippingAddressResponse;
 
 import java.util.List;
 

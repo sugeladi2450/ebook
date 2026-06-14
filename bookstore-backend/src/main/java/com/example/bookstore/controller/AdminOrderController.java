@@ -1,6 +1,6 @@
 package com.example.bookstore.controller;
 
-import com.example.bookstore.dto.OrderResponse;
+import com.example.bookstore.dto.response.OrderResponse;
 import com.example.bookstore.service.OrderService;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;

@@ -1,7 +1,7 @@
 package com.example.bookstore.service.impl;
 
-import com.example.bookstore.dto.AddCartItemRequest;
-import com.example.bookstore.dto.CartItemResponse;
+import com.example.bookstore.dto.request.AddCartItemRequest;
+import com.example.bookstore.dto.response.CartItemResponse;
 import com.example.bookstore.entity.Book;
 import com.example.bookstore.entity.CartItem;
 import com.example.bookstore.entity.User;
@@ -47,14 +47,17 @@ public class CartServiceImpl implements CartService {
                 .orElseThrow(() -> new ResourceNotFoundException("Book", request.bookId()));
         int number = request.number() == null ? 1 : request.number();
 
+        // 查一下这个用户是否已经加过同一本书
         CartItem item = cartItemRepository.findByUserIdAndBookId(user.getId(), book.getId())
                 .orElseGet(() -> {
+                    // 没加过 → 新建一个
                     CartItem newItem = new CartItem();
                     newItem.setUser(user);
                     newItem.setBook(book);
                     newItem.setNumber(0);
                     return newItem;
                 });
+        // 数量累加（加过就是累加，没加过就是 0+number）
         item.setNumber(item.getNumber() + number);
         return CartItemResponse.from(cartItemRepository.save(item));
     }

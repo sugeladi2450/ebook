@@ -1,7 +1,7 @@
 package com.example.bookstore.service.impl;
 
-import com.example.bookstore.dto.AdminBookRequest;
-import com.example.bookstore.dto.BookResponse;
+import com.example.bookstore.dto.request.AdminBookRequest;
+import com.example.bookstore.dto.response.BookResponse;
 import com.example.bookstore.entity.Book;
 import com.example.bookstore.entity.User;
 import com.example.bookstore.exception.ForbiddenOperationException;

@@ -19,6 +19,9 @@ public class Pbkdf2PasswordService implements PasswordService {
 
     private final SecureRandom secureRandom = new SecureRandom();
 
+    /**
+     * 接收用户明文密码，生成随机盐，用 PBKDF2 加密，返回可直接存入数据库的密码字符串
+     */
     @Override
     public String encode(String rawPassword) {
         byte[] salt = new byte[SALT_BYTES];
@@ -31,6 +34,7 @@ public class Pbkdf2PasswordService implements PasswordService {
                 Base64.getEncoder().encodeToString(hash));
     }
 
+    // 接收用户输入的明文密码和数据库中存储的密码字符串，验证是否匹配
     @Override
     public boolean matches(String rawPassword, String storedPassword) {
         if (storedPassword == null || !storedPassword.startsWith(PREFIX + "$")) {
@@ -53,6 +57,7 @@ public class Pbkdf2PasswordService implements PasswordService {
         }
     }
 
+    // 真正执行 PBKDF2 哈希计算的底层方法。被 encode 和 matches 共同调用，保证加密逻辑统一。
     private byte[] hash(char[] password, byte[] salt, int iterations) {
         try {
             PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, HASH_BITS);
@@ -62,6 +67,9 @@ public class Pbkdf2PasswordService implements PasswordService {
         }
     }
 
+    /**
+     * 防计时攻击的恒定时间比对方法。即使密码错误，也要保证对比过程耗时相同，避免泄露信息。
+     */
     private boolean constantTimeEquals(byte[] expected, byte[] actual) {
         if (expected.length != actual.length) {
             return false;

@@ -36,6 +36,7 @@ public class RsaPasswordCipherService implements PasswordCipherService {
         return Base64.getEncoder().encodeToString(keyPair.getPublic().getEncoded());
     }
 
+    // 接收用户输入的明文密码，使用 RSA 公钥加密后返回给前端
     @Override
     public String decrypt(String encryptedText) {
         try {
@@ -49,6 +50,7 @@ public class RsaPasswordCipherService implements PasswordCipherService {
         }
     }
 
+    // 生成 RSA 密钥对的底层方法。被构造器调用，保证整个服务生命周期内密钥对不变。
     private KeyPair generateKeyPair() {
         try {
             KeyPairGenerator generator = KeyPairGenerator.getInstance(ALGORITHM);

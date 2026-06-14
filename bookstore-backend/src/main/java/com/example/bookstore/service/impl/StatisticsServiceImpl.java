@@ -1,8 +1,8 @@
 package com.example.bookstore.service.impl;
 
-import com.example.bookstore.dto.BookSalesStatResponse;
-import com.example.bookstore.dto.UserConsumptionStatResponse;
-import com.example.bookstore.dto.UserPurchaseStatsResponse;
+import com.example.bookstore.dto.response.BookSalesStatResponse;
+import com.example.bookstore.dto.response.UserConsumptionStatResponse;
+import com.example.bookstore.dto.response.UserPurchaseStatsResponse;
 import com.example.bookstore.entity.Book;
 import com.example.bookstore.entity.Order;
 import com.example.bookstore.entity.OrderItem;
